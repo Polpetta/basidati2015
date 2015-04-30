@@ -1,0 +1,5 @@
+\select@language {italian}
+\contentsline {section}{\numberline {1}Il progetto}{3}{section.1}
+\contentsline {subsubsection}{\numberline {1.0.1}Studio di fattibilit\`a}{3}{subsubsection.1.0.1}
+\contentsline {subsubsection}{\numberline {1.0.2}Raccolta e analisi dei requisiti}{3}{subsubsection.1.0.2}
+\contentsline {paragraph}{Negiozio "Linea Casa Bari"}{3}{section*.2}
