@@ -1,0 +1,23 @@
+\subsection{Raccolta e analisi dei requisiti}
+\subsubsection{Abstract}
+\paragraph*{Negozio 'Linea Casa Bari'}
+Si vuole realizzare una base di dati per un negozio al dettaglio che vende oggetti per la casa, di cui vogliamo rappresentare i dati dei clienti abituali, dei dipendenti, dei fornitori e dei prodotti, con le rispettive categorie. \\
+
+Per i clienti \textbf{iscritti} (circa 20), identificati da un codice, vogliamo tenere conto dell'identit\`a (nome,cognome), dell'indirizzo(via, numero, citt\`a, provincia) e dei contatti (e-mail,telefono). Ogni cliente iscritto ha un unico storico acquisti che specifica il numero di acquisti fatti su una certa categoria e da cui si derivano gli eventuali sconti di cui ha diritto. \\
+
+Ad ogni \textbf{acquisto} viene rilasciato uno scontrino, identificato da un codice acquisto e dalla data, inoltre deve essere riportata la quantit\`a relativa ad ogni prodotto acquistato e aggiornato il campo totale che tiene conto della spesa totale relativa ad un acquisto. \\
+
+Per le 5 \textbf{categorie} di prodotti, identificate da un nome univoco (porcellane, pentolame, liste nozze, stoffe, tavola), vogliamo tenere conto della percentuale IVA a cui sono soggette. \\
+
+Ad ogni categoria \`e associato un \textbf{sconto} in base ad una distribuzione per livelli e con una relativa percentuale. \\
+
+I \textbf{dipendenti}, responsabili ognuno di una una categoria, sono identificati da un codice, inoltre vogliamo tenere conto dell'indirizzo (via,numero, citt\`a, provincia), dei recapiti (telefono, mail) e delle informazioni di base (nome, cognome, data di nascita, cod. fiscale). Ad ogni dipendente viene assegnato un determinato turno (mattina, pomeriggio) in un certo giorno lavorativo in cui sar\`a responsabile di una certa categoria. \\
+
+Ogni \textbf{prodotto} appartiene ad una singola categoria, sono identificati da un codice ed inoltre vogliamo tenere conto delle informazioni base (nome, descrizione, prezzo) e della quantit\`a disponibile, cio\`e in magazzino e in esposizione. \\
+
+Ogni prodotto disponibile deve essere stato precedentemente ordinato da un fornitore, con relativa fattura. Per quanto riguarda gli \textbf{ordini}, identificati da un numero ordine univoco, inoltre teniamo conto della data e della quantit\`a riferita al singolo prodotto ordinato. \\
+
+Per i \textbf{fornitori}, identificati da un nome univoco, dobbiamo tenere conto dei contatti (fax, mail, numero di telefono), dell'indirizzo (via, numero, citt\`a, provincia).
+
+
+\paragraph
