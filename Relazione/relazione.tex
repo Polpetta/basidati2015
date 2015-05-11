@@ -10,6 +10,7 @@
     urlcolor=blue
 }
 \usepackage{amsmath}
+%\usepackage{xcolors}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{listings}
@@ -31,24 +32,6 @@
 \tableofcontents
 \newpage
 
-\section{Il progetto}
-	\subsubsection{Studio di fattibilit\`a}
-	\subsubsection{Raccolta e analisi dei requisiti}
-		\paragraph{Negiozio "Linea Casa Bari"}
-			Si vuole realizzare un database di un negozio che vende
-                        \textit{prodotti} (codice prodotto, nome prodotto,
-                        descrizione, categoria, prezzo, quantit\`a, ordine) di
-                        diverse \textit{categorie} (nome categoria, IVA,
-                        responsabile).  Il responsabile \`e un
-                        \textit{dipendente} (codice dipendente, nome, cognome,
-                        data assunzione, competenze). I prodotti sono
-                        \textit{ordinati} (numero ordine, data, quantit\`a) ad
-                        un \textit{Fornitore} (nome, indirizzo, telefono, Email,
-                        fax, ordine). \textit{Iscritti} sono speciali clienti
-                        che hanno diritto a sconti (codice iscritto, e-mail,
-                        telefono, nome, cognome) in base ad un suo
-                        \textit{storico} (codice iscritto, categoria, numero
-                        acquisti), gli \textit{sconti} sono calcolati (numero
-                        acquisti, categoria, %sconto).
+\include{include/progettazioneConcettuale}
 
 \end{document}
