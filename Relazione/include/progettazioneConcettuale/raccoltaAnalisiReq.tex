@@ -29,9 +29,19 @@ Termine & Descrizione & Sinonimi & Collegamenti \\ \hline
 
 Iscritto & Compratore abituale iscritto a questa lista per avere diritto a sconti speciali. Pu\`o essere un dipendente. & Cliente,cliente abituale & Acquisto, storico \\ \hline
 
-Acquisto & Scontrino attestante l'avvenuto acquisto & Scontrino & Iscritto, Prodotto \\ \hline
+Acquisto & Scontrino attestante l'avvenuto acquisto. & Scontrino & Iscritto, Prodotto \\ \hline
 
 Categoria & 5 insiemi di prodotti. Un prodotto pu\`o appartenere ad un'unica categoria. Ogni categoria ha il suo univoco responsabile. & & Sconti, Storico, Dipende. \\ \hline
+
+Sconto & Spetta solamente al cliente iscritto. Per ogni categoria esistono diversi livelli di acquisti a cui corrisponde una percentuale di sconto. & & Categoria. \\ \hline
+
+Dipendente & Responsabile di una singola categoria. Pu\`o essere un cliente ma non un fornitore. & Responsabile & Categoria \\ \hline
+
+Prodotto & Ogni prodotto pu\`o appartenere ad una sola categoria. & Oggetti & Categoria, Acquisto, Ordine \\ \hline
+
+Ordine & Pi\`u unit\`a di prodotto possono essere ordinate a fornitori diversi. Modifica il campo quantit\`a di prodotto. & Fattura & Fornitore, Prodotto \\ \hline
+
+Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o essere un cliente e pu\`o fornire prodotti di diverse categorie & & Ordine \\
 
 
 \hline
