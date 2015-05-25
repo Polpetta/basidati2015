@@ -1,23 +1,23 @@
 \subsection{Raccolta e analisi dei requisiti}
 \subsubsection{Abstract}
-\paragraph*{Negozio 'Linea Casa Bari'}
+\paragraph*{Negozio ''Linea Casa Bari''}
 Si vuole realizzare una base di dati per un negozio al dettaglio che vende oggetti per la casa, di cui vogliamo rappresentare i dati dei clienti abituali, dei dipendenti, dei fornitori e dei prodotti, con le rispettive categorie. \\
 
-Per i clienti \textbf{iscritti} (circa 20), identificati da un codice, vogliamo tenere conto dell'identit\`a (nome,cognome), dell'indirizzo(via, numero, citt\`a, provincia) e dei contatti (e-mail,telefono). Ogni cliente iscritto ha un unico storico acquisti che specifica il numero di acquisti fatti su una certa categoria e da cui si derivano gli eventuali sconti di cui ha diritto. \\
+Per i clienti \textbf{iscritti} (sono circa 20 e sono un sottoinsieme dei clienti totali), identificati da un codice, vogliamo tenere conto dell'identit\`a (nome,cognome), dell'indirizzo(via, numero, citt\`a, provincia) e dei contatti (e-mail,telefono). Ogni cliente iscritto ha un unico storico acquisti (insieme di scontrini presenti e passati) che specifica il numero di acquisti fatti su una certa categoria e da cui si derivano gli eventuali sconti di cui ha diritto. \\
 
-Ad ogni \textbf{acquisto} viene rilasciato uno scontrino, identificato da un codice acquisto e dalla data, inoltre deve essere riportata la quantit\`a relativa ad ogni prodotto acquistato e aggiornato il campo totale che tiene conto della spesa totale relativa ad un acquisto. \\
+Per ogni acquisto viene rilasciato uno \textbf{scontrino}, identificato da un codice scontrino e dalla data, deve essere riportata la quantit\`a relativa ad ogni prodotto (acquistato) e aggiornato il campo totale che tiene conto della spesa totale relativa ad un acquisto. \\
 
-Per le 5 \textbf{categorie} di prodotti, identificate da un nome univoco (porcellane, pentolame, liste nozze, stoffe, tavola), vogliamo tenere conto della percentuale IVA a cui sono soggette. \\
+Per le 5 \textbf{categorie} di prodotti, identificate da un nome univoco (porcellane, pentolame, liste nozze, stoffe, stoviglie), vogliamo tenere conto della percentuale IVA a cui sono soggette. \\
 
-Ad ogni categoria \`e associato un \textbf{sconto} in base ad una distribuzione per livelli e con una relativa percentuale. \\
+Ad ogni categoria sono associati possibili \textbf{sconti} in base ad una distribuzione per livelli e con una relativa percentuale. \\
 
-I \textbf{dipendenti}, responsabili ognuno di una una categoria, sono identificati da un codice, inoltre vogliamo tenere conto dell'indirizzo (via,numero, citt\`a, provincia), dei recapiti (telefono, mail) e delle informazioni di base (nome, cognome, data di nascita, cod. fiscale). Ad ogni dipendente viene assegnato un determinato turno (mattina, pomeriggio) in un certo giorno lavorativo in cui sar\`a responsabile di una certa categoria. \\
+I \textbf{dipendenti}, responsabili ognuno di una singola categoria, sono identificati da un codice, inoltre vogliamo tenere conto dell'indirizzo (via,numero, citt\`a, provincia), dei recapiti (telefono, mail) e delle informazioni di base (nome, cognome, data di nascita, cod. fiscale). Ad ogni dipendente viene assegnato un determinato turno (mattina, pomeriggio) in un certo giorno lavorativo in cui sar\`a responsabile di una certa categoria. \\
 
-Ogni \textbf{prodotto} appartiene ad una singola categoria, sono identificati da un codice ed inoltre vogliamo tenere conto delle informazioni base (nome, descrizione, prezzo) e della quantit\`a disponibile, cio\`e in magazzino e in esposizione. \\
+Ogni \textbf{prodotto} appartiene ad una singola categoria, \`e identificato da un codice ed inoltre vogliamo tenere conto delle informazioni base (nome, descrizione, prezzo) e della quantit\`a disponibile (in magazzino e in esposizione). \\
 
-Ogni prodotto disponibile deve essere stato precedentemente ordinato da un fornitore, con relativa fattura. Per quanto riguarda gli \textbf{ordini}, identificati da un numero ordine univoco, inoltre teniamo conto della data e della quantit\`a riferita al singolo prodotto ordinato. \\
+Ogni prodotto disponibile deve essere stato precedentemente ordinato da un fornitore, con relativa \textbf{fattura}. La singola fattura deve essere identificata da un codice fattura univoco, inoltre teniamo conto della data e della quantit\`a riferita al singolo prodotto ordinato. \\
 
-Per i \textbf{fornitori}, identificati da un nome univoco, dobbiamo tenere conto dei contatti (fax, mail, numero di telefono), dell'indirizzo (via, numero, citt\`a, provincia).
+Per i \textbf{fornitori} (artigiani o grossisti), identificati da un nome univoco, dobbiamo tenere conto dei contatti (fax, mail, telefono), dell'indirizzo (via, numero, città, provincia).
 
 
 \subsubsection{Glossario dei termini}
@@ -27,19 +27,19 @@ Per i \textbf{fornitori}, identificati da un nome univoco, dobbiamo tenere conto
 
 Termine & Descrizione & Sinonimi & Collegamenti \\ \hline
 
-Iscritto & Compratore abituale iscritto a questa lista per avere diritto a sconti speciali. Pu\`o essere un dipendente. & Cliente,cliente abituale & Acquisto, storico \\ \hline
+Iscritto & Compratore abituale iscritto a questa lista per avere diritto a sconti speciali. Pu\`o essere un dipendente. & Cliente abituale & Acquisto, Scontrino \\ \hline
 
-Acquisto & Scontrino attestante l'avvenuto acquisto. & Scontrino & Iscritto, Prodotto \\ \hline
+Scontrino & Scontrino attestante lo storico degli acquisti. & Storico, acquisto & Iscritto, Prodotto \\ \hline
 
-Categoria & 5 insiemi di prodotti. Un prodotto pu\`o appartenere ad un'unica categoria. Ogni categoria ha il suo univoco responsabile. & & Sconti, Storico, Dipende. \\ \hline
+Categoria & 5 insiemi di prodotti. Un prodotto pu\`o appartenere ad un'unica categoria. Ogni categoria ha il suo univoco responsabile. & & Sconto, Dipende, Prodotto. \\ \hline
 
-Sconto & Spetta solamente al cliente iscritto. Per ogni categoria esistono diversi livelli di acquisti a cui corrisponde una percentuale di sconto. & & Categoria. \\ \hline
+Sconto & Spetta solamente al cliente iscritto. Per ogni categoria esistono diversi livelli in base agli acquisti, a cui corrisponde una percentuale di sconto. & & Categoria. \\ \hline
 
 Dipendente & Responsabile di una singola categoria. Pu\`o essere un cliente ma non un fornitore. & Responsabile & Categoria \\ \hline
 
-Prodotto & Ogni prodotto pu\`o appartenere ad una sola categoria. & Oggetti & Categoria, Acquisto, Ordine \\ \hline
+Prodotto & Ogni prodotto pu\`o appartenere ad una sola categoria. & Oggetti, Prodotto ordinati o acquistati & Categoria, Fattura, Scontrino \\ \hline
 
-Ordine & Pi\`u unit\`a di prodotto possono essere ordinate a fornitori diversi. Modifica il campo quantit\`a di prodotto. & Fattura & Fornitore, Prodotto \\ \hline
+Fattura & Pi\`u unit\`a di prodotto possono essere ordinate a fornitori diversi. Modifica il campo quantit\`a disponibile di prodotto. & Ordine & Fornitore, Prodotto \\ \hline
 
 Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o essere un cliente e pu\`o fornire prodotti di diverse categorie & & Ordine \\
 
