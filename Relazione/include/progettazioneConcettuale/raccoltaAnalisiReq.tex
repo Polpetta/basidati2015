@@ -43,5 +43,139 @@ Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o 
 
 %\hline
 \end{tabular}
-
 \end{center}
+
+
+\subsubsection{Schema Concettuale}
+
+\paragraph*{Lista delle Entit\`a}
+
+\begin{itemize}
+
+\item \underline{Dipendente}: lista dei dipendenti del negozio.
+  
+  \begin{itemize}
+
+  \item Codice dipendente (PK)
+    
+  \item Informazioni: dati anagrafici e di recapito del dipendente
+    \begin{itemize}
+    \item Nome
+    \item Cognome
+    \item Data di nascita
+    \item Codice Fiscale
+    \item Telefono
+    \item E-mail
+    \end{itemize}
+    
+  \item Indirizzo:
+    \begin{itemize}
+    \item Via
+    \item Numero
+    \item Citt\`a
+    \end{itemize}
+
+  \end{itemize}
+
+\item \underline{Categoria}: insieme di prodotti
+  \begin{itemize}
+  \item Nome Categoria (PK)
+  \item Responsabile (FK)
+  \end{itemize}
+
+\item \underline{Sconto}: entit\`a destinata a contenere tutti i gradi di sconto di tutte le categorie
+  \begin{itemize}
+  \item Livelli (PK)
+  \item Categorie (FK)
+  \item Tetto Max
+  \end{itemize}
+
+\item \underline{Prodotto}: lista di tutti i prodotti in vendita
+  \begin{itemize}
+  \item Codice Prodotto (PK)
+  \item Quantit\`a
+  \item Percentruale iva
+  \item Categoria (FK)
+  \end{itemize}
+
+\item \underline{Specifica}: descrizione base sul prodotto
+  \begin{itemize}
+  \item Codice Prodotto (FK)
+  \item Descrizione
+  \item Nome
+  \item Foto
+  \end{itemize}
+
+\item \underline{Fattura}: contenente tutti gli attestati di avvenuto ordine per un certo numero di prodotti
+  \begin{itemize}
+  \item Codice Fattura (PK)
+  \item Codice Prodotto (FK)
+  \item Quantit\`a
+  \item Data
+  \item Fornitore (FK)
+  \end{itemize}
+
+\item \underline{Fornitore}: lista di tutti i venditori da cui il negozio acquista i prodotti
+  \begin{itemize}
+  \item Nome (PK)
+  \item Contatto
+    \begin{itemize}
+    \item Fax
+    \item Telefono
+    \item E-mail
+    \end{itemize}
+
+  \item Indirizzo:
+    \begin{itemize}
+    \item Via
+    \item Provincia
+    \item Citt\`a
+    \end{itemize}
+  \end{itemize}
+  Di cui sono presenti le seguienti generalizzazioni:
+  \begin{itemize}
+  \item \underline{Artigiano}: Fornisce prodotti fatti a mano
+  \item \underline{Grossista}: Fornisce prodotti all'ingrosso
+  \end{itemize}
+
+\item \underline{Scontrino}: registro di tutti le vendite effettuate ai clienti iscritti
+  \begin{itemize}
+  \item Codice Scontrino (PK)
+  \item Data (PK)
+  \item Quantit\`a
+  \item Codice Prodotto (FK)
+  \end{itemize}
+
+\item \underline{Cliente}: lista dei clienti, di cui abbiamo creato la seguente generalizzazione parziale:
+  \begin{itemize}
+  \item \underline{Iscritto}: clienti iscritti
+    \begin{itemize}
+    \item Codice Iscritto (PK)
+    \item Indirizzo:
+      \begin{itemize}
+      \item Via
+      \item Provincia
+      \item Citt\`a
+      \end{itemize}
+
+    \item Contatto
+      \begin{itemize}
+      \item Fax
+      \item Telefono
+      \item E-mail
+      \end{itemize}
+
+    \item Identit\`a
+      \begin{itemize}
+      \item Nome
+      \item Cognome
+      \end{itemize}
+
+    \end{itemize}
+  \end{itemize}
+  
+\end{itemize}
+
+
+
+%Passi successivi: Schema, Progettazione logica, Schema Normalizzato.
