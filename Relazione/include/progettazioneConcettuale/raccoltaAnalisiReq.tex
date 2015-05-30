@@ -3,21 +3,15 @@
 \paragraph*{Negozio ''Linea Casa Bari''}
 Si vuole realizzare una base di dati per un negozio al dettaglio che vende oggetti per la casa, di cui vogliamo rappresentare i dati dei clienti abituali, dei dipendenti, dei fornitori e dei prodotti, con le rispettive categorie. \\
 
-Per i clienti \textbf{iscritti} (sono circa 20 e sono un sottoinsieme dei clienti totali), identificati da un codice, vogliamo tenere conto dell'identit\`a (nome,cognome), dell'indirizzo(via, numero, citt\`a, provincia) e dei contatti (e-mail,telefono). Ogni cliente iscritto ha un unico storico acquisti (insieme di scontrini presenti e passati) che specifica il numero di acquisti fatti su una certa categoria e da cui si derivano gli eventuali sconti di cui ha diritto. \\
+Per i clienti \textbf{iscritti} identificati da un codice, vogliamo tenere conto dell'identit\`a e dei suoi acquisti effettuati. \\
 
-Per ogni acquisto viene rilasciato uno \textbf{scontrino}, identificato da un codice scontrino e dalla data, deve essere riportata la quantit\`a relativa ad ogni prodotto (acquistato) e aggiornato il campo totale che tiene conto della spesa totale relativa ad un acquisto. \\
-
-Per le 5 \textbf{categorie} di prodotti, identificate da un nome univoco (porcellane, pentolame, liste nozze, stoffe, stoviglie), vogliamo tenere conto della percentuale IVA a cui sono soggette. \\
+Ogni \textbf{prodotto} \`e identificato da un codice, vogliamo tenere conto delle informazioni base e della quantit\`a disponibile e catalogarlo in una delle cinque \textbf{categorie}, identificate come: porcellane, pentolame, liste nozze, stoffe, stoviglie. \newline
 
 Ad ogni categoria sono associati possibili \textbf{sconti} in base ad una distribuzione per livelli e con una relativa percentuale. \\
 
-I \textbf{dipendenti}, responsabili ognuno di una singola categoria, sono identificati da un codice, inoltre vogliamo tenere conto dell'indirizzo (via,numero, citt\`a, provincia), dei recapiti (telefono, mail) e delle informazioni di base (nome, cognome, data di nascita, cod. fiscale). Ad ogni dipendente viene assegnato un determinato turno (mattina, pomeriggio) in un certo giorno lavorativo in cui sar\`a responsabile di una certa categoria. \\
+I \textbf{dipendenti}, responsabili ognuno di una singola categoria, sono identificati da un codice e sono organizzati per turni. \\
 
-Ogni \textbf{prodotto} appartiene ad una singola categoria, \`e identificato da un codice ed inoltre vogliamo tenere conto delle informazioni base (nome, descrizione, prezzo) e della quantit\`a disponibile (in magazzino e in esposizione). \\
-
-Ogni prodotto disponibile deve essere stato precedentemente ordinato da un fornitore, con relativa \textbf{fattura}. La singola fattura deve essere identificata da un codice fattura univoco, inoltre teniamo conto della data e della quantit\`a riferita al singolo prodotto ordinato. \\
-
-Per i \textbf{fornitori} (artigiani o grossisti), identificati da un nome univoco, dobbiamo tenere conto dei contatti (fax, mail, telefono), dell'indirizzo (via, numero, città, provincia).
+Vogliamo tener conto degli ordini di merce ai \textbf{fornitori} con rispettive \textbf{fatture}. \\
 
 
 \subsubsection{Glossario dei termini}
