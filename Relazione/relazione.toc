@@ -4,5 +4,7 @@
 \contentsline {subsection}{\numberline {1.3}Raccolta e analisi dei requisiti}{3}{subsection.1.3}
 \contentsline {subsubsection}{\numberline {1.3.1}Analisi dei requisiti}{3}{subsubsection.1.3.1}
 \contentsline {subsubsection}{\numberline {1.3.2}Glossario dei termini}{4}{subsubsection.1.3.2}
-\contentsline {subsection}{\numberline {1.4}Schema E-R (prima della ristrutturazione)}{5}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Schema E-R (dopo la ristrutturazione)}{6}{subsection.1.5}
+\contentsline {subsubsection}{\numberline {1.3.3}Schema Concettuale}{4}{subsubsection.1.3.3}
+\contentsline {subsubsection}{\numberline {1.3.4}Lista delle Relazioni}{6}{subsubsection.1.3.4}
+\contentsline {subsection}{\numberline {1.4}Schema E-R (prima della ristrutturazione)}{8}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Schema E-R (dopo la ristrutturazione)}{9}{subsection.1.5}
