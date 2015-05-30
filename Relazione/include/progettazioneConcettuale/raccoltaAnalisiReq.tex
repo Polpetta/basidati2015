@@ -1,31 +1,34 @@
 \subsection{Raccolta e analisi dei requisiti}
-\subsubsection{Abstract}
-\paragraph*{Negozio ''Linea Casa Bari''}
-Si vuole realizzare una base di dati per un negozio al dettaglio che vende oggetti per la casa, di cui vogliamo rappresentare i dati dei clienti abituali, dei dipendenti, dei fornitori e dei prodotti, con le rispettive categorie. \\
 
-Per i clienti \textbf{iscritti} identificati da un codice, vogliamo tenere conto dell'identit\`a e dei suoi acquisti effettuati. \\
+\subsubsection{Analisi dei requisiti}
+Per i clienti \textbf{iscritti} identificati da un codice, vogliamo tenere conto dell'identit\`a e dei suoi acquisti effettuati.
 
-Ogni \textbf{prodotto} \`e identificato da un codice, vogliamo tenere conto delle informazioni base e della quantit\`a disponibile e catalogarlo in una delle cinque \textbf{categorie}, identificate come: porcellane, pentolame, liste nozze, stoffe, stoviglie. \newline
 
-Ad ogni categoria sono associati possibili \textbf{sconti} in base ad una distribuzione per livelli e con una relativa percentuale. \\
 
-I \textbf{dipendenti}, responsabili ognuno di una singola categoria, sono identificati da un codice e sono organizzati per turni. \\
+Ogni \textbf{prodotto} \`e identificato da un codice, vogliamo tenere conto delle informazioni base e della quantit\`a disponibile e catalogarlo in una delle cinque \textbf{categorie}, identificate come: porcellane, pentolame, liste nozze, stoffe, stoviglie.
+
+
+Ad ogni categoria sono associati possibili \textbf{sconti} in base ad una distribuzione per livelli e con una relativa percentuale.
+
+
+I \textbf{dipendenti}, responsabili ognuno di una singola categoria, sono identificati da un codice e sono organizzati per turni.
+
 
 Vogliamo tener conto degli ordini di merce ai \textbf{fornitori} con rispettive \textbf{fatture}. \\
 
 
 \subsubsection{Glossario dei termini}
 \begin{center}
-\begin{tabular}{| l | p{5cm} | p{3cm} | p{3cm} |}
-\hline
+\begin{tabular}{ l | p{5cm} | p{3cm} | p{3cm} }
+%\hline
 
-Termine & Descrizione & Sinonimi & Collegamenti \\ \hline
+\textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Collegamenti} \\ \hline
 
 Iscritto & Compratore abituale iscritto a questa lista per avere diritto a sconti speciali. Pu\`o essere un dipendente. & Cliente abituale & Acquisto, Scontrino \\ \hline
 
 Scontrino & Scontrino attestante lo storico degli acquisti. & Storico, acquisto & Iscritto, Prodotto \\ \hline
 
-Categoria & 5 insiemi di prodotti. Un prodotto pu\`o appartenere ad un'unica categoria. Ogni categoria ha il suo univoco responsabile. & & Sconto, Dipende, Prodotto. \\ \hline
+Categoria & Cinque insiemi di prodotti. Un prodotto pu\`o appartenere ad un'unica categoria. Ogni categoria ha il suo univoco responsabile. & & Sconto, Dipende, Prodotto. \\ \hline
 
 Sconto & Spetta solamente al cliente iscritto. Per ogni categoria esistono diversi livelli in base agli acquisti, a cui corrisponde una percentuale di sconto. & & Categoria. \\ \hline
 
@@ -38,7 +41,7 @@ Fattura & Pi\`u unit\`a di prodotto possono essere ordinate a fornitori diversi.
 Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o essere un cliente e pu\`o fornire prodotti di diverse categorie & & Ordine \\
 
 
-\hline
+%\hline
 \end{tabular}
 
 \end{center}
