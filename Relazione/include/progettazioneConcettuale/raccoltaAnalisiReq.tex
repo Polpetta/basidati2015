@@ -177,5 +177,40 @@ Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o 
 \end{itemize}
 
 
+\subsubsection{Lista delle Relazioni}
+
+\begin{itemize}
+
+\item \underline{Responsabile}: relazione tra Dipendente-Categoria.
+  \begin{itemize}
+  \item Presenza di due attributi:
+  \begin{itemize}
+  \item Turno
+  \item Data di inizio
+  \end{itemize}
+  La cardinalit\`a \`e (1,1) in quanto ogni dipendente \`e responsabile solamente di una categoria e vi lavora in una determinata data e in un rispettivo turno.
+
+  \end{itemize}
+
+\item \underline{Scaglioni}: relazione tra Categoria-Sconto. \`E una cardinalit\`a (0,N) da Categoria $\to$ Sconto, mentre la cardinalit\`a risulta essere (1,N) da Sconto $\to$ Categoria. \newline
+Ogni Categoria presenta dei diversi scaglioni di sconti in base al livello di acquisto.
+
+\item \underline{Appartenenza}: relazione tra Categoria-Prodotto. Da Prodotto $\to$ Categoria abbiamo imposto una cardinalit\`a di tipo (1,1) in quanto un Prodotto deve appartenere a una ed una sola Categoria. \newline
+  La cardinalit\`a \`e (0,N) da Categoria $\to$ Prodotto in quanto una nuova categoria pu\`o non contenere prodotti.\newline
+  Si prenda l'esempio della Categoria \textit{Liste Nozze}: quando il negozio non sta svolgendo nessuna attivit\`a per matrimoni la categoria \textit{Lista Nozze} risulter\`a essere vuota. %DA FARE FRAMEBOX PERCHÈ ESEMPIO
+
+\item \underline{Definito}: relazione tra Prodotto-Specifica. La cardinalit\`a tra Prodotto e Specifica \`e (1,1) in quanto ogni prodotto ha una singola specifica.
+
+\item \underline{Registrato}: relazione tra Fattura-Prodotto. Da Prodotto $\to$ Fattura abbiamo una relazione di tipo (1,N) in quanto un prodotto deve risultare registrato in una fattura. \newline
+  Da Fattura $\to$ Prodotto la cardinalit\`a \`e (1,N) perch\`e una fattura per essere emessa deve contenere uno o pi\`u prodotti
+
+\item \underline{Emesso}: relazione tra Fattura-Fornitore. Da fattura a fornitore la cardinalit\`a \`e (1,1): una fattura pu\`o essere solamente emessa da un singolo fornitore. \newline
+  Da Fornitore $\to$ a Fattura \`e (1,N) in quanto viene memorizzato solamente un fornitore che abbia almeno emesso una o pi\`u fatture al negozio.
+
+\item \underline{Certifica}: relazione tra Prodotto-Scontrino. Ha cardinalit\`a (0,N) in Prodotto $\to$ Scontrino siccome un prodotto pu\`o esser stato acquistato da zero a pi\`u volte, invece da Scontrino $\to$ Prodotto vi \`e una cardinalit\`a (1,N), uno scontrino infatti certifica almeno un prodotto.
+
+\item \underline{Ottiene}: relazione tra Scontrino-Cliente. In Scontrino $\to$ Cliente vi \`e una relazione (1,1) in quanto uno scontrino si riferisce ad un singolo acquirente, mentre tra Cliente $\to$ Scontrino vi \`e una relazione (1,N) ne consegue che un cliente pu\`o fare molti acquisti. Un cliente per essere definito tale deve almeno aver compiuto un acquisto.
+  
+\end{itemize}
 
 %Passi successivi: Schema, Progettazione logica, Schema Normalizzato.
