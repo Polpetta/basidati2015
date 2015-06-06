@@ -14,14 +14,20 @@ function getHeader($title="",$style="style.css"){
 
 function getMenu(){
 ?>
-<div id="button_menu">
-    <div id="menu">
-        <ul>
-            <li>link1</li>
-            <li>link2</li>
-            <li>link3</li>
-        </ul>
-        <p>Prova</p>
+<div id="head">
+    <div id="button_menu">
+        <div id="drawer">
+            <ul>
+                <li>link1</li>
+                <li>link2</li>
+                <li>link3</li>
+            </ul>
+            <p>Prova</p>
+        </div>
+    </div>
+
+    <div id="logo">
+        Test
     </div>
 </div>
 <?php
