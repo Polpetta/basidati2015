@@ -12,5 +12,59 @@
             //La funzione mi aggiunge il menu alla pagina
             getMenu()
         ?>
+       <div id="main">
+         <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        <p>prova</p>
+        </div>
     </body>
 </html>
