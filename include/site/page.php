@@ -1,12 +1,12 @@
 <?php
-function getHeader($title=""){
+function getHeader($title="",$style="style.css"){
     if(isset($title)){
      $title= "- " . $title;
     }
 ?>
 <head>
-        <link rel="stylesheet" href="css/style.css">
-        <title>Linea Casa Bari <?php echo $title ?></title>
+        <link rel="stylesheet" href="css/<?php echo $style;?>">
+        <title>Linea Casa Bari <?php echo $title; ?></title>
 </head>
 <?php
 }
