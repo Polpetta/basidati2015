@@ -2,12 +2,15 @@
 
 
 <html>
-<?php
-include("include/site/head.html");
-//echo "<html><body><p>Prova</p></body></html>";
-?>
+    <?php
+        //Creo l'header in cui includo il foglio di stile e setto la pagina del titolo
+        include("include/site/page.php");
+        getHeader("Home");
+    ?>
     <body>
-    <?php include("include/site/menu.html"); ?>
+        <?php
+            //La funzione mi aggiunge il menu alla pagina
+            getMenu()
+        ?>
     </body>
-
 </html>
