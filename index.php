@@ -12,7 +12,7 @@
             //La funzione mi aggiunge il menu alla pagina
             getMenu()
         ?>
-       <div id="main">
+        <div id="main">
            <h1>Benvenuto</h1>
            <p>
                In questo negozio si troveranno articoli per la casa, comprese tazze fatte a mano, vasi, abat jour e argenteria. <br>
