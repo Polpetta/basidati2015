@@ -1,9 +1,10 @@
 #head {
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     z-index: 100;
     width: 100%;
+    background-color: white;
  -webkit-box-shadow: 0px 10px 8px 0px rgba(0,0,0,0.7);
 -moz-box-shadow: 0px 10px 8px 0px rgba(0,0,0,0.7);
 box-shadow: 0px 10px 8px 0px rgba(0,0,0,0.7);
