@@ -22,7 +22,7 @@ function getMenu(){
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="products.php">Prodotti</a></li>
-                <li>link3</li>
+                <li><a href="makelamp.php">Crea lampada</a></li>
             </ul>
             <p>Prova</p>
         </div>
