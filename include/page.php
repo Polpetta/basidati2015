@@ -21,7 +21,7 @@ function getMenu(){
             <h3>Men&ugrave;</h3>
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li>link2</li>
+                <li><a href="products.php">Prodotti</a></li>
                 <li>link3</li>
             </ul>
             <p>Prova</p>
