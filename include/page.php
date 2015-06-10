@@ -27,7 +27,6 @@ function getMenu(){
     </div>
 
     <div id="logo">
-        Test
     </div>
 </div>
 <?php
