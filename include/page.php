@@ -17,8 +17,9 @@ function getMenu(){
 <div id="head">
     <div id="button_menu">
         <div id="drawer">
+            <h3>Men&ugrave;</h3>
             <ul>
-                <li>link1</li>
+                <li><a href="index.php">Home</a></li>
                 <li>link2</li>
                 <li>link3</li>
             </ul>
@@ -27,6 +28,9 @@ function getMenu(){
     </div>
 
     <div id="logo">
+        <div id="login">
+            <a href="login.php">Accedi</a>
+        </div>
     </div>
 </div>
 <?php
