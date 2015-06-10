@@ -5,6 +5,7 @@ function getHeader($title="",$style="style.css"){
     }
 ?>
 <head>
+    <link rel="stylesheet" href="css/head.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/<?php echo $style;?>">
     <title>Linea Casa Bari <?php echo $title; ?></title>
