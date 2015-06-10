@@ -5,6 +5,7 @@
     margin-top: 0px;
     margin-left: 5%;
     padding-top: 30px;
+    padding-bottom: 30px;
     background-color: white;
 }
 
@@ -43,4 +44,9 @@ body h1{
 #products tr.alt td {
     color: #000000;
     background-color: #D4D4F3;
+}
+
+
+#makelamp{
+
 }
