@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.16)  9 JUN 2015 19:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.16)  15 JUN 2015 19:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -442,6 +442,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--18
  []
 
 
+Underfull \hbox (badness 1448) in paragraph at lines 31--31
+[]\OT1/cmr/m/n/10 Sei in-siemi di prodotti. Un
+ []
+
+
 Underfull \hbox (badness 3148) in paragraph at lines 31--31
 \OT1/cmr/m/n/10 prodotto pu^^Ro ap-partenere ad
  []
@@ -462,7 +467,7 @@ Underfull \hbox (badness 1888) in paragraph at lines 37--37
  []
 
 
-Underfull \hbox (badness 1158) in paragraph at lines 39--39
+Underfull \hbox (badness 1158) in paragraph at lines 41--41
 \OT1/cmr/m/n/10 es-sere or-di-nate a for-n-i-tori di-
  []
 
@@ -502,32 +507,37 @@ Underfull \hbox (badness 1158) in paragraph at lines 39--39
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-<include/progettazioneConcettuale/schemaER/PreNorm.png, id=95, 1075.01625pt x 7
-79.91376pt>
+<include/progettazioneConcettuale/schemaER/PreNorm.png, id=95, 1058.95625pt x 7
+77.90625pt>
 File: include/progettazioneConcettuale/schemaER/PreNorm.png Graphic file (type 
 png)
  <use include/progettazioneConcettuale/schemaER/PreNorm.png>
 Package pdftex.def Info: include/progettazioneConcettuale/schemaER/PreNorm.png 
 used on input line 11.
-(pdftex.def)             Requested size: 645.01474pt x 467.95187pt.
+(pdftex.def)             Requested size: 635.37866pt x 466.74734pt.
 
 [8
 
 
  <./include/progettazioneConcettuale/schemaER/PreNorm.png>]
-<include/progettazioneConcettuale/schemaER/PostRistrutturaz.png, id=102, 1067.9
-9pt x 774.895pt>
+<include/progettazioneConcettuale/schemaER/PostRistrutturaz.png, id=102, 1075.0
+1625pt x 754.82pt>
 File: include/progettazioneConcettuale/schemaER/PostRistrutturaz.png Graphic fi
 le (type png)
 
 <use include/progettazioneConcettuale/schemaER/PostRistrutturaz.png>
 Package pdftex.def Info: include/progettazioneConcettuale/schemaER/PostRistrutt
 uraz.png used on input line 27.
-(pdftex.def)             Requested size: 640.79895pt x 464.94058pt.
- [9 <./include/progettazioneConcettuale/schemaER/PostRistrutturaz.png>]))
+(pdftex.def)             Requested size: 645.01474pt x 452.89551pt.
+ [9 <./include/progettazioneConcettuale/schemaER/PostRistrutturaz.png>]
+(./include/progettazioneConcettuale/schemaER/NotePostRistr.tex))) [10
+
+
+]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 41.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 41.
- (./relazione.aux (./include/progettazioneConcettuale.aux))
+
+(./relazione.aux (./include/progettazioneConcettuale.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 41.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 41.
 Package rerunfilecheck Info: File `relazione.out' has not changed.
@@ -535,13 +545,13 @@ Package rerunfilecheck Info: File `relazione.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 41.
  ) 
 Here is how much of TeX's memory you used:
- 7895 strings out of 495025
- 114157 string characters out of 6181515
- 205514 words of memory out of 5000000
+ 7900 strings out of 495025
+ 114307 string characters out of 6181515
+ 206514 words of memory out of 5000000
  10978 multiletter control sequences out of 15000+600000
  11849 words of font info for 46 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,9n,32p,598b,513s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,9n,32p,642b,507s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
@@ -549,10 +559,10 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmti10.pfb>
-Output written on relazione.pdf (9 pages, 203966 bytes).
+Output written on relazione.pdf (10 pages, 201926 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 116 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
+ 146 PDF objects out of 1000 (max. 8388607)
+ 121 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
