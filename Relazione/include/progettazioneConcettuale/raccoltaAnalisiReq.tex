@@ -73,8 +73,8 @@ Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o 
   \item Indirizzo:
     \begin{itemize}
     \item Via
-    \item Numero
     \item Citt\`a
+    \item Provincia
     \end{itemize}
 
   \end{itemize}
@@ -111,10 +111,10 @@ Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o 
 \item \underline{Fattura}: contenente tutti gli attestati di avvenuto ordine per un certo numero di prodotti
   \begin{itemize}
   \item Codice Fattura (PK)
-  \item Codice Prodotto (FK)
+  \item Codice Prodotto
   \item Quantit\`a
   \item Data
-  \item Fornitore (FK)
+  \item Fornitore
   \end{itemize}
 
 \item \underline{Fornitore}: lista di tutti i venditori da cui il negozio acquista i prodotti
@@ -145,7 +145,7 @@ Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o 
   \item Codice Scontrino (PK)
   \item Data (PK)
   \item Quantit\`a
-  \item Codice Prodotto (FK)
+  \item Codice Prodotto
   \end{itemize}
 
 \item \underline{Cliente}: lista dei clienti, di cui abbiamo creato la seguente generalizzazione parziale:
