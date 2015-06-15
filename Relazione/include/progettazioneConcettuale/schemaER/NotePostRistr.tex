@@ -1,0 +1,16 @@
+\paragraph*{Note post ristrutturazione}
+\begin{itemize}
+
+\item Nell'attributo composto Informazione in DIPENDENTE abbiamo notato la ridondanza tra Nome, Cognome, Data di nascita con Codice Fiscale, ma abbiamo deciso di mantenere questi campi in quanto ricavarci questi dati da Codice Fiscale risulterebbe essere un'operazione onerosa ed inoltre non sempre potrebbe essere corretta (vedasi i casi di omocodia). Sempre su DIPENDENTE abiamo deciso di tenere l'indirizzo principale di abitazione e un solo recapito.
+
+\item Abbiamo deciso di non accorpare DIPENDENTE in CATEGORIA in quanto, accedendo a CATEGORIA, non sempre vogliamo accedere agli attributi di DIPENDENTE; rendento il tutto pi\`u modulare e velocizzando le query che usano solamente gli attributi di CATEGORIA.
+
+\item L'entit\`a SPECIFICA e la relazione DEFINITO sono stati rimossi in quanto le relazioni pi\`u frequenti su PRODOTTO richiedono i dati relativi ad esso (come Nome e Descrizione) e vogliamo quindi risparmiare gli accessi necessari per risalire a questi dati attraverso l'associazione che li lega.
+
+\item Su PRODOTTO abbiamo lasciato l'attributo Quantit\`a in quanto, al crescere del numero di scontrini e fatture, calcolare il numero di un determinato prodotto sarebe diventato troppo oneroso dal punto di vista computazionale, quindi abbiamo deciso di lasciare questa rindondanza.
+
+\item Su FORNITORE \`e stata tolta la generalizzazione totale, in quanto la differenza tra le produzioni di un artigiano e di un grossista non sono richieste nell'analisi dei requisiti.
+
+\item Per quanto riguarda gli iscritti abbiamo deciso di voler conoscere solo un contatto e un indirizzo principale. Anche qui la generalizzazione \`e stata tolta, in quanto nell'analisi dei requisiti abbiamo imposto che gli sconti fossero riferiti solamente ai clienti iscritti.
+  
+\end{itemize}
