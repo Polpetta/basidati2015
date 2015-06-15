@@ -1,0 +1,10 @@
+\paragraph*{Note post ristrutturazione}
+\begin{itemize}
+
+\item Nell'attributo composto Informazione in DIPENDENTE abbiamo notato la ridondanza tra Nome, Cognome, Data di nascita con codice fiscale, ma abbiamo deciso di mantenere questi campo in quanto ricavarci questi dati risulterebbe essere un'operazione onerosa ed inoltre non sempre potrebbe essere corretta (vedasi per i casi di omocodia). Sempre su DIPENDENTE abiamo deciso di tenere l'indirizzo principale di abitazione e un solo recapito.
+
+\item Abbiamo deciso di non accorpare DIPENDENTE in CATEGORIA in quanto, accedendo a CATEGORIA, non sempre vogliamo accedere agli attributi di DIPENDENTE; rendento il tutto più modulare e velocizzando le query che usano solamente gli attributi di CATEGORIA.
+
+  \item L'entit\`a SPECIFICA e la relazione DEFINITO sono stati rimossi in quanto le relazioni più frequenti su PRODOTTO richiedono i dati relativi ad esso (come Nome e Descrizione) e vogliamo quindi risparmiare gli accessi necessari per risalire a questi dati attraverso l'associazione che li lega.
+  
+\end{itemize}
