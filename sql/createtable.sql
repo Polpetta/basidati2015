@@ -12,6 +12,15 @@ CREATE TABLE Categoria(
 NomeCategoria	CHAR(20) PRIMARY KEY
 ) ENGINE=InnoDB;
 
+CREATE TABLE Scaglioni(
+Categoria    CHAR(20),
+Livello	     SMALLINT,
+
+PRIMARY KEY (Categoria, Livello),
+FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria),
+FOREIGN KEY (Livello) REFERENCES Sconto (Livello)
+) ENGINE=InnoDB;
+
 CREATE TABLE Sconto(
 Categoria    CHAR(20),
 Livello	     SMALLINT,
@@ -21,15 +30,6 @@ TettoMax	  SMALLINT,
 PRIMARY KEY (Categoria,Livello),
 FOREIGN KEY (Categoria) REFERENCES Scaglioni (Categoria)
 ) ENGINE=InnoDB;
-
-CREATE TABLE Scaglioni(
-Categoria    CHAR(20),
-Livello	     SMALLINT,
-
-PRIMARY KEY (Categoria,Livello),
-FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria),
-FOREIGN KEY (Livello) REFERENCES Sconto (Livello)
-);#ENGINE=InnoDB;
 
 CREATE TABLE Dipendente(
 CodDipendente	SMALLINT,
@@ -70,8 +70,19 @@ SubTotale    INT NOT NULL,
 Iscritto     INT,
 
 PRIMARY KEY (Prodotto,Data,CodScontrino),
-FOREIGN KEY (Iscritto) REFERENCES Iscritto(CodIscritto)
+FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
+FOREIGN KEY (Iscritto) REFERENCES Iscritto (CodIscritto)
 ) ENGINE=InnoDB;
+
+CREATE TABLE Certifica(
+Prodotto     INT,
+Data	     Date,
+CodScontrino    INT,
+
+PRIMARY KEY (Prodotto, Data, Scontrino)
+FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
+FOREIGN KEY (Data,CodScontrino) REFERENCES Scontrino (Data,CodScontrino),
+) ENGINE = InnoDB;
 
 CREATE TABLE Iscritto(
 CodIscritto  INT AUTO_INCREMENT,
@@ -103,6 +114,15 @@ Quantita     SMALLINT,
 Fornitore    CHAR(50),
 
 PRIMARY KEY (Prodotto,CodFattura),
-FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
+FOREIGN KEY (Prodotto) REFERENCES Registrato (CodProdotto),
 FOREIGN KEY (Fornitore) REFERENCES Fornitore (Nome)
 ) ENGINE = InnoDB;
+
+CREATE TABLE Registrato(
+Prodotto     INT,
+Fattura	     INT,
+
+PRIMARY KEY (Prodotto,Fattura),
+FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
+FOREIGN KEY (Fattura) REFERENCES Fattura (CodFattura)
+) ENGINE=InnoDB;
