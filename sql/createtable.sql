@@ -16,6 +16,7 @@ CREATE TABLE Sconto(
 Categoria    CHAR(20),
 Livello	     SMALLINT,
 PercentualeSconto INT(2) DEFAULT 0 NOT NULL,
+TettoMax	  SMALLINT,
 
 PRIMARY KEY (Categoria,Livello),
 FOREIGN KEY (Categoria) REFERENCES Scaglioni (Categoria)
