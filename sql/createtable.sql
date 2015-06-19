@@ -43,10 +43,10 @@ CREATE INDEX IScaglione2
 ON Scaglione (Categoria);
 
 ALTER TABLE Sconto
-      ADD CONSTRAINT fkSconto_Scaglione FOREIGN KEY (Categoria) REFERENCES Scaglione (Categoria);
+      ADD CONSTRAINT fkSconto_Scaglione FOREIGN KEY (Categoria) REFERENCES Scaglione (Categoria) ON DELETE CASCADE;
 ALTER TABLE Scaglione
-      ADD CONSTRAINT fkScaglione_Sconto FOREIGN KEY (Livello) REFERENCES Sconto (Livello),
-      ADD CONSTRAINT fkScaglione_Categoria FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria);
+      ADD CONSTRAINT fkScaglione_Sconto FOREIGN KEY (Livello) REFERENCES Sconto (Livello) ON DELETE CASCADE,
+      ADD CONSTRAINT fkScaglione_Categoria FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE CASCADE;
 
 CREATE TABLE Dipendente(
 CodDipendente	SMALLINT,
@@ -61,7 +61,7 @@ Indirizzo	CHAR(50) NOT NULL,
 Categoria	CHAR(20),
 
 PRIMARY KEY (CodDipendente),
-FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria)
+FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Prodotto(
@@ -123,11 +123,11 @@ ON Certifica (Data,CodScontrino);
 
 ALTER TABLE Scontrino
       ADD CONSTRAINT fkScontrino_Certifica FOREIGN KEY (Prodotto) REFERENCES Certifica (Prodotto),
-      ADD CONSTRAINT fkScontrino_Iscritto FOREIGN KEY (Iscritto) REFERENCES Iscritto (CodIscritto);
+      ADD CONSTRAINT fkScontrino_Iscritto FOREIGN KEY (Iscritto) REFERENCES Iscritto (CodIscritto) ON DELETE CASCADE;
 
 ALTER TABLE Certifica
-      ADD CONSTRAINT fkCertifica_Prodotto FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
-      ADD CONSTRAINT fkCertifica_Scontrino FOREIGN KEY (Data,CodScontrino) REFERENCES Scontrino (Data,CodScontrino);
+      ADD CONSTRAINT fkCertifica_Prodotto FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto) ON DELETE CASCADE,
+      ADD CONSTRAINT fkCertifica_Scontrino FOREIGN KEY (Data,CodScontrino) REFERENCES Scontrino (Data,CodScontrino) ON DELETE CASCADE;
 
 CREATE TABLE Fornitore(
 Nome   CHAR(50),
