@@ -1,6 +1,5 @@
 drop table if exists Categoria;
 drop table if exists Sconto;
-drop table if exists Scaglioni;
 drop table if exists Scaglione;
 drop table if exists Dipendente;
 drop table if exists Prodotto;
@@ -9,44 +8,31 @@ drop table if exists Iscritto;
 drop table if exists Fornitore;
 drop table if exists Fattura;
 
-CREATE TABLE Categoria(
-NomeCategoria	CHAR(20) PRIMARY KEY
+drop trigger if exists Categoria_Scaglione;
+
+CREATE TABLE Categoria (
+NomeCategoria	CHAR(50),
+
+PRIMARY KEY (NomeCategoria)
 ) ENGINE=InnoDB;
 
+CREATE TABLE Sconto (
+Id	INT AUTO_INCREMENT,
+Livello SMALLINT DEFAULT 0 NOT NULL,
+PercSconto	INT(2) DEFAULT 0 NOT NULL,
+TettoMax	SMALLINT,
 
-CREATE TABLE Sconto(
-Categoria    CHAR(20) NOT NULL,
-Livello	     SMALLINT,
-PercentualeSconto INT(2) DEFAULT 0 NOT NULL,
-TettoMax	  SMALLINT,
-
-PRIMARY KEY (Categoria,Livello)
+PRIMARY KEY(Id)
 ) ENGINE=InnoDB;
 
-CREATE INDEX ISconto
-ON Sconto (Categoria);
+CREATE TABLE Scaglione (
+Categoria	CHAR(50),
+Sconto	INT,
 
-CREATE INDEX ISconto2
-ON Sconto (Livello);
-
-CREATE TABLE Scaglione(
-Categoria    CHAR(20),
-Livello	     SMALLINT,
-
-PRIMARY KEY (Categoria, Livello)
+PRIMARY KEY (Categoria,Sconto),
+FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE CASCADE,
+FOREIGN KEY (Sconto) REFERENCES Sconto(Id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
-
-CREATE INDEX IScaglione
-ON Scaglione (Livello);
-
-CREATE INDEX IScaglione2
-ON Scaglione (Categoria);
-
-ALTER TABLE Sconto
-      ADD CONSTRAINT fkSconto_Scaglione FOREIGN KEY (Categoria) REFERENCES Scaglione (Categoria) ON DELETE CASCADE;
-ALTER TABLE Scaglione
-      ADD CONSTRAINT fkScaglione_Sconto FOREIGN KEY (Livello) REFERENCES Sconto (Livello) ON DELETE CASCADE, #da controllare
-      ADD CONSTRAINT fkScaglione_Categoria FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE CASCADE;
 
 CREATE TABLE Dipendente(
 CodDipendente	SMALLINT,
