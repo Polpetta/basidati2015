@@ -45,7 +45,7 @@ ON Scaglione (Categoria);
 ALTER TABLE Sconto
       ADD CONSTRAINT fkSconto_Scaglione FOREIGN KEY (Categoria) REFERENCES Scaglione (Categoria) ON DELETE CASCADE;
 ALTER TABLE Scaglione
-      ADD CONSTRAINT fkScaglione_Sconto FOREIGN KEY (Livello) REFERENCES Sconto (Livello) ON DELETE CASCADE,
+      ADD CONSTRAINT fkScaglione_Sconto FOREIGN KEY (Livello) REFERENCES Sconto (Livello) ON DELETE CASCADE, #da controllare
       ADD CONSTRAINT fkScaglione_Categoria FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE CASCADE;
 
 CREATE TABLE Dipendente(
@@ -75,7 +75,7 @@ Foto		 MEDIUMBLOB,
 Categoria	 CHAR(20),
 
 PRIMARY KEY (CodProdotto),
-FOREIGN KEY (Categoria) REFERENCES Categoria(NomeCategoria)
+FOREIGN KEY (Categoria) REFERENCES Categoria(NomeCategoria) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE Iscritto(
@@ -170,7 +170,7 @@ ON Registrato (Fattura);
 
 ALTER TABLE Fattura
       ADD CONSTRAINT fkFattura_Registrato FOREIGN KEY (Prodotto) REFERENCES Registrato (Prodotto),
-      ADD CONSTRAINT fkFattura_Fornitore FOREIGN KEY (Fornitore) REFERENCES Fornitore (Nome);
+      ADD CONSTRAINT fkFattura_Fornitore FOREIGN KEY (Fornitore) REFERENCES Fornitore (Nome) ON DELETE CASCADE; #da controllare
 
 ALTER TABLE Registrato
       ADD CONSTRAINT fkRegistrato_Prodotto FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
