@@ -4,11 +4,36 @@
 
 $category=$_GET['cat'];
 
-function printCategory($category=""){
+function getCategory(){
+ /*
+    In questa funizone si effettuerà la query:
+    SELECT * FROM Categoria;
+    In modo da ottenere tutte le categorie disponibili
+ */
+    ?>
+
+<a id="category" href="#home">Home</a>
+<a id="category" href="#news">Nebgbcgfdnhgfcnhgnhgnhgnhnhgws</a>
+<a id="category" href="#contact">Contact</a>
+<a id="category" href="#about">About</a>
+<a id="category" href="#news">Nebgbcgfdnhgfcnhgnhgnhgnhnhgws</a>
+<a id="category" href="#contact">Contact</a>
+<a id="category" href="#about">About</a>
+<a id="category" href="#news">Nebgbcgfdnhgfcnhgnhgnhgnhnhgws</a>
+<a id="category" href="#contact">Contact</a>
+<a id="category" href="#about">About</a>
+
+<?php
+
+}
+
+function printSelectedCategory($category=""){
     if(!isset($category)){
         echo "Non hai selezionato alcuna categoria";
+    } else {
+        ?><p>Sei sulla categoria: <?php echo $category;?>. <a href="products.php">Visualizza tutti i prodotti.</a></p>
+    <?php
     }
-
     ?>
 
     <table id="products" style align="center">
@@ -16,7 +41,6 @@ function printCategory($category=""){
         <tr>
             <th>Nome</th>
             <th>Categoria</th>
-            <th>Foto</th>
         </tr>
         <tr>
             <td>Tazza</td>
@@ -59,7 +83,16 @@ function printCategory($category=""){
         ?>
         <div id="main">
             <h1>Prodotti</h1>
-            <p><?php printCategory($category); ?></p>
+            <p>
+                <?php
+                    getCategory();
+                ?>
+            </p>
+            <p>
+                <?php
+                    printSelectedCategory($category);
+                ?>
+            </p>
         </div>
     </body>
 </html>
