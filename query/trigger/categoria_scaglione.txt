@@ -1,0 +1,13 @@
+DROP TRIGGER IF EXISTS Categoria_Scaglione;
+
+DELIMITER //
+CREATE TRIGGER Categoria_Scaglione
+AFTER INSERT ON Categoria
+FOR EACH ROW
+BEGIN
+	IF NOT EXISTS (SELECT Categoria FROM Scaglione 
+	WHERE Scaglione.Categoria = NEW.NomeCategoria)
+	THEN INSERT INTO Scaglione (Categoria) VALUES (NEW.NomeCategoria);
+	END IF;
+END;//
+DELIMITER ;
