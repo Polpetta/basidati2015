@@ -45,22 +45,22 @@ function printSelectedCategory($category=""){
         <tr>
             <td>Tazza</td>
             <td>Stoviglie</td>
-            <td>ffffff</td>
+            <td><a href="details.php?id=1">Dettagli</a></td>
         </tr>
         <tr class="alt">
             <td>Vaso</td>
             <td>Porcellane</td>
-            <td>ffffff</td>
+            <td><a href="details.php?id=2">Dettagli</a></td>
         </tr>
         <tr>
             <td>Pentola figa</td>
             <td>Pentolame</td>
-            <td>ffffff</td>
+            <td><a href="details.php?id=3">Dettagli</a></td>
         </tr>
         <tr class="alt">
             <td>Tovaglia blu</td>
             <td>Tovaglie</td>
-            <td>ffffff</td>
+            <td><a href="details.php?id=4">Dettagli</a></td>
         </tr>
     </table>
 
