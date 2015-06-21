@@ -1,5 +1,5 @@
 <?php
-function getHeader($title="",$style="style.css"){
+function getHeader($title="",$style=""){
     if(isset($title)){
      $title= "- " . $title;
     }
@@ -7,7 +7,14 @@ function getHeader($title="",$style="style.css"){
 <head>
     <link rel="stylesheet" href="css/head.css">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/<?php echo $style;?>">
+    <link rel="stylesheet" href="css/style.css">
+    <?php
+    if(isset($style)){
+        ?>
+        <link rel="stylesheet" href="css/<?php echo $style;?>">
+    <?php
+    }
+    ?>
     <title>Linea Casa Bari <?php echo $title; ?></title>
 </head>
 <?php
