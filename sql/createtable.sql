@@ -73,6 +73,7 @@ Fax	     CHAR(20),
 Telefono     CHAR(20) NOT NULL,
 Mail	     CHAR(20),
 Indirizzo    CHAR(50) NOT NULL,
+Password     CHAR(64) NOT NULL,
 
 PRIMARY KEY (CodIscritto)
 ) ENGINE=InnoDB;
