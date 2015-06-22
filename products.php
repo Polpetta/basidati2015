@@ -10,21 +10,18 @@ function getCategory(){
     SELECT * FROM Categoria;
     In modo da ottenere tutte le categorie disponibili
  */
-    ?>
 
-<a id="category" href="#home">Home</a>
-<a id="category" href="#news">Nebgbcgfdnhgfcnhgnhgnhgnhnhgws</a>
-<a id="category" href="#contact">Contact</a>
-<a id="category" href="#about">About</a>
-<a id="category" href="#news">Nebgbcgfdnhgfcnhgnhgnhgnhnhgws</a>
-<a id="category" href="#contact">Contact</a>
-<a id="category" href="#about">About</a>
-<a id="category" href="#news">Nebgbcgfdnhgfcnhgnhgnhgnhnhgws</a>
-<a id="category" href="#contact">Contact</a>
-<a id="category" href="#about">About</a>
+    include_once("include/lib/mysql/query.php");
+    $test = new Query;
+    $query = $test->exec("SELECT * FROM Categoria");
 
-<?php
-
+    if (mysql_num_rows($query) > 0) {
+        while($row = mysql_fetch_row($query)){
+            for ( $i = 0; $i <count($row); $i++){
+                ?><a id="category" href="products.php?cat=<?php echo $row[$i];?>"><?php echo $row[$i];?></a><?php
+            }
+        }
+    }
 }
 
 function printSelectedCategory($category=""){
