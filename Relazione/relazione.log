@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.16)  15 JUN 2015 19:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.16)  23 JUN 2015 11:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -296,7 +296,8 @@ Package Listings Warning: Unknown column format `flexibile' on input line 30.
 LaTeX Warning: Unused global option(s):
     [openany].
 
-(./relazione.aux (./include/progettazioneConcettuale.aux))
+(./relazione.aux (./include/progettazioneConcettuale.aux)
+(./include/progettazioneLogica.aux))
 \openout1 = `relazione.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
@@ -437,43 +438,44 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 )
 (./include/progettazioneConcettuale/abstract.tex)
 (./include/progettazioneConcettuale/raccoltaAnalisiReq.tex
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
 
  []
 
 
-Underfull \hbox (badness 1448) in paragraph at lines 31--31
+Underfull \hbox (badness 1448) in paragraph at lines 29--29
 []\OT1/cmr/m/n/10 Sei in-siemi di prodotti. Un
  []
 
 
-Underfull \hbox (badness 3148) in paragraph at lines 31--31
+Underfull \hbox (badness 3148) in paragraph at lines 29--29
 \OT1/cmr/m/n/10 prodotto pu^^Ro ap-partenere ad
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--31
+Underfull \hbox (badness 10000) in paragraph at lines 29--29
 []\OT1/cmr/m/n/10 Sconto, Dipende,
  []
 
 
-Underfull \hbox (badness 4013) in paragraph at lines 37--37
+Underfull \hbox (badness 4013) in paragraph at lines 35--35
 []\OT1/cmr/m/n/10 Oggetti, Prodotto
  []
 
 
-Underfull \hbox (badness 1888) in paragraph at lines 37--37
+Underfull \hbox (badness 1888) in paragraph at lines 35--35
 \OT1/cmr/m/n/10 or-di-nati o ac-quis-
  []
 
 
-Underfull \hbox (badness 1158) in paragraph at lines 41--41
+Underfull \hbox (badness 1158) in paragraph at lines 39--39
 \OT1/cmr/m/n/10 es-sere or-di-nate a for-n-i-tori di-
  []
 
 [3
 
-] [4] [5] [6]) [7] (./include/progettazioneConcettuale/schemaER.tex
+]) (./include/progettazioneConcettuale/schemaConcettuale.tex [4] [5] [6])
+[7] (./include/progettazioneConcettuale/schemaER.tex
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
 * paper: a4paper
@@ -507,7 +509,7 @@ Underfull \hbox (badness 1158) in paragraph at lines 41--41
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-<include/progettazioneConcettuale/schemaER/PreNorm.png, id=95, 1058.95625pt x 7
+<include/progettazioneConcettuale/schemaER/PreNorm.png, id=87, 1058.95625pt x 7
 77.90625pt>
 File: include/progettazioneConcettuale/schemaER/PreNorm.png Graphic file (type 
 png)
@@ -520,8 +522,8 @@ used on input line 11.
 
 
  <./include/progettazioneConcettuale/schemaER/PreNorm.png>]
-<include/progettazioneConcettuale/schemaER/PostRistrutturaz.png, id=102, 1075.0
-1625pt x 754.82pt>
+<include/progettazioneConcettuale/schemaER/PostRistrutturaz.png, id=94, 1075.01
+625pt x 754.82pt>
 File: include/progettazioneConcettuale/schemaER/PostRistrutturaz.png Graphic fi
 le (type png)
 
@@ -530,39 +532,73 @@ Package pdftex.def Info: include/progettazioneConcettuale/schemaER/PostRistrutt
 uraz.png used on input line 27.
 (pdftex.def)             Requested size: 645.01474pt x 452.89551pt.
  [9 <./include/progettazioneConcettuale/schemaER/PostRistrutturaz.png>]
-(./include/progettazioneConcettuale/schemaER/NotePostRistr.tex))) [10
+(./include/progettazioneConcettuale/schemaER/NotePostRistr.tex
+Overfull \hbox (1.99707pt too wide) in paragraph at lines 8--9
+\OT1/cmr/m/n/10 nome, de-scrizione nella tabella prodotto, in quanto le re-lazi
+oni pi^^Ru fre-quenti su PRODOTTO
+ []
+
+))) [10
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 41.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 41.
+\openout2 = `include/progettazioneLogica.aux'.
 
-(./relazione.aux (./include/progettazioneConcettuale.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 41.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 41.
-Package rerunfilecheck Info: File `relazione.out' has not changed.
-(rerunfilecheck)             Checksum: 2047C206F1B61EB33C1A2F4B38951F97;769.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 41.
+ (./include/progettazioneLogica.tex
+(./include/progettazioneLogica/ModelloRelazionale.tex
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 1.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--15
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--32
+
+ []
+
+[11
+
+
+])) [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 42.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 42.
+ (./relazione.aux (./include/progettazioneConcettuale.aux)
+(./include/progettazioneLogica.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 42.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 42.
+
+
+Package rerunfilecheck Warning: File `relazione.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `relazione.out':
+(rerunfilecheck)             Before: F3344D9EA99643F474B8D385331FE7E9;840
+(rerunfilecheck)             After:  ED48D6721491D4ED1DF22A33AD641C78;970.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 42.
  ) 
 Here is how much of TeX's memory you used:
- 7900 strings out of 495025
- 114307 string characters out of 6181515
- 206514 words of memory out of 5000000
- 10978 multiletter control sequences out of 15000+600000
- 11849 words of font info for 46 fonts, out of 8000000 for 9000
+ 7918 strings out of 495025
+ 114843 string characters out of 6181515
+ 206517 words of memory out of 5000000
+ 10979 multiletter control sequences out of 15000+600000
+ 11503 words of font info for 45 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,9n,32p,642b,507s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,9n,32p,643b,507s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti10.pfb>
-Output written on relazione.pdf (10 pages, 201926 bytes).
+fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on relazione.pdf (12 pages, 194275 bytes).
 PDF statistics:
- 146 PDF objects out of 1000 (max. 8388607)
- 121 compressed objects within 2 object streams
- 26 named destinations out of 1000 (max. 500000)
- 91 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 145 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
+ 30 named destinations out of 1000 (max. 500000)
+ 99 words of extra memory for PDF output out of 10000 (max. 10000000)
 
