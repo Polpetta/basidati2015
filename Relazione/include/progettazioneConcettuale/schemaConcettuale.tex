@@ -1,0 +1,159 @@
+\subsection{Schema Concettuale}
+
+\subsubsection{Lista delle Entit\`a}
+
+\begin{itemize}
+
+\item \underline{Dipendente}: lista dei dipendenti del negozio.
+  
+  \begin{itemize}
+
+  \item Codice dipendente SMALLINT
+    
+  \item Informazioni: dati anagrafici e di recapito del dipendente
+    \begin{itemize}
+    \item Nome CHAR(15)
+    \item Cognome CHAR(15)
+    \item Data di nascita DATE
+    \item Codice Fiscale CHAR(16)
+    \item Telefono CHAR(10)
+    \item E-mail CHAR(50)
+    \end{itemize}
+    
+  \item Indirizzo:
+    \begin{itemize}
+    \item Via CHAR(50)
+    \item Citt\`a CHAR(50)
+    \item Provincia CHAR(50)
+    \end{itemize}
+
+  \end{itemize}
+
+\item \underline{Categoria}: insieme di prodotti
+  \begin{itemize}
+  \item Nome Categoria CHAR(50)
+  \end{itemize}
+
+\item \underline{Sconto}: entit\`a destinata a contenere tutti i gradi di sconto di tutte le categorie
+  \begin{itemize}
+  \item Livello SMALLINT
+  \item PercentualeSconto INT(2)
+  \item Tetto Max SMALLINT
+  \end{itemize}
+
+\item \underline{Prodotto}: lista di tutti i prodotti in vendita
+  \begin{itemize}
+  \item Codice Prodotto INT
+  \item Quantit\`a SMALLINT
+  \item Percentruale IVA INT(2)
+  \end{itemize}
+
+\item \underline{Specifica}: descrizione base sul prodotto
+  \begin{itemize}
+  \item Nome CHAR(50)
+  \item Descrizione TEXT
+  \end{itemize}
+
+\item \underline{Fattura}: contenente tutti gli attestati di avvenuto ordine per un certo numero di prodotti
+  \begin{itemize}
+  \item Codice Fattura INT
+  \item Quantit\`a SMALLINT
+  \item Data DATE
+  \end{itemize}
+
+\item \underline{Fornitore}: lista di tutti i venditori da cui il negozio acquista i prodotti
+  \begin{itemize}
+  \item Nome CHAR(50)
+  \item Contatto
+    \begin{itemize}
+    \item Fax CHAR(10)
+    \item Telefono CHAR(10)
+    \item E-mail CHAR (10)
+    \end{itemize}
+
+  \item Indirizzo:
+    \begin{itemize}
+    \item Via CHAR(50)
+    \item Citt\`a CHAR(50)
+    \item Provincia CHAR (50)
+    \end{itemize}
+  \end{itemize}
+  Di fornitore sono presenti le seguenti generalizzazioni:
+  \begin{itemize}
+  \item \underline{Artigiano}: Fornisce prodotti fatti a mano
+  \item \underline{Grossista}: Fornisce prodotti all'ingrosso
+  \end{itemize}
+
+\item \underline{Scontrino}: registro di tutti le vendite effettuate dai clienti iscritti
+  \begin{itemize}
+  \item Codice Scontrino INT
+  \item Data DATE
+  \item Quantit\`a SMALLINT
+  \item SubTotale DECIMAL(5,2)
+  \end{itemize}
+
+\item \underline{Cliente}: lista dei clienti, di cui abbiamo creato la seguente generalizzazione parziale:
+  \begin{itemize}
+  \item \underline{Iscritto}: clienti iscritti
+    \begin{itemize}
+    \item Codice Iscritto INT
+    \item Indirizzo:
+      \begin{itemize}
+      \item Via CHAR(50)
+      \item Citt\`a CHAR(50)
+      \item Provincia CHAR(50)
+      \end{itemize}
+
+    \item Contatto
+      \begin{itemize}
+      \item Fax CHAR(20)
+      \item Telefono CHAR(20)
+      \item E-mail CHAR (50)
+      \end{itemize}
+
+    \item Identit\`a
+      \begin{itemize}
+      \item Nome CHAR(20)
+      \item Cognome CHAR(20)
+      \end{itemize}
+
+    \end{itemize}
+  \end{itemize}
+  
+\end{itemize}
+
+
+\subsubsection{Lista delle Relazioni}
+
+\begin{itemize}
+
+\item \underline{Responsabile}: relazione tra Dipendente-Categoria.
+  \begin{itemize}
+  \item Presenza di due attributi:
+  \begin{itemize}
+  \item Data di inizio DATE
+  \end{itemize}
+  La cardinalit\`a \`e (1,1) in quanto ogni dipendente \`e responsabile solamente di una categoria e vi lavora in una determinata data. I dipendenti in s\`e possono ovviamente cambiare nel tempo.
+
+  \end{itemize}
+
+\item \underline{Scaglioni}: relazione tra Categoria-Sconto. \`E una cardinalit\`a (0,N) da Categoria $\to$ Sconto, mentre la cardinalit\`a risulta essere (1,N) da Sconto $\to$ Categoria. \newline
+Ogni Categoria presenta dei diversi scaglioni di sconti in base al livello di acquisto.
+
+\item \underline{Appartenenza}: relazione tra Categoria-Prodotto. Da Prodotto $\to$ Categoria abbiamo imposto una cardinalit\`a di tipo (1,1) in quanto un Prodotto deve appartenere a una ed una sola Categoria. \newline
+  La cardinalit\`a \`e (0,N) da Categoria $\to$ Prodotto in quanto una nuova categoria pu\`o non contenere prodotti.\newline
+  Per esempio se un dipendente acquistasse tutti  i prodotti di una certa categoria questa risulterebbe vuota fino a nuova fattura.
+
+\item \underline{Definito}: relazione tra Prodotto-Specifica. La cardinalit\`a tra Prodotto e Specifica \`e (1,1) in quanto ogni prodotto ha una singola specifica.
+
+\item \underline{Registrato}: relazione tra Fattura-Prodotto. Da Prodotto $\to$ Fattura abbiamo una relazione di tipo (1,N) in quanto un prodotto deve risultare registrato in una fattura. \newline
+  Da Fattura $\to$ Prodotto la cardinalit\`a \`e (1,N) perch\`e una fattura per essere emessa deve contenere uno o pi\`u prodotti
+
+\item \underline{Emesso}: relazione tra Fattura-Fornitore. Da fattura a fornitore la cardinalit\`a \`e (1,1): una fattura pu\`o essere solamente emessa da un singolo fornitore. \newline
+  Da Fornitore $\to$ a Fattura \`e (1,N) in quanto viene memorizzato solamente un fornitore che abbia almeno emesso una o pi\`u fatture al negozio.
+
+\item \underline{Certifica}: relazione tra Prodotto-Scontrino. Ha cardinalit\`a (0,N) in Prodotto $\to$ Scontrino siccome un prodotto pu\`o esser stato acquistato da zero a pi\`u volte, invece da Scontrino $\to$ Prodotto vi \`e una cardinalit\`a (1,N), uno scontrino infatti certifica almeno un prodotto.
+
+\item \underline{Ottiene}: relazione tra Scontrino-Cliente. In Scontrino $\to$ Cliente vi \`e una relazione (1,1) in quanto uno scontrino si riferisce ad un singolo acquirente, mentre tra Cliente $\to$ Scontrino vi \`e una relazione (1,N) ne consegue che un cliente pu\`o fare pi\`u acquisti e per essere definito tale deve aver almeno compiuto un acquisto.
+  
+\end{itemize}
