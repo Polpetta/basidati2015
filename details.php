@@ -13,6 +13,7 @@ if (!isset($Pid)){
      "Qta" => getInfo ("Quantità",$Pid),
      "IVA" => getInfo ("PercentualeIVA",$Pid),
      "Costo" => getInfo ("Costo",$Pid),
+     "Categoria" => getInfo ("Categoria",$Pid),
      );
 }
 
@@ -49,6 +50,10 @@ function getInfo($attribute="*",$product){
                     echo $product["Nome"];
                 ?>
             </h1>
+            <div id="cat">
+                Prodotto in <b><?php echo $product["Categoria"];?></b>
+            </div>
+            <br>
             <div id="qta">
                 Disponibili ancora <b><?php echo $product["Qta"];?> </b> unit&agrave;
             </div>
