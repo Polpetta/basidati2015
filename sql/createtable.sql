@@ -69,9 +69,9 @@ CREATE TABLE Iscritto(
 CodIscritto  INT AUTO_INCREMENT,
 Nome	     CHAR(20) NOT NULL,
 Cognome	     CHAR(20) NOT NULL,
-Fax	     CHAR(20),
-Telefono     CHAR(20) NOT NULL,
-Mail	     CHAR(20),
+Fax	     CHAR(10),
+Telefono     CHAR(10) NOT NULL,
+Mail	     CHAR(50),
 Indirizzo    CHAR(50) NOT NULL,
 Password     CHAR(64) NOT NULL,
 
@@ -104,7 +104,7 @@ CREATE TABLE Fornitore(
 Nome   CHAR(50),
 Fax    CHAR(10),
 Telefono	CHAR(10) NOT NULL,
-Mail		CHAR(10) NOT NULL,
+Mail		CHAR(50) NOT NULL,
 Indirizzo	CHAR(50) NOT NULL,
 
 PRIMARY KEY (Nome)
