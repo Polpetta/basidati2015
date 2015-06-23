@@ -1,0 +1,6 @@
+Liste nozze;
+Porcellane;
+Pentolame;
+Tovaglie;
+Tavola;
+Paralumi;
