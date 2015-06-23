@@ -1,0 +1,44 @@
+\subsubsection{Modello Relazionale}
+
+Seguendo i procedimenti di trasformazione dello schema-ER al modello Relazionale abbiamo ottenuto: \newline
+PRODOTTO (\underline{CodProdotto}, Nome, Descrizione, Quantit\`a, Costo, PercentualeIVA, Categoria) \newline
+SCONTRINO (\underline{Prodotto}, \underline{Data}, \underline{CodScontrino}, Quantit\`a, Subtotale, Iscritto) \newline
+CERTIFICA (\underline{Prodotto}, \underline{Data}, \underline{CodScontrino}) \newline
+FATTURA (\underline{Prodotto}, \underline{CodFattura}, Data, Quantit\`a, Fornitore) \newline
+REGISTRATO (\underline{Prodotto}, \underline{Codice Fattura}) \newline
+CATEGORIA (\underline{Nome Categoria}) \newline
+SCONTO (\underline{Categoria}, \underline{Livello}, \underline{PercentualeSconto}, \underline{TettoMax}) \newline
+SCAGLIONI (\underline{Categoria}, \underline{Livello}) \newline
+ISCRITTO (\underline{CodIscritto}, Nome, Cognome, Fax, Telefono, Mail, Indirizzo) \newline
+FORNITORE (\underline{Nome}, Fax, Telefono, Mail, Indirizzo) \newline
+DIPENDENTE (\underline{CodDipendente}, Nome, Cognome, Data Nascita, Codice Fiscale, Telefono, Mail, Data Inizio, Categoria) \\
+
+Qui vengono espressi i vincoli non esprimibili nel modello relazionale:
+\begin{itemize}
+\item In PRODOTTO vincolo d'integrit\`a di categoria con CATEGORIA
+\item In SCONTRINO vincolo d'integrit\`a di prodotto con CERTIFICA
+\item In SCONTRINO vincolo d'integrit\`a di iscritto con ISCRITTO
+\item In CERTIFICA vincolo d'integrit\`a di prodotto con PRODOTTO
+\item In CERTIFICA vincolo d'integrit\`a di codice scontrino con SCONTRINO
+\item In CERTIFICA vincolo d'integrit\`a di data con SCONTRINO
+\item In FATTURA vincolo d'integrit\`a di prodotto con REGISTRATO
+\item In FATTURA vincolo d'integrit\`a di fornitore con FORNITORE
+\item In REGISTRATO vincolo d'integrit\`a di prodotto con PRODOTTO
+\item In REGISTRATO vincolo d'integrit\`a di codice fattura con FATTURA
+\item In SCONTO vincolo d'integrit\`a di categoria con SCAGLIONI
+\item In SCAGLIONI vincolo d'integrit\`a di categoria con CATEGORIA
+\item In SCAGLIONI vincolo d'integrit\`a di livelli con SCONTO
+\item In DIPENDENTE vincolo d'integrit\`a di categoria con CATEGORIA \\
+
+\end{itemize}
+
+Inoltre per alcuni attributi abbiamo attribuito le seguenti propriet\`a:
+\begin{itemize}
+\item In PRODOTTO Descrizione, Foto possono essere NULL
+\item In ISCRITTO Fax, Indirizzo, Mail possono essere NULL
+\item In FORNITORE Fax pu\`o essere NULL
+\item In DIPENDENTE Mail pu\`o essere NULL
+\item In SCONTO il tetto-max pu\`o essere NULL
+
+\end{itemize}
+
