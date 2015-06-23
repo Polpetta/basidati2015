@@ -57,7 +57,7 @@ CodProdotto  INT AUTO_INCREMENT,
 Nome	     CHAR(50) NOT NULL,
 Descrizione  TEXT,
 Quantita     SMALLINT DEFAULT 0 NOT NULL,
-Costo	     DECIMAL(5,2) DEFAULT 0 NOT NULL,
+Costo	     DECIMAL(8,2) DEFAULT 0 NOT NULL,
 PercentualeIVA	 INT(2) DEFAULT 0 NOT NULL,
 Categoria	 CHAR(20),
 
@@ -80,11 +80,10 @@ PRIMARY KEY (CodIscritto)
 
 CREATE TABLE Scontrino (
 Id	INT AUTO_INCREMENT,
-Prodotto	INT,
 Data	DATE NOT NULL,
 CodScontrino	INT NOT NULL,
 Quantita	SMALLINT NOT NULL,
-SubTotale	DECIMAL(5,2) NOT NULL,
+SubTotale	DECIMAL(8,2) NOT NULL,
 Iscritto	INT,
 
 PRIMARY KEY (Id),
@@ -112,10 +111,9 @@ PRIMARY KEY (Nome)
 
 CREATE TABLE Fattura(
 Id	INT AUTO_INCREMENT,
-Prodotto	INT,
 CodFattura	INT NOT NULL,
 Data	DATE NOT NULL,
-Qauntita	SMALLINT NOT NULL,
+Quantita	SMALLINT NOT NULL,
 Fornitore	CHAR(50),
 
 PRIMARY KEY (Id),
