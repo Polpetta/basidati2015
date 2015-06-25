@@ -37,7 +37,7 @@ FOREIGN KEY (Sconto) REFERENCES Sconto(Id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Dipendente(
-CodDipendente	SMALLINT,
+CodDipendente	INT AUTO_INCREMENT,
 Nome		CHAR(15) NOT NULL,
 Cognome		CHAR(15) NOT NULL,
 DataNascita	DATE NOT NULL,
@@ -47,6 +47,7 @@ Mail		CHAR(50),
 DataInizio	DATE NOT NULL,
 Indirizzo	CHAR(50) NOT NULL,
 Categoria	CHAR(20),
+Password     CHAR(64) NOT NULL,
 
 PRIMARY KEY (CodDipendente),
 FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE CASCADE
