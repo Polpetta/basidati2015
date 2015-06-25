@@ -9,10 +9,6 @@ class Query
     private $dbURL="basidati1004.studenti.math.unipd.it";
     private $dbPort="3306";
 
-    public function __construct(){
-        $this->openDB();
-    }
-
     private function openDB(){
         if(isset($dbConnection)){
             return $this->dbConnection;
@@ -35,9 +31,11 @@ class Query
         return $this->dbConnection;
     }
 
-    public function exec($query){
+    public function exec($query, $disconnect=true){
         $result=mysql_query($query,$this->openDB());
-        $this->closeDB();
+        if($disconnect==true){
+            $this->closeDB();
+        }
         return $result;
     }
 }
