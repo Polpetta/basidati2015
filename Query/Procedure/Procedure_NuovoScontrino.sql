@@ -7,8 +7,6 @@ BEGIN
 DECLARE SSubTotale DECIMAL(8,2);
 DECLARE UltimoScontrino INT;
 
-#bisogna resettare il numero dello scontrino quando cambia il giorno!
-
 SELECT Costo INTO SSubTotale FROM Prodotto WHERE CodProdotto = CProdotto;
 
 SET SSubTotale = SQuantita * SSubTotale;
