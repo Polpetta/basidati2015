@@ -1,5 +1,7 @@
 <?php
 
+include_once("include/lib/mysql/query.php");
+
 $Pid=$_GET['id'];
 
 if (!isset($Pid)){
@@ -11,8 +13,8 @@ if (!isset($Pid)){
      "Nome" => getInfo ("Nome",$Pid),
      "Descrizione" => getInfo ("Descrizione",$Pid),
      "Qta" => getInfo ("Quantità",$Pid),
-     "IVA" => getInfo ("PercentualeIVA",$Pid),
      "Costo" => getInfo ("Costo",$Pid),
+     "IVA" => getInfo ("PercentualeIVA",$Pid),
      "Categoria" => getInfo ("Categoria",$Pid),
      );
 }
@@ -22,10 +24,17 @@ function getInfo($attribute="*",$product){
  /*
  In questa funzione si restituisce il nome del prodotto di cui si vogliono
  i dettagli.
- La query sarà: SELECT `$attribute` FROM Prodotto WHERE `CodProdotto`= $product;
 
- si farà return $result
+ In questa funzione si ritorna un array con tutte le informazioni di base sul
+ prodotto in questione. Ancora da finire l'implementazione.
  */
+	$info = new Query();
+	$query = $info->exec ("SELECT Nome,Descrizione,Quantita,Costo,PercentualeIVA,Categoria FROM Prodotto WHERE CodProdotto = '$product'");
+
+	if (mysql_num_rows($query) > 0) {
+        $row = mysql_fetch_row($query);
+	}
+
 
     return "Gianni"; //test
 }
