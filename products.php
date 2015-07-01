@@ -12,8 +12,8 @@ function getCategory(){
  */
 
     include_once("include/lib/mysql/query.php");
-    $test = new Query;
-    $query = $test->exec("SELECT * FROM Categoria");
+    $cat = new Query;
+    $query = $cat->exec("SELECT * FROM Categoria");
 
     if (mysql_num_rows($query) > 0) {
         while($row = mysql_fetch_row($query)){
@@ -25,12 +25,19 @@ function getCategory(){
 }
 
 function printSelectedCategory($category=""){
+	$prd = new Query;
     if(!isset($category)){
         echo "Non hai selezionato alcuna categoria";
+		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto");
     } else {
         ?><p>Sei sulla categoria: <?php echo $category;?>. <a href="products.php">Visualizza tutti i prodotti.</a></p>
     <?php
+		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto WHERE Categoria = '$category'");
     }
+
+	
+
+
     ?>
 
     <table id="products" style align="center">
@@ -40,25 +47,22 @@ function printSelectedCategory($category=""){
             <th>Categoria</th>
         </tr>
         <tr>
-            <td>Tazza</td>
-            <td>Stoviglie</td>
-            <td><a href="details.php?id=1">Dettagli</a></td>
-        </tr>
-        <tr class="alt">
-            <td>Vaso</td>
-            <td>Porcellane</td>
-            <td><a href="details.php?id=2">Dettagli</a></td>
-        </tr>
-        <tr>
-            <td>Pentola figa</td>
-            <td>Pentolame</td>
-            <td><a href="details.php?id=3">Dettagli</a></td>
-        </tr>
-        <tr class="alt">
-            <td>Tovaglia blu</td>
-            <td>Tovaglie</td>
-            <td><a href="details.php?id=4">Dettagli</a></td>
-        </tr>
+
+	<?php
+
+		if (mysql_num_rows($result) > 0) {
+        while($row = mysql_fetch_row($result)){
+                ?>
+				<tr>
+				<td><?php echo $row[0];?></td>
+				<td><?php echo $row[1];?></td>
+				<td><a href="details.php?id=<?php echo $row[2];?>">Dettagli</a></td>
+				</tr>
+<?php
+        }
+    }
+
+?>
     </table>
 
 <?php
