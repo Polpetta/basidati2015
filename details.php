@@ -4,39 +4,35 @@ include_once("include/lib/mysql/query.php");
 
 $Pid=$_GET['id'];
 
+function getInfo($id){
+    $info = new Query();
+	$query = $info->exec ("SELECT Nome,Descrizione,Quantita,Costo,PercentualeIVA,Categoria FROM Prodotto WHERE CodProdotto = '$id'");
+
+	if (mysql_num_rows($query) == 1) {
+        $row = mysql_fetch_row($query);
+
+
+    $result = array(
+        "CodProdotto" => $id,
+        "Nome" => $row[0],
+        "Descrizione" => $row[1],
+        "Qta" => $row[2],
+        "Costo" => $row[3],
+        "IVA" => $row[4],
+        "Categoria" => $row[5],
+        );
+    }
+    else
+        $result = 0;
+
+    return $result;
+}
+
 if (!isset($Pid)){
     header("Location: products.php");
     exit;
 } else {
- $product=array(
-     "CodProdotto" => $Pid,
-     "Nome" => getInfo ("Nome",$Pid),
-     "Descrizione" => getInfo ("Descrizione",$Pid),
-     "Qta" => getInfo ("Quantità",$Pid),
-     "Costo" => getInfo ("Costo",$Pid),
-     "IVA" => getInfo ("PercentualeIVA",$Pid),
-     "Categoria" => getInfo ("Categoria",$Pid),
-     );
-}
-
-
-function getInfo($attribute="*",$product){
- /*
- In questa funzione si restituisce il nome del prodotto di cui si vogliono
- i dettagli.
-
- In questa funzione si ritorna un array con tutte le informazioni di base sul
- prodotto in questione. Ancora da finire l'implementazione.
- */
-	$info = new Query();
-	$query = $info->exec ("SELECT Nome,Descrizione,Quantita,Costo,PercentualeIVA,Categoria FROM Prodotto WHERE CodProdotto = '$product'");
-
-	if (mysql_num_rows($query) > 0) {
-        $row = mysql_fetch_row($query);
-	}
-
-
-    return "Gianni"; //test
+    $product = getInfo($Pid);
 }
 
 ?>
@@ -54,13 +50,26 @@ function getInfo($attribute="*",$product){
             getMenu();
         ?>
         <div id="main">
+            <?php
+                    if ($product == 0){
+                        die("Non è stato trovato il prodotto selezionato.");
+                    }
+
+                    if ($product["Qta"] == -1)
+                        die("Spiacenti, il prodotto non è più in vendita");
+            ?>
             <h1>
                 <?php
                     echo $product["Nome"];
                 ?>
             </h1>
+
+            <div id="cst">
+                Prezzo: <b><?php echo $product["Costo"];?></b> euro
+            </div>
+            <br>
             <div id="cat">
-                Prodotto in <b><?php echo $product["Categoria"];?></b>
+                Prodotto in <b><a href="products.php?cat=<?php echo $product["Categoria"];?>"><?php echo $product["Categoria"];?></a></b>
             </div>
             <br>
             <div id="qta">
