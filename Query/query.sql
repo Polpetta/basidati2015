@@ -1,71 +1,69 @@
 #query nr 1
 
-SELECT *
-FROM Prodotto P
-WHERE P.CodProdotto=SELECT C.Prodotto
-					FROM Scontrino S, Certifica C
-					WHERE C.Scontrino=S.Id
-					GROUP BY C.Prodotto
-					HAVING max(count(S.Id));
+SELECT P.CodProdotto ,P.Nome, P.Descrizione, P.Costo, P.PercentualeIVA, P.Categoria,COUNT(C.Prodotto) AS Num_venduti
+FROM Prodotto P, Certifica C, Scontrino S 
+WHERE P.CodProdotto=C.Prodotto AND S.Id=C.Scontrino
+GROUP BY C.Prodotto, P.CodProdotto ,P.Nome, P.Descrizione, P.Quantita, P.Costo, P.PercentualeIVA, P.Categoria
+HAVING MAX(Num_venduti);
+					  
 						   
 //query nr2
 
-(select p1.nome 
-from prodotto as p1)
-except
-(select p.nome
-from prodotto as p join scontrino as s);
+SELECT P1.CodProdotto 
+FROM Prodotto P1
+WHERE P1.CodProdotto <> ALL(SELECT C.Prodotto
+						FROM Certifica C);
 
 //query nr3
 
-(select *
-from prodotto as p join scontrino as s
-		on s.iscritto=$nome);
+SELECT P.CodProdotto ,P.Nome, P.Descrizione, P.Costo, P.PercentualeIVA, P.Categoria
+FROM Prodotto P,Certifica C, Scontrino S
+WHERE C.Prodotto=P.CodProdotto AND C.Scontrino=S.Id AND S.Iscritto=1;
 		
-//query nr4
+//query nr4 
 
-select *
-from fornitore for
-where for.nome =( select f.fornitore
-				 from (select f.fornitore, count(*) as numero_fatture
-					   from fattura f
-						goup by fornitore)
-				group by fornitore
-				having max(numero_fatture));
+SELECT FO.Nome, FO.Fax, FO.Telefono, FO.Mail, FO.Indirizzo, count(*) AS Numero_acquisto
+FROM Fornitore FO JOIN Fattura F
+ON FO.Nome=F.Fornitore
+GROUP BY FO.Nome
+ORDER BY  Numero_acquisto DESC
+LIMIT 1
+;
+//query nr5 NON VA
 
-//query nr5
+SELECT P.Categoria, SUM(S.SubTotale) AS Guadagno_Max
+FROM Prodotto P, Categoria C, Certifica CE, Scontrino S
+WHERE P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id
+GROUP BY C.NomeCategoria
+ORDER BY Guadagno_Max DESC
+LIMIT 1;
 
-select p.categoria
-from prodotto p join scontrino s
-where sum(s.subTotale)= select max(sum(s1.subTotale))
-						from scontrino s1
-						group by s1.data
 
 //query nr 6
 
-select *
-from iscritto i1
-where i1.cod.iscritto = select i.cod.iscritto
-						from iscritto i
-						except
-						select s.iscritto
-						from prodotto p join scontrino s
-								on p.categoria=$categoria
+SELECT *
+FROM Iscritto I1
+WHERE I1.CodIscritto = ANY (SELECT I.CodIscritto
+						FROM Iscritto I
+						WHERE I.CodIscritto <> ALL
+						(SELECT S.Iscritto
+						FROM Prodotto P JOIN Scontrino S
+						ON P.Categoria='dildi'));
 			
-// query nr 7
+// query nr 7 NON VA
 
-select day(s.data)
-from scontrino s
-where sum(s.subtoTale) = select max(sum(s1.subtotale))
-						 from scontrino s1
-						 group by s1.data
+SELECT DAY(S.Data)
+FROM Scontrino S
+WHERE SUM(S.SubTotale) = ANY (SELECT MAX(SUM(S1.SubTotale))
+						 FROM Scontrino S1
+						 GROUP BY S1.Data);
 
-//query nr 8
+//query nr 8 NON VA
 
-select dip.nome
-from dipendente dip
-where dip.categoria=select p.categoria
-					from prodotto p join scontrino s
-					where sum(s.subTotale)= select max(sum(s1.subTotale))
-											from scontrino s1
-											group by s1.data
+SELECT *
+FROM Dipendente D
+WHERE D.Categoria= ANY (select P.Categoria
+						FROM Prodotto P JOIN Scontrino S
+						WHERE sum(s.subTotale)= SELECT max(sum(s1.subTotale))
+												FROM Scontrino S1
+												GROUP BY S1.Data
