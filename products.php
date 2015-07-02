@@ -2,7 +2,47 @@
 
 <?php
 
-$category=$_GET['cat'];
+include_once("include/lib/mysql/query.php");
+
+if(isset($_GET['cat'])){
+    $category=$_GET['cat'];
+}
+
+function search($category=""){
+    /*
+    Form che serve per una ricerca rapida in base alla categoria in cui sei.
+    */
+    ?>
+
+     <form action="search.php" method="GET">
+         Esegui una ricerca: <input list="prd" type="text" name="product">
+            <datalist id="prd">
+                <?php
+
+                    $fastprd = new Query();
+                    if(isset($category)){
+                        $result = $fastprd->exec("SELECT Nome FROM Prodotto WHERE Categoria = '$category' ");
+                    }else{
+                        $result = $fastprd->exec("SELECT Nome FROM Prodotto");
+                    }
+
+                    if (mysql_num_rows($result) > 0) {
+                        while($row = mysql_fetch_row($result)){
+                                ?><option value="<?php echo $row[0];?>"><?php
+                        }
+                    }
+
+                ?>
+            </datalist>
+         <input type="hidden" name="category" value="<?php echo $category;?>">
+         <input type="submit" value="Cerca">
+    </form>
+
+
+<?php
+}
+
+
 
 function getCategory(){
  /*
@@ -11,7 +51,6 @@ function getCategory(){
     In modo da ottenere tutte le categorie disponibili
  */
 
-    include_once("include/lib/mysql/query.php");
     $cat = new Query;
     $query = $cat->exec("SELECT * FROM Categoria");
 
@@ -24,15 +63,15 @@ function getCategory(){
     }
 }
 
-function printSelectedCategory($category=""){
+function printSelectedCategory($category=false){
 	$prd = new Query;
-    if(!isset($category)){
+    if($category == false){
         echo "Non hai selezionato alcuna categoria";
-		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto");
+		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto ORDER BY Nome ASC");
     } else {
         ?><p>Sei sulla categoria: <?php echo $category;?>. <a href="products.php">Visualizza tutti i prodotti.</a></p>
     <?php
-		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto WHERE Categoria = '$category'");
+		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto WHERE Categoria = '$category' ORDER BY Nome ASC");
     }
 
 	
@@ -46,19 +85,25 @@ function printSelectedCategory($category=""){
             <th>Nome</th>
             <th>Categoria</th>
         </tr>
-        <tr>
 
 	<?php
-
+        $i = 0;
 		if (mysql_num_rows($result) > 0) {
         while($row = mysql_fetch_row($result)){
                 ?>
-				<tr>
+				<tr
+                    <?php
+                        if($i % 2 != 0){ ?>
+                            class="alt"
+                    <?php }
+                    ?>
+                    >
 				<td><?php echo $row[0];?></td>
 				<td><?php echo $row[1];?></td>
 				<td><a href="details.php?id=<?php echo $row[2];?>">Dettagli</a></td>
 				</tr>
 <?php
+            $i++;
         }
     }
 
@@ -87,11 +132,20 @@ function printSelectedCategory($category=""){
             <p>
                 <?php
                     getCategory();
+                    if(isset($category)){
+                        search($category);
+                    }else{
+                        search();
+                    }
                 ?>
             </p>
             <p>
                 <?php
-                    printSelectedCategory($category);
+                    if(isset($category)){
+                        printSelectedCategory($category);
+                    }else{
+                        printSelectedCategory();
+                    }
                 ?>
             </p>
         </div>
