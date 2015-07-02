@@ -65,7 +65,7 @@ if (!isset($Pid)){
             </h1>
 
             <div id="cst">
-                Prezzo: <b><?php echo $product["Costo"];?></b> euro
+                Prezzo: <b><?php echo $product["Costo"];?></b> &euro;
             </div>
             <br>
             <div id="cat">
