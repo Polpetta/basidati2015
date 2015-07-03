@@ -30,15 +30,13 @@ function getMenu(){
                 <li><a href="index.php">Home</a></li>
                 <li><a href="products.php">Prodotti</a></li>
                 <li><a href="makelamp.php">Crea lampada</a></li>
+                <li><a href="login.php">Area Riservata</a></li>
             </ul>
-            <p>Prova</p>
         </div>
     </div>
 
     <div id="logo">
-        <div id="login">
-            <a href="login.php">Accedi</a>
-        </div>
+
     </div>
 </div>
 <?php
