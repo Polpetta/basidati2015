@@ -15,7 +15,7 @@ SELECT MAX(Id) INTO UltimaCategoria FROM Sconto;
 INSERT INTO Scaglione VALUES (NCategoria, UltimaCategoria); 
 
 
-INSERT INTO Dipendente (Nome,Cognome,DataNascita,CodFiscale,Telefono,Mail,DataInizio,Indirizzo,Categoria,Password) VALUES (NDip,CDip,DData,DCodF,DTel,DMail,NOW(),DInd,NCategoria,DPswd);
+INSERT INTO Dipendente (Nome,Cognome,DataNascita,CodFiscale,Telefono,Mail,DataInizio,Indirizzo,Categoria,Password) VALUES (NDip,CDip,DData,DCodF,DTel,DMail,NOW(),DInd,NCategoria,SHA1(DPswd));
 
 END$$
 DELIMITER ;
