@@ -29,7 +29,7 @@ GROUP BY FO.Nome
 ORDER BY  Numero_acquisto DESC
 LIMIT 1
 ;
-//query nr5 NON VA
+//query nr5
 
 SELECT P.Categoria, SUM(S.SubTotale) AS Guadagno_Max
 FROM Prodotto P, Categoria C, Certifica CE, Scontrino S
@@ -50,20 +50,32 @@ WHERE I1.CodIscritto = ANY (SELECT I.CodIscritto
 						FROM Prodotto P JOIN Scontrino S
 						ON P.Categoria='dildi'));
 			
-// query nr 7 NON VA
+// query nr 7
 
-SELECT DAY(S.Data)
+SELECT S.Data, SUM(S.SubTotale) AS Tot_vendite
 FROM Scontrino S
-WHERE SUM(S.SubTotale) = ANY (SELECT MAX(SUM(S1.SubTotale))
-						 FROM Scontrino S1
-						 GROUP BY S1.Data);
+GROUP BY S.Data
+ORDER BY Tot_vendite DESC
+LIMIT 1;
 
-//query nr 8 NON VA
+//query nr 8
 
-SELECT *
-FROM Dipendente D
-WHERE D.Categoria= ANY (select P.Categoria
-						FROM Prodotto P JOIN Scontrino S
-						WHERE sum(s.subTotale)= SELECT max(sum(s1.subTotale))
-												FROM Scontrino S1
-												GROUP BY S1.Data
+SELECT D.Nome, COUNT(S.Id) AS Num_Scontrini
+FROM Dipendente D, Categoria C, Prodotto P, Certifica CE, Scontrino S
+WHERE D.Categoria=C.NomeCategoria AND P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id
+GROUP BY D.Nome
+ORDER BY Num_Scontrini DESC
+LIMIT 1;
+
+//query nr 9
+
+SELECT I.CodIscritto,I.Nome,I.Cognome,MAX(SC.Livello) AS Livello_massimo
+FROM Iscritto I, Sconto SC, Scontrino S, Scaglione SCA,Certifica CE,Prodotto P, Categoria C
+WHERE SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id AND P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id AND S.Iscritto=I.CodIscritto 
+AND C.NomeCategoria=(SELECT P.Categoria 
+						  FROM Prodotto P, Categoria C, Certifica CE, Scontrino S
+						  WHERE P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id AND Month(S.Data)=Month(now())
+						  GROUP BY C.NomeCategoria
+						  ORDER BY SUM(S.SubTotale) DESC
+						  LIMIT 1);
+
