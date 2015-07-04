@@ -41,4 +41,12 @@ function getMenu(){
 </div>
 <?php
 }
+
+function getCss(){
+    ?>
+    <link rel="stylesheet" href="css/head.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/style.css">
+<?php
+}
 ?>
