@@ -15,6 +15,7 @@ function query7(){
 }
 
 function query6(){
+    echo "<h3>Iscritti che non hanno mai comprato prodotti da una certa categoria</h3>";
     $stats = new Query();
 
     $q6 = $stats->exec ("SELECT *
@@ -25,6 +26,15 @@ function query6(){
                             (SELECT S.Iscritto
                             FROM Prodotto P JOIN Scontrino S
                             ON P.Categoria='dildi'));");
+    ?>
+
+
+ <iframe src="include/lib/admin/q6.php" scrolling="no"></iframe>
+
+
+<?php
+
+
 }
 
 function query5(){
@@ -54,6 +64,8 @@ function query5(){
 				<td><?php echo $row[1];?></td>
             </tr> <?php
         }
+        ?>
+        </table> <?php
     }
 }
 
@@ -123,12 +135,13 @@ function doLogin(){
                     <tr>
                         <td>id</td> <td><input type="text" name="userid"></td>
                     </tr>
+                    <tr>
                         <td>Password</td> <td><input type="password" name="passid"></td>
                     </tr>
-                    </tr>
+                    <tr>
                         <td>User</td><td><input type="radio" name="isUser" value="true" CHECKED></td>
                     </tr>
-                    </tr>
+                    <tr>
                         <td>Admin</td><td><input type="radio" name="isUser" value="false"></td>
                     </tr>
                     <tr>
