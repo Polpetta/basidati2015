@@ -60,3 +60,9 @@ body h1{
 #makelamp{
 
 }
+
+
+iframe{
+    border: medium none;
+    width: 100%;
+}
