@@ -32,7 +32,7 @@ class Query
     }
 
     public function exec($query, $disconnect=true){
-        $result=mysql_query($query,$this->openDB());
+        $result=mysql_query($query,$this->openDB()) or die( mysql_error() );
         if($disconnect==true){
             $this->closeDB();
         }
