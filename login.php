@@ -148,7 +148,8 @@ function addInvoice(){
 }
 
 function addTicket(){
-
+    echo "<h3>Emetti Scontrino</h3>";
+    ?><iframe src="include/lib/admin/addTicket.php" scrolling="auto"></iframe><?php
 }
 
 function addCategory(){
