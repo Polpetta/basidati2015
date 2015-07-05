@@ -23,17 +23,6 @@ if(isset($_POST['NFattura']) && isset($_POST['FData']) && isset($_POST['FQuantit
 
 function execadd($NFattura,$FData,$FQuantita,$NFornitore,$PCategoria="",$CProdotto="",$PNome="",$PCosto="",$PPercentualeIVA="",$PDescrizione=""){
 
-    echo "$NFattura <br>";
-    echo "$FData <br>";
-    echo "$FQuantita <br>";
-    echo "$NFornitore <br>";
-    echo "$PCategoria <br>";
-    echo "$CProdotto <br>";
-    echo "$PNome <br>";
-    echo "$PCosto <br>";
-    echo "$PPercentualeIVA <br>";
-    echo "$PDescrizione <br>";
-
     $add = new Query();
     if($PCategoria == "" && $PNome == "" && $PCosto == "" && $PPercentualeIVA == "" && $PDescrizione == ""){
 
