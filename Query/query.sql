@@ -60,7 +60,7 @@ LIMIT 1;
 
 //query nr 8
 
-SELECT D.Nome, COUNT(S.Id) AS Num_Scontrini
+SELECT D.Nome, COUNT(S.Id) AS Num_Scontrini, C.NomeCategoria
 FROM Dipendente D, Categoria C, Prodotto P, Certifica CE, Scontrino S
 WHERE D.Categoria=C.NomeCategoria AND P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id
 GROUP BY D.Nome
