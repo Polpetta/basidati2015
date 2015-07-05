@@ -8,35 +8,39 @@ DECLARE IdProdotto INT;
 DECLARE Oldqta SMALLINT;
 DECLARE Newqta SMALLINT;
 
-IF NOT EXISTS(SELECT * FROM Prodotto WHERE CodProdotto=CProdotto)
-THEN
-	INSERT INTO Prodotto (Nome, Descrizione, Quantita, Costo, PercentualeIVA, Categoria) VALUES (PNome, PDescrizione, FQuantita, PCosto, PPercentualeIVA, PCategoria);
+IF(FQuantita>0)
+	THEN
+	IF NOT EXISTS(SELECT * FROM Prodotto WHERE CodProdotto=CProdotto)
+	THEN
+		INSERT INTO Prodotto (Nome, Descrizione, Quantita, Costo, PercentualeIVA, Categoria) VALUES (PNome, PDescrizione, FQuantita, PCosto, PPercentualeIVA, PCategoria);
 
-	SELECT MAX(CodProdotto) INTO IdProdotto FROM Prodotto;
+		SELECT MAX(CodProdotto) INTO IdProdotto FROM Prodotto;
 
+	ELSE
+
+	SET IdProdotto = CProdotto;
+
+	SELECT P.Quantita INTO Oldqta FROM Prodotto P WHERE P.CodProdotto=IdProdotto;
+
+	IF Oldqta=-1
+	THEN 
+	 SET Oldqta=0;
+	END IF;
+
+	SET Newqta= Oldqta+FQuantita;
+
+	UPDATE Prodotto SET Quantita=Newqta WHERE CodProdotto=IdProdotto;
+
+
+	END IF;
+
+	INSERT INTO Fattura(CodFattura, Data, Quantita, Fornitore) VALUES (NFattura, FData, FQuantita, NFornitore);
+
+	SELECT MAX(Id) INTO UltimaFattura FROM Fattura;
+
+	INSERT INTO Registrato VALUES (IdProdotto, UltimaFattura); 
 ELSE
-
-SET IdProdotto = CProdotto;
-
-SELECT P.Quantita INTO Oldqta FROM Prodotto P WHERE P.CodProdotto=IdProdotto;
-
-IF Oldqta=-1
-THEN 
- SET Oldqta=0;
+	INSERT INTO Fattura SELECT * FROM Fattura LIMIT 1;
 END IF;
-
-SET Newqta= Oldqta+FQuantita;
-
-UPDATE Prodotto SET Quantita=Newqta WHERE CodProdotto=IdProdotto;
-
-
-END IF;
-
-INSERT INTO Fattura(CodFattura, Data, Quantita, Fornitore) VALUES (NFattura, FData, FQuantita, NFornitore);
-
-SELECT MAX(Id) INTO UltimaFattura FROM Fattura;
-
-INSERT INTO Registrato VALUES (IdProdotto, UltimaFattura); 
-
 END$$
 DELIMITER ;
