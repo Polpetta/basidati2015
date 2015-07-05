@@ -7,6 +7,8 @@ BEGIN
 DECLARE SSubTotale DECIMAL(8,2);
 DECLARE UltimoScontrino INT;
 DECLARE QtaPrd INT;
+DECLARE Iva INT;
+DECLARE Piva INT;
 
 SELECT Quantita INTO QtaPrd FROM Prodotto WHERE CodProdotto = CProdotto;
 
@@ -15,6 +17,9 @@ THEN
 SELECT Costo INTO SSubTotale FROM Prodotto WHERE CodProdotto = CProdotto;
 
 SET SSubTotale = SQuantita * SSubTotale;
+SELECT PercentualeIVA INTO Piva FROM Prodotto WHERE CodProdotto=CProdotto;
+SET Iva=(SSubTotale*Piva)/100;
+SET SSubTotale= SSubTotale+Iva;
 
 INSERT INTO Scontrino (Data,CodScontrino,Quantita,SubTotale,Iscritto) VALUES (SData,SCodScontrino,SQuantita,SSubTotale,SIscritto);
 
