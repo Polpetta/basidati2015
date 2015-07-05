@@ -33,7 +33,7 @@ function execadd($NFattura,$FData,$FQuantita,$NFornitore,$PCategoria="",$CProdot
         $newinvoice = $add->exec("CALL NuovaFattura($NFattura,'$NFornitore',$FQuantita,'$FData',NULL,'$PNome','$PDescrizione',$PCosto,$PPercentualeIVA, '$PCategoria');");
     }
 
-    ?><p>Fattura aggiunta con successo. <a href="addInvoice.php">Aggiungi una nuova fattura.</a></p><?php
+    ?><p>Riga Fattura aggiunta con successo. <a href="addInvoice.php">Aggiungi una nuova riga fattura.</a></p><?php
 }
 
 function form(){
