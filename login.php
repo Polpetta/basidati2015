@@ -2,37 +2,65 @@
 
 include_once("include/lib/mysql/query.php");
 
+//STATS************************************************************************
+
 function query9(){
 
 }
 
 function query8(){
+    $stats = new Query();
+
+    $q8 = $stats->exec ("SELECT C.NomeCategoria as Categoria, D.Nome, COUNT(S.Id) AS Num_Scontrini
+                            FROM Dipendente D, Categoria C, Prodotto P, Certifica CE, Scontrino S
+                            WHERE D.Categoria=C.NomeCategoria AND P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id
+                            GROUP BY D.Nome
+                            ORDER BY Num_Scontrini DESC
+                            LIMIT 1;"
+                       );
+
+    if(mysql_num_rows($q8) == 1){
+        $row = mysql_fetch_row($q8);
+        echo "<h3>Miglior dipendente</h3>";
+        echo "$row[1] è il dipendente responsabile della categoria $row[0] che ha stampato il maggior numero di scontrini, $row[2]. <br>";
+    }
 
 }
 
 function query7(){
+    $stats = new Query();
+
+    $q7 = $stats->exec ("SELECT S.Data, SUM(S.SubTotale) AS Tot_vendite
+                            FROM Scontrino S
+                            GROUP BY S.Data
+                            ORDER BY Tot_vendite DESC
+                            LIMIT 1;"
+                       );
+    if(mysql_num_rows($q7) > 0){
+        echo "<h3>Giorno della settimana dove vi è stato il maggior guadagno</h3>";
+        ?><table style align="center" border="1">
+            <tr>
+                <th>Data</th>
+                <th>Totale</th>
+            </tr> <?php
+        while($row = mysql_fetch_row($q7)){
+            ?>
+            <tr>
+				<td><?php echo $row[0];?></td>
+				<td><?php echo $row[1];?></td>
+            </tr>
+            <?php
+        }
+    ?></table><?php
+
+    }
 
 }
 
 function query6(){
     echo "<h3>Iscritti che non hanno mai comprato prodotti da una certa categoria</h3>";
-    $stats = new Query();
 
-    $q6 = $stats->exec ("SELECT *
-                            FROM Iscritto I1
-                            WHERE I1.CodIscritto = ANY (SELECT I.CodIscritto
-                            FROM Iscritto I
-                            WHERE I.CodIscritto <> ALL
-                            (SELECT S.Iscritto
-                            FROM Prodotto P JOIN Scontrino S
-                            ON P.Categoria='dildi'));");
-    ?>
-
-
- <iframe src="include/lib/admin/q6.php" scrolling="no"></iframe>
-
-
-<?php
+    ?><iframe src="include/lib/admin/q6.php" scrolling="auto"></iframe><?php
 
 
 }
@@ -111,15 +139,35 @@ function adminStats(){
     query9();
 }
 
-?>
+//*****************************************************************************
+//ADD**************************************************************************
 
+function addInvoice(){
+    echo "<h3>Aggiungi Fattura</h3>";
+    ?><iframe src="include/lib/admin/addInvoice.php" scrolling="auto"></iframe><?php
+}
 
-<?php
+function addTicket(){
+
+}
+
+function addCategory(){
+
+}
+
+function adminOp(){
+    /*qui ci andranno le funzioni per inserire i dati come le fatture,
+    le nuove categorie con i nuovi dipendenti e per emettere nuovi scontrini*/
+    addCategory();
+    addTicket();
+    addInvoice();
+}
 
 function showServices($userType){
     if ($userType == "admin"){
         //fai le robe di admin
         echo "<h1>Amministrazione</h1>";
+        adminOp();
         adminStats();
     }else{
         //fai le robe di user
