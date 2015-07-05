@@ -82,6 +82,7 @@ AND C.NomeCategoria=(SELECT P.Categoria
 //query nr 10
 
 SELECT COUNT(S.Id) AS Numero_Acquisti,C.NomeCategoria, max(SC.Livello) AS Livello_attuale
-FROM Scontrino S,Categoria C,Sconto SC,Iscritto I, Certifica CE, Prodotto P
-WHERE S.Iscritto=I.CodIscritto AND CE.Scontrino=S.Id AND CE.Prodotto=P.CodProdotto AND P.Categoria=C.NomeCategoria AND I.CodIscritto=1 
+FROM Scontrino S,Categoria C,Sconto SC,Iscritto I, Certifica CE, Prodotto P,Scaglione SCA
+WHERE S.Iscritto=I.CodIscritto AND CE.Scontrino=S.Id AND CE.Prodotto=P.CodProdotto AND P.Categoria=C.NomeCategoria AND SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id
+AND I.CodIscritto=1 
 GROUP BY C.NomeCategoria;
