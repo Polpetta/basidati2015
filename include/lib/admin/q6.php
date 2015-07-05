@@ -12,7 +12,8 @@ if(isset($_POST['category']) && $_POST['category'] != ""){
 }
 
 function execq6($cat){
-    echo "<h3>Iscritti che non hanno mai comprato prodotti da una certa categoria</h3>";
+    //echo "<h3>Iscritti che non hanno mai comprato prodotti da una certa categoria</h3>";
+    ?><a href="q6.php">Esegui una nuova ricerca</a><?php
     $stats = new Query();
 
     $q6 = $stats->exec ("SELECT *
@@ -25,7 +26,7 @@ function execq6($cat){
                             ON P.Categoria='$cat'));");
 
     ?>
-    <table style align="center">
+    <table style align="center" border="1">
             <tr>
                 <th>Codice Iscritto</th>
                 <th>Nome</th>
@@ -52,7 +53,7 @@ function execq6($cat){
 }
 
 function formq6(){
-    echo "<h3>Visualizza iscritti che non hanno mai comprato prodotti da una certa categoria</h3>";
+    //echo "<h3>Visualizza iscritti che non hanno mai comprato prodotti da una certa categoria</h3>";
     ?>
             <form action="q6.php" method="POST">
                 <table style align="center">
@@ -60,11 +61,11 @@ function formq6(){
                         <td>Categoria</td>
                         <td>
                             <select id="category" name="category"><?php
-                                 <option value="" selected>Seleziona...</option>
+                                 /*<option value="" selected>Seleziona...</option>*/
                                      $cat = new Query();
-                                     $list  $cat->exec("SELECT NomeCategoria FROM Categoria");
+                                     $list = $cat->exec("SELECT NomeCategoria FROM Categoria");
                                      while($row = mysql_fetch_row($list)){
-                                        ?><option value="<?php echo $row[0];?>" id="category" name="category"><?php echo $row[0];?></option>
+                                        ?><option value="<?php echo $row[0];?>" id="category" name="category"><?php echo $row[0];?></option><?php
                                      }
 
 
