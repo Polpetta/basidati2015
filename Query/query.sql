@@ -69,7 +69,7 @@ LIMIT 1;
 
 //query nr 9
 
-SELECT I.CodIscritto,I.Nome,I.Cognome,MAX(SC.Livello) AS Livello_massimo
+SELECT I.CodIscritto,I.Nome,I.Cognome, MAX(SC.Livello) AS Livello_massimo
 FROM Iscritto I, Sconto SC, Scontrino S, Scaglione SCA,Certifica CE,Prodotto P, Categoria C
 WHERE SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id AND P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id AND S.Iscritto=I.CodIscritto 
 AND C.NomeCategoria=(SELECT P.Categoria 
