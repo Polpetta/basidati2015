@@ -1,0 +1,16 @@
+DROP TRIGGER IF EXISTS Delete_sconto ;
+
+DELIMITER ||
+CREATE TRIGGER Delete_sconto
+AFTER DELETE ON Scaglione
+FOR EACH ROW
+BEGIN
+DECLARE Id_canc INT ;
+
+SELECT SCA.Sconto INTO Id_canc FROM Scaglione SCA WHERE SCA.Sconto=old.Sconto;
+DELETE * FROM Sconto SC WHERE SC.Id=Id_canc;
+
+
+
+END ||
+DELIMITER ;
