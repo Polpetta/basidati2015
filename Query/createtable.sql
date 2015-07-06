@@ -72,7 +72,7 @@ Nome	     CHAR(20) NOT NULL,
 Cognome	     CHAR(20) NOT NULL,
 Fax	     CHAR(10),
 Telefono     CHAR(10) NOT NULL,
-Mail	     CHAR(50),
+Mail	     CHAR(50) NOT NULL,
 Indirizzo    CHAR(50) NOT NULL,
 Password     CHAR(64) NOT NULL,
 
@@ -118,7 +118,7 @@ Quantita	SMALLINT NOT NULL,
 Fornitore	CHAR(50),
 
 PRIMARY KEY (Id),
-FOREIGN KEY (Fornitore) REFERENCES Fornitore (Nome)
+FOREIGN KEY (Fornitore) REFERENCES Fornitore (Nome) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Registrato(
