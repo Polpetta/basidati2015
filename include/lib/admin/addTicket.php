@@ -93,7 +93,7 @@ function form(){
                         <td>
                             <select id="CProdotto" name="CProdotto"><?php
                                      $cat = new Query();
-                                     $list = $cat->exec("SELECT CodProdotto,Nome FROM Prodotto WHERE Quantita != -1;");
+                                     $list = $cat->exec("SELECT CodProdotto,Nome FROM ProdottiValidi;");
                                      while($row = mysql_fetch_row($list)){
                                         ?><option value="<?php echo $row[0];?>" id="CProdotto" name="CProdotto"><?php echo "$row[0], $row[1]";?></option><?php
                                      }
