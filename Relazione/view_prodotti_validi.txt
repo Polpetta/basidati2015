@@ -1,0 +1,8 @@
+						VISTE
+VISTA Prodotti_Validi
+
+CREATE OR REPLACE VIEW ProdottiValidi AS
+SELECT * FROM Prodotto WHERE Quantita <> -1;
+
+Questa view è stata implementata in modo tale da nascondere alla vista dell'utente finale di tutti quei prodotti che non sono più in vendita (identificati 
+dalla quantità pari a -1) ma che continuano a popolare la tabella Prodotto per consentire il calcolo degli sconti per gli iscritti.
