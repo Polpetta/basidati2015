@@ -11,3 +11,5 @@
 \contentsline {subsection}{\numberline {1.6}Schema E-R (dopo la ristrutturazione)}{9}{subsection.1.6}
 \contentsline {section}{\numberline {2}Progettazione Logica}{11}{section.2}
 \contentsline {subsubsection}{\numberline {2.0.1}Modello Relazionale}{11}{subsubsection.2.0.1}
+\contentsline {subsubsection}{\numberline {2.0.2}Create Table}{12}{subsubsection.2.0.2}
+\contentsline {subsubsection}{\numberline {2.0.3}Procedure}{15}{subsubsection.2.0.3}
