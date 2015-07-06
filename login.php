@@ -215,6 +215,11 @@ function addLevel(){
     ?><iframe src="include/lib/admin/addLevel.php" scrolling="auto"></iframe><?php
 }
 
+function hideProduct(){
+    echo "<h3>Rimuovi Prodotto dalla vendita</h3>";
+    ?><iframe src="include/lib/admin/hideProduct.php" scrolling="auto"></iframe><?php
+}
+
 function adminOp(){
     /*qui ci andranno le funzioni per inserire i dati come le fatture,
     le nuove categorie con i nuovi dipendenti e per emettere nuovi scontrini*/
@@ -227,6 +232,7 @@ function adminOp(){
     addUser();
     removeUser();
     addLevel();
+    hideProduct();
 }
 
 //USER*************************************************************************
