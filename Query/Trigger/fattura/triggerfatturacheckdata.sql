@@ -1,0 +1,16 @@
+DROP TRIGGER IF EXISTS Fattura_check_data;
+
+DELIMITER ||
+CREATE TRIGGER Fattura_check_data
+BEFORE INSERT ON Fattura
+FOR EACH ROW
+
+BEGIN
+IF(New.Data > Date(Now()))
+THEN 
+	INSERT INTO Fattura SELECT * FROM Fattura LIMIT 1;
+END IF;
+
+END ||
+DELIMITER ;
+
