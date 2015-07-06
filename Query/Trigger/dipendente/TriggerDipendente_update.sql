@@ -7,9 +7,9 @@ FOR EACH ROW
 
 BEGIN
 
-IF((year(New.DataInizio )-New.DataNascita)<18)
+IF((year(New.DataInizio )-year(New.DataNascita))<18)
 THEN 
-	INSERT INTO Dipendente SELECT * FROM Dipendente LIMIT 1;
+	INSERT INTO Categoria SELECT * FROM Categoria LIMIT 1;
 ELSE
 	SET New.Password=SHA1(New.Password);
 END IF;
