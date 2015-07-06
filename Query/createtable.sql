@@ -10,8 +10,6 @@ drop table if exists Fattura;
 drop table if exists Registrato;
 drop table if exists Certifica;
 
-drop trigger if exists Categoria_Scaglione;
-
 CREATE TABLE Categoria (
 NomeCategoria	CHAR(50),
 
