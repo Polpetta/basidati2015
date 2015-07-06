@@ -19,7 +19,7 @@ AND C.NomeCategoria=(SELECT P.Categoria
                        );
 
     if(mysql_num_rows($q9) > 0){
-        echo "<h3>Livello di sconto piu alto nella categoria che ha venduto di piu' questo mese</h3>";
+        echo "<h3>Livello di sconto piu alto nella categoria che ha venduto di pi&ugrave; questo mese</h3>";
             ?><table style align="center" border="1">
             <tr>
                 <th>CodIscritto</th>
@@ -206,7 +206,8 @@ function addUser(){
 }
 
 function removeUser(){
-
+    echo "<h3>Rimuovi Utente</h3>";
+    ?><iframe src="include/lib/admin/removeUser.php" scrolling="auto"></iframe><?php
 }
 
 function adminOp(){
