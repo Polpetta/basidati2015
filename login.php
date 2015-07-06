@@ -5,7 +5,40 @@ include_once("include/lib/mysql/query.php");
 //STATS************************************************************************
 
 function query9(){
+    $stats = new Query();
 
+    $q9 = $stats->exec ("SELECT I.CodIscritto,I.Nome,I.Cognome, MAX(SC.Livello) AS Livello_massimo
+FROM Iscritto I, Sconto SC, Scontrino S, Scaglione SCA,Certifica CE,Prodotto P, Categoria C
+WHERE SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id AND P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id AND S.Iscritto=I.CodIscritto
+AND C.NomeCategoria=(SELECT P.Categoria
+						  FROM Prodotto P, Categoria C, Certifica CE, Scontrino S
+						  WHERE P.Categoria=C.NomeCategoria AND CE.Prodotto=P.CodProdotto AND CE.Scontrino=S.Id AND Month(S.Data)=Month(now())
+						  GROUP BY C.NomeCategoria
+						  ORDER BY SUM(S.SubTotale) DESC
+						  LIMIT 1);"
+                       );
+
+    if(mysql_num_rows($q9) > 0){
+        echo "<h3>Livello di sconto piu alto nella categoria che ha venduto di piu' questo mese</h3>";
+            ?><table style align="center" border="1">
+            <tr>
+                <th>CodIscritto</th>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Livello_massimo</th>
+            </tr> <?php
+        while($row = mysql_fetch_row($q9)){
+            ?>
+            <tr>
+				<td><?php echo $row[0];?></td>
+				<td><?php echo $row[1];?></td>
+                <td><?php echo $row[2];?></td>
+                <td><?php echo $row[3];?></td>
+            </tr>
+            <?php
+        }
+    ?></table><?php
+        }
 }
 
 function query8(){
@@ -153,6 +186,26 @@ function addTicket(){
 }
 
 function addCategory(){
+    echo "<h3>Aggiungi Categoria</h3>";
+    ?><iframe src="include/lib/admin/addCategory.php" scrolling="auto"></iframe><?php
+}
+
+function addSupplier(){
+    echo "<h3>Aggiungi Fornitore</h3>";
+    ?><iframe src="include/lib/admin/addSupplier.php" scrolling="auto"></iframe><?php
+}
+
+function removeSupplier(){
+    echo "<h3>Rimuovi Fornitore</h3>";
+    ?><iframe src="include/lib/admin/removeSupplier.php" scrolling="auto"></iframe><?php
+}
+
+function addUser(){
+    echo "<h3>Aggiungi Utente</h3>";
+    ?><iframe src="include/lib/admin/addUser.php" scrolling="auto"></iframe><?php
+}
+
+function removeUser(){
 
 }
 
@@ -162,9 +215,45 @@ function adminOp(){
     addCategory();
     addTicket();
     addInvoice();
+    addSupplier();
+    removeSupplier();
+    addUser();
+    removeUser();
 }
 
-function showServices($userType){
+//USER*************************************************************************
+
+function query10($user){
+    $q10 = new Query();
+
+    $result = $q10->exec("SELECT COUNT(S.Id) AS Numero_Acquisti,C.NomeCategoria, max(SC.Livello) AS Livello_attuale FROM Scontrino S,Categoria C,Sconto SC,Iscritto I, Certifica CE, Prodotto P,Scaglione SCA WHERE S.Iscritto=I.CodIscritto AND CE.Scontrino=S.Id AND CE.Prodotto=P.CodProdotto AND P.Categoria=C.NomeCategoria AND SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id AND I.CodIscritto=$user GROUP BY C.NomeCategoria;");
+
+    if(mysql_num_rows($result) > 0){
+        echo "<h3>I tuoi scontrini</h3>";
+        ?> <table style align="center" border="1">
+            <tr>
+                <th>Numero Acquisti</th>
+                <th>Nome Categoria</th>
+                <th>Livello</th>
+            </tr>
+        <?php
+
+        while($row = mysql_fetch_row($result)){ ?>
+            <tr>
+				<td><?php echo $row[0];?></td>
+				<td><?php echo $row[1];?></td>
+                <td><?php echo $row[2];?></td>
+				</tr> <?php
+        }
+?> </table> <?php
+    }
+}
+
+function userStats($user){
+    query10($user);
+}
+
+function showServices($userType,$user){
     if ($userType == "admin"){
         //fai le robe di admin
         echo "<h1>Amministrazione</h1>";
@@ -172,6 +261,8 @@ function showServices($userType){
         adminStats();
     }else{
         //fai le robe di user
+        echo "<h1>Zona Utente</h1>";
+        userStats($user);
     }
 }
 
@@ -258,7 +349,7 @@ function login($user,$pass,$type){
                     }
 
                     if(login($user,$pass, $type)){
-                        showServices($type);
+                        showServices($type,$user);
                     }else{
                      die("Username o password errati. Riprova.");
                     }
