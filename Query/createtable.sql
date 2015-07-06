@@ -63,7 +63,7 @@ PercentualeIVA	 INT(2) DEFAULT 0 NOT NULL,
 Categoria	 CHAR(20),
 
 PRIMARY KEY (CodProdotto),
-FOREIGN KEY (Categoria) REFERENCES Categoria(NomeCategoria) ON DELETE SET NULL
+FOREIGN KEY (Categoria) REFERENCES Categoria(NomeCategoria)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Iscritto(
