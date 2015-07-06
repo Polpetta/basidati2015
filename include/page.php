@@ -29,7 +29,6 @@ function getMenu(){
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="products.php">Prodotti</a></li>
-                <li><a href="makelamp.php">Crea lampada</a></li>
                 <li><a href="login.php">Area Riservata</a></li>
             </ul>
         </div>
