@@ -21,9 +21,9 @@ function search($category=""){
 
                     $fastprd = new Query();
                     if(isset($category)){
-                        $result = $fastprd->exec("SELECT Nome FROM Prodotto WHERE Categoria = '$category' ");
+                        $result = $fastprd->exec("SELECT Nome FROM ProdottiValidi WHERE Categoria = '$category' ");
                     }else{
-                        $result = $fastprd->exec("SELECT Nome FROM Prodotto");
+                        $result = $fastprd->exec("SELECT Nome FROM ProdottiValidi");
                     }
 
                     if (mysql_num_rows($result) > 0) {
@@ -67,11 +67,11 @@ function printSelectedCategory($category=false){
 	$prd = new Query;
     if($category == false){
         echo "Non hai selezionato alcuna categoria";
-		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto ORDER BY Nome ASC");
+		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM ProdottiValidi ORDER BY Nome ASC");
     } else {
         ?><p>Sei sulla categoria: <?php echo $category;?>. <a href="products.php">Visualizza tutti i prodotti.</a></p>
     <?php
-		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM Prodotto WHERE Categoria = '$category' ORDER BY Nome ASC");
+		$result = $prd->exec ("SELECT Nome,Categoria,CodProdotto FROM ProdottiValidi WHERE Categoria = '$category' ORDER BY Nome ASC");
     }
 
 	

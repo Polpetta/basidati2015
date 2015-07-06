@@ -16,9 +16,9 @@ function displayItem($nameproducts,$category = false){
     $nameproducts = "%" . $nameproducts . "%";
 
     if($category != false){
-        $query = $elements->exec("SELECT Nome,Categoria,CodProdotto FROM Prodotto WHERE Categoria = '$category' && Nome LIKE '$nameproducts' ORDER BY Nome ASC");
+        $query = $elements->exec("SELECT Nome,Categoria,CodProdotto FROM ProdottiValidi WHERE Categoria = '$category' && Nome LIKE '$nameproducts' ORDER BY Nome ASC");
     }else{
-        $query = $elements->exec("SELECT Nome,Categoria,CodProdotto FROM Prodotto WHERE Nome LIKE '$nameproducts' ORDER BY Nome ASC");
+        $query = $elements->exec("SELECT Nome,Categoria,CodProdotto FROM ProdottiValidi WHERE Nome LIKE '$nameproducts' ORDER BY Nome ASC");
     } ?>
 
 	<?php
