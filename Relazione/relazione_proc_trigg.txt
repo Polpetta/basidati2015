@@ -1,0 +1,468 @@
+CREATE TABLE 
+Prima di creare le tabelle abbiamo inserito le seguenti righe di codice:
+
+drop table if exists Categoria;
+drop table if exists Sconto;
+drop table if exists Scaglione;
+drop table if exists Dipendente;
+drop table if exists Prodotto;
+drop table if exists Scontrino;
+drop table if exists Iscritto;
+drop table if exists Fornitore;
+drop table if exists Fattura;
+drop table if exists Registrato;
+drop table if exists Certifica;
+
+In modo da non incorrere in errori in caso di ricreazione delle tabelle.
+
+I create table veri e propri sono I seguenti:
+
+CREATE TABLE Categoria (
+NomeCategoria	CHAR(50),
+PRIMARY KEY (NomeCategoria)
+) ENGINE=InnoDB;
+
+Crea la tabella Categoria con chiave primaria NomeCategoria;
+
+CREATE TABLE Sconto (
+Id	INT AUTO_INCREMENT,
+Livello SMALLINT DEFAULT 0 NOT NULL,
+PercSconto	INT(2) DEFAULT 0 NOT NULL,
+TettoMax	SMALLINT,
+PRIMARY KEY(Id)
+) ENGINE=InnoDB;
+
+Crea la tabella Sconto che ha come chiave primaria l'attributo Id;
+
+CREATE TABLE Scaglione (
+	Categoria	CHAR(50),
+	Sconto	INT,
+
+	PRIMARY KEY (Categoria,Sconto),
+	FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE 	CASCADE,
+	FOREIGN KEY (Sconto) REFERENCES Sconto(Id) ON DELETE CASCADE
+	) ENGINE=InnoDB;
+
+Crea la tabella Scaglione (relazione tra Sconto e Categoria), ha come chiave entrambi I suoi campi (Categoria e Sconto) che sono chiave esterna per Categoria e Sconto rispettivamente. Sia Categoria che Sconto hanno il vincolo DELETE ON CASCADE in quanto vogliamo che alla cancellazione di una Categoria anche gli sconti a questa associata vengano cancellati (con l'intervento aggiuntivo del trigger delete_categoria spiegato successivamente), mentre per l'eliminazione di Sconto deve essere eliminata la tupla corrispondente di Scaglione ma mantenuta la Categoria associata (inquanto potrebbe essere non vuota);
+
+CREATE TABLE Dipendente(
+	CodDipendente	INT AUTO_INCREMENT,
+	Nome		CHAR(15) NOT NULL,
+	Cognome		CHAR(15) NOT NULL,
+	DataNascita	DATE NOT NULL,
+	CodFiscale	CHAR(16) NOT NULL,
+	Telefono	CHAR(10) NOT NULL,
+	Mail		CHAR(50),
+	DataInizio	DATE NOT NULL,
+	Indirizzo	CHAR(50) NOT NULL,
+	Categoria	CHAR(20),
+	Password     CHAR(64) NOT NULL,
+
+	PRIMARY KEY (CodDipendente),
+	FOREIGN KEY (Categoria) REFERENCES Categoria (NomeCategoria) ON DELETE 	CASCADE
+	) ENGINE=InnoDB;
+
+Crea tabella Dipendente con chiave primaria CodDipendente e Categoria come chiave esterna con vincolo ON DELETE CASCADE in modo tale che all'eliminazione (evento raro ma possibile) di una categoria anche il dipendente venga eliminato;
+
+CREATE TABLE Prodotto(
+	CodProdotto  INT AUTO_INCREMENT,
+	Nome	     CHAR(50) NOT NULL,
+	Descrizione  TEXT,
+	Quantita     SMALLINT DEFAULT 0 NOT NULL,
+	Costo	     DECIMAL(8,2) DEFAULT 0 NOT NULL,
+	PercentualeIVA	 INT(2) DEFAULT 0 NOT NULL,
+	Categoria	 CHAR(20),
+
+	PRIMARY KEY (CodProdotto),
+	FOREIGN KEY (Categoria) REFERENCES Categoria(NomeCategoria) 
+	) ENGINE=InnoDB;
+
+Crea la tabella Prodotto con chiave primaria CodProdotto e chiave esterna Categoria. In caso di cancellazione di categoria agisce il trigger delete_categoria che impedisce l'eliminazione in caso di esistenza di prodotti in quella categoria;
+
+CREATE TABLE Iscritto(
+	CodIscritto  INT AUTO_INCREMENT,
+	Nome	     CHAR(20) NOT NULL,
+	Cognome	     CHAR(20) NOT NULL,
+	Fax	     CHAR(10),
+	Telefono     CHAR(10) NOT NULL,
+	Mail	     CHAR(50) NOT NULL,
+	Indirizzo    CHAR(50) NOT NULL,
+	Password     CHAR(64) NOT NULL,
+
+	PRIMARY KEY (CodIscritto)
+	) ENGINE=InnoDB;
+
+Crea la tabella Iscritto con chiave primaria CodIscritto;
+
+CREATE TABLE Scontrino (
+	Id	INT AUTO_INCREMENT,
+	Data	DATE NOT NULL,
+	CodScontrino	INT NOT NULL,
+	Quantita	SMALLINT NOT NULL,
+	SubTotale	DECIMAL(8,2) NOT NULL,
+	Iscritto	INT,
+
+	PRIMARY KEY (Id),
+	FOREIGN KEY (Iscritto) REFERENCES Iscritto(CodIscritto) ON DELETE CASCADE
+	) ENGINE = InnoDB;
+
+Crea la tabella Scontrino con chiave primaria Id e chiave esterna Iscritto a cui viene associato il vincolo ON DELETE CASCADE che alla cancellazione di un iscritto procede alla cancellazione di tutti I suoi scontrini (qui interviene il tirgger delete certifica che verra' spiegato successivamente). Scontrino si riferisce alle singole righe di uno scontrino, lo scontrino totale viene identificato dal CodScontrino. Abbiamo fatto questa scelta inquanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sullo scontrino totale (questo fatto si ritrova anche nella tabella Fattura) ;
+
+CREATE TABLE Certifica (
+	Prodotto	INT,
+	Scontrino	INT,
+
+	PRIMARY KEY (Prodotto, Scontrino),
+	FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
+	FOREIGN KEY (Scontrino) REFERENCES Scontrino (Id)
+	) ENGINE = InnoDB;
+
+Crea la tabella Certifica (relazione tra prodotto e scontrino) con chiave primaria Prodotto e Scontrino entrambe anche chiavi esterne per le tabelle Prodotto e Scontrino rispettivamente;
+
+CREATE TABLE Fornitore(
+	Nome   CHAR(50),
+	Fax    CHAR(10),
+	Telefono	CHAR(10) NOT NULL,
+	Mail		CHAR(50) NOT NULL,
+	Indirizzo	CHAR(50) NOT NULL,
+
+	PRIMARY KEY (Nome)
+	) ENGINE=InnoDB;
+
+Crea la tabella Fornitore con chiave primaria Nome inquanto univoco;
+
+CREATE TABLE Fattura(
+	Id	INT AUTO_INCREMENT,
+	CodFattura	INT NOT NULL,
+	Data	DATE NOT NULL,
+	Quantita	SMALLINT NOT NULL,
+	Fornitore	CHAR(50),
+
+	PRIMARY KEY (Id),
+	FOREIGN KEY (Fornitore) REFERENCES Fornitore (Nome) ON DELETE CASCADE
+	) ENGINE=InnoDB;
+
+Crea la tabella Fattura, che si riferisce alle singole righe di fattura, la fattura totale viene identificata dal CodFattura. Abbiamo fatto questa scelta inquanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sulla fattura totale. La chiave primaria e' Id;
+
+CREATE TABLE Registrato(
+	Prodotto	INT,
+	Fattura		INT,
+
+	PRIMARY KEY (Prodotto, Fattura),
+	FOREIGN KEY (Prodotto) REFERENCES Prodotto (CodProdotto),
+	FOREIGN KEY (Fattura) REFERENCES Fattura (Id)
+	) ENGINE = InnoDB;
+
+Crea la tabella Registrato (relazione tra Prodotto e Fattura) con chiave primaria Prodotto e Fattura entrambe chiavi esterne per le relazioni Prodotto e Fattura rispettivamente;
+
+
+PROCEDURE
+Le procedure sono le seguenti:
+
+NUOVO LIVELLO
+
+DROP PROCEDURE IF EXISTS NuovoLivello;
+DELIMITER ||
+
+CREATE PROCEDURE NuovoLivello(NLivello SMALLINT,NPercSconto INT(2), NTettoMax	SMALLINT, NCategoria CHAR(50))
+BEGIN
+DECLARE IdSconto INT;
+
+IF (NPercSconto >=0)
+THEN
+	IF EXISTS(SELECT* FROM Categoria C WHERE C.NomeCategoria=NCategoria)
+	THEN
+		IF NOT EXISTS(SELECT * FROM Sconto SC, Scaglione SCA,Categoria C
+		WHERE SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id AND 			C.NomeCategoria=NCategoria AND SC.Livello=NLivello)
+		THEN
+			IF NOT EXISTS(SELECT * FROM Sconto SC, Scaglione SCA,Categoria C
+			WHERE SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id AND 			C.NomeCategoria=NCategoria AND SC.TettoMax >= NTettoMax)
+			THEN
+				IF NOT EXISTS(SELECT * FROM Sconto SC, Scaglione 					SCA,Categoria C
+				WHERE SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id 				AND C.NomeCategoria=NCategoria AND SC.Livello<NLivello 					AND SC.PercSconto >= NPercSconto)
+				THEN
+					INSERT INTO Sconto(Livello, PercSconto, TettoMax) 						VALUES (NLivello,NPercSconto,NTettoMax);
+					SELECT Max(Id) INTO IdSconto FROM Sconto;
+					INSERT INTO Scaglione(Categoria,Sconto) 							VALUES(NCategoria,IdSconto);
+				ELSE
+					INSERT INTO Sconto SELECT * FROM Sconto LIMIT 1;
+				END IF;
+			ELSE
+				INSERT INTO Sconto SELECT * FROM Sconto LIMIT 1;
+			END IF;
+		ELSE
+			INSERT INTO Sconto SELECT * FROM Sconto LIMIT 1;
+		END IF;
+	ELSE 
+		INSERT INTO Sconto SELECT * FROM Sconto LIMIT 1;
+	END IF;
+END IF;
+END ||
+DELIMITER ;
+
+Questa Procedura esegue diversi controlli:
+1. Controlla la percentuale di sconto inserita sia maggiore di zero.
+2. Se la categoria collegata al livello di sconto esiste
+3. Se non esiste gia' lo stesso livello che deve essere aggiunto
+4. Controlli sulla scalarita' per stessa categoria di riferimento. In particolare controlla se non esistono altri livelli con numero livello piu' alto, percentuale sconto piu' alto o tetto massimo piu' alto; inquanto non avrebbe senso l'inserimento altrimenti
+Se queste condizioni sono negate viene generato un errore, altrimenti procede all'inserimento di un nuovo livello di sconto relativo ad una categoria ricevuta come input (la categoria deve esistere a priori);
+
+NUOVA FATTURA
+		
+DROP PROCEDURE IF EXISTS NuovaFattura;
+DELIMITER $$
+
+CREATE PROCEDURE NuovaFattura(NFattura INT, NFornitore CHAR(50), FQuantita SMALLINT, FData DATE,CProdotto  INT,PNome CHAR(50), PDescrizione  TEXT, PCosto DECIMAL(8,2), PPercentualeIVA	 INT(2), PCategoria	 CHAR(20))
+BEGIN
+DECLARE UltimaFattura INT;
+DECLARE IdProdotto INT;
+DECLARE Oldqta SMALLINT;
+DECLARE Newqta SMALLINT;
+
+IF(FQuantita>0)
+THEN
+	IF NOT EXISTS(SELECT * FROM Prodotto WHERE CodProdotto=CProdotto)
+	THEN
+		INSERT INTO Prodotto (Nome, Descrizione, Quantita, Costo, PercentualeIVA, 			Categoria) VALUES (PNome, PDescrizione, FQuantita, PCosto, PPercentualeIVA, 		PCategoria);
+		SELECT MAX(CodProdotto) INTO IdProdotto FROM Prodotto;
+	ELSE
+	SET IdProdotto = CProdotto;
+	SELECT P.Quantita INTO Oldqta FROM Prodotto P WHERE P.CodProdotto=IdProdotto;
+	IF Oldqta=-1
+	THEN 
+	SET Oldqta=0;
+	END IF;
+	SET Newqta= Oldqta+FQuantita;
+	UPDATE Prodotto SET Quantita=Newqta WHERE CodProdotto=IdProdotto;
+	END IF;
+	INSERT INTO Fattura(CodFattura, Data, Quantita, Fornitore) VALUES (NFattura, FData, 	FQuantita, NFornitore);
+	SELECT MAX(Id) INTO UltimaFattura FROM Fattura;
+	INSERT INTO Registrato VALUES (IdProdotto, UltimaFattura); 
+ELSE
+	INSERT INTO Fattura SELECT * FROM Fattura LIMIT 1;
+END IF;
+END$$
+DELIMITER ;
+
+Questa procedura controlla se la quantita' che appare in fattura e' positiva altrimenti non procede all'inserimento della fattura inquanto non avrebbe senso. Inoltre viene controllato se il prodotto che si vuole inserire esiste gia' nella tabella Prodotto in questo caso viene solamente generata la fattura e maggiorata la quantita' di prodotto con la quantita' che compare in fattura; altrimenti viene aggiunto un nuovo prodotto nella relativa tabella e generata la fattura. 
+I controlli su quantita'=-1 vengono inseriti in quanto e' stato scelto di porre a -1 la quantita' di prodotto in caso di tolta dal mercato dello stesso (deve essere mantenuto per consentire il calcolo degli sconti degli iscritti che hanno acquistato il prodotto in questione);
+
+NUOVA CATEGORIA
+
+DROP PROCEDURE IF EXISTS NuovaCategoria;
+DELIMITER $$
+CREATE PROCEDURE NuovaCategoria(NCategoria CHAR(20), NDip CHAR(15), CDip CHAR(15), DData DATE, DCodF CHAR(16), DTel CHAR(10), DMail CHAR(50),DDatainizio DATE, DInd CHAR(50), DPswd CHAR(64), SLvl SMALLINT, PrcSconto INT(2), STettoMax SMALLINT)
+BEGIN
+DECLARE UltimaCategoria INT;
+INSERT INTO Sconto (Livello, PercSconto,TettoMax) VALUES (SLvl,PrcSconto,STettoMax);
+INSERT INTO Categoria VALUES (NCategoria);
+SELECT MAX(Id) INTO UltimaCategoria FROM Sconto;
+INSERT INTO Scaglione VALUES (NCategoria, UltimaCategoria); 
+INSERT INTO Dipendente (Nome,Cognome,DataNascita,CodFiscale,Telefono,Mail,DataInizio,Indirizzo,Categoria,Password) VALUES (NDip,CDip,DData,DCodF,DTel,DMail,DDatainizio,DInd,NCategoria,SHA1(DPswd));
+END$$
+DELIMITER ;
+
+Questa procedura inserisce una nuova riga nella tabella Categoria procedendo all'inserimento delle righe richieste su Sconto e Scaglione per rispettare I vincoli di integrita' referenziale.
+
+NUOVO SCONTRINO
+
+DROP PROCEDURE IF EXISTS NuovoScontrino;
+DELIMITER $$
+CREATE PROCEDURE NuovoScontrino(SData DATE, SCodScontrino INT, SQuantita SMALLINT, SIscritto INT, CProdotto INT)
+BEGIN
+DECLARE SSubTotale DECIMAL(8,2);
+DECLARE UltimoScontrino INT;
+DECLARE QtaPrd INT;
+DECLARE Iva INT;
+DECLARE Piva INT;
+DECLARE Psconto INT;
+DECLARE Scont INT;
+DECLARE Cat CHAR(50);
+IF (SQuantita>0)
+	THEN
+	SELECT Quantita INTO QtaPrd FROM Prodotto WHERE CodProdotto = CProdotto;
+	IF (QtaPrd != -1 AND SQuantita <= QtaPrd)
+	THEN
+		SELECT Costo INTO SSubTotale FROM Prodotto WHERE CodProdotto = 			CProdotto;
+		SET SSubTotale = SQuantita * SSubTotale;
+		SELECT PercentualeIVA INTO Piva FROM Prodotto WHERE 					CodProdotto=CProdotto;
+		SET Iva=(SSubTotale*Piva)/100;
+		SET SSubTotale= SSubTotale+Iva;
+		INSERT INTO Scontrino (Data,CodScontrino,Quantita,SubTotale,Iscritto) VALUES 			(SData,SCodScontrino,SQuantita,SSubTotale,SIscritto);
+		SELECT MAX(Id) INTO UltimoScontrino FROM Scontrino;
+		INSERT INTO Certifica VALUES (CProdotto,UltimoScontrino);
+		SELECT P.Categoria INTO Cat FROM Prodotto P WHERE 						P.CodProdotto=CProdotto;
+		UPDATE Prodotto SET Quantita=Quantita-SQuantita WHERE 						CodProdotto=CProdotto;
+		SELECT max(SC.PercSconto) INTO Psconto
+		FROM Scontrino S,Categoria C,Sconto SC,Iscritto I, Certifica CE, Prodotto 				P,Scaglione SCA
+		WHERE S.Iscritto=I.CodIscritto AND CE.Scontrino=S.Id AND 						CE.Prodotto=P.CodProdotto AND P.Categoria=C.NomeCategoria AND 				SCA.Categoria=C.NomeCategoria AND SCA.Sconto=SC.Id
+			AND I.CodIscritto=SIscritto AND C.NomeCategoria=Cat;
+		SET Scont=(SSubTotale*Psconto)/100;
+		UPDATE Scontrino SET SubTotale=SSubTotale-Scont WHERE 						Scontrino.Id=UltimoScontrino;
+	ELSE
+		INSERT INTO Prodotto SELECT * FROM Prodotto LIMIT 1;
+	END IF;
+ELSE 
+	INSERT INTO Scontrino SELECT * FROM Scontrino LIMIT 1;
+END IF;
+END$$
+DELIMITER ;
+
+Questa procedura controlla se la quantita' richiesta dall'acquisto e' maggiore di zero, quindi anche diversa da -1 (che significherebbe prodotto non piu' in vendita) e ovviamente che venga richiesto l'acquisto di una quantita' di prodotto effettivamente esistente in magazzino. Se queste richieste vengono soddisfatte procede con
+1. il calcolo della quantita' di prodotto rimanente dopo l'acquisto
+2. il calcolo della percentuale di iva sul prodotto
+3. il calcolo dello sconto relativo al livello di acquisti dell'iscritto acquistante
+4. la scittura dello scontrino
+Altrimenti genera un errore.
+
+TRIGGERS
+
+Trigger DeleteCategoria
+
+DROP TRIGGER IF EXISTS DeleteCategoria;
+DELIMITER $$
+CREATE TRIGGER DeleteCategoria
+BEFORE DELETE ON Categoria
+FOR EACH ROW
+BEGIN
+IF EXISTS (SELECT * FROM Prodotto P WHERE P.Categoria=old.NomeCategoria)
+THEN
+	INSERT INTO Categoria SELECT * FROM Categoria LIMIT 1;
+ELSE
+	DELETE FROM Sconto WHERE Id = ANY (SELECT S.Sconto FROM Scaglione S 	WHERE S.Categoria = old.NomeCategoria);
+END IF;
+END $$
+DELIMITER ;
+
+Questo trigger alla cancellazione di una categoria procede alla cancellazione della riga associata in sconto, le righe di dipendente e scaglione vengono invece cancellate dal vincolo di DELETE ON CASCADE.
+
+Trigger delete_certifica
+
+DROP TRIGGER IF EXISTS delete_certifica;
+DELIMITER $$
+CREATE TRIGGER delete_certifica
+BEFORE DELETE ON Iscritto
+FOR EACH ROW
+BEGIN
+DELETE FROM Certifica WHERE Scontrino = ANY (SELECT S.Id FROM Scontrino S WHERE S.Iscritto = old.CodIscritto);
+END $$
+DELIMITER ;
+
+Questo trigger viene attivato dalla cancellazione di un iscritto e procede all'eliminazione delle relative righe di tabelle su Certifica in modo da rispettare I vincoli di integrita' referenziale.
+
+Trigger Dipendente_psw_insert
+
+DROP TRIGGER IF EXISTS Dipendente_psw_insert ;
+DELIMITER ||
+CREATE TRIGGER Dipendente_psw_insert
+BEFORE INSERT ON Dipendente
+FOR EACH ROW
+BEGIN
+IF((year(New.DataInizio )-year(New.DataNascita))<18)
+THEN 
+	INSERT INTO Categoria SELECT * FROM Categoria LIMIT 1;
+ELSE
+	SET New.Password=SHA1(New.Password);
+END IF;
+END ||
+DELIMITER ;
+
+Questo trigger viene attivato dall'inserimento di un nuovo dipendente e procede al confronto della data di nascita con la data di assunzione e se maggiorenne consente il suo inserimento facendo lo SHA della password;
+
+Trigger Dipendente_psw_update
+
+DROP TRIGGER IF EXISTS Dipendente_psw_update;
+DELIMITER ||
+CREATE TRIGGER Dipendente_psw_update
+BEFORE UPDATE ON Dipendente
+FOR EACH ROW
+BEGIN
+IF((year(New.DataInizio )-year(New.DataNascita))<18)
+THEN 
+	INSERT INTO Categoria SELECT * FROM Categoria LIMIT 1;
+ELSE
+	SET New.Password=SHA1(New.Password);
+END IF;
+END ||
+DELIMITER ;
+
+Questo trigger compie le stesse azioni del trigger precedente, ma viene attivato dall'update di un dipendente.
+
+Trigger Fattura_check_data
+
+DROP TRIGGER IF EXISTS Fattura_check_data;
+DELIMITER ||
+CREATE TRIGGER Fattura_check_data
+BEFORE INSERT ON Fattura
+FOR EACH ROW
+BEGIN
+IF(New.Data > Date(Now()))
+THEN 
+	INSERT INTO Fattura SELECT * FROM Fattura LIMIT 1;
+END IF;
+END ||
+DELIMITER ;
+
+Questo trigger verifica l'integrita' della data di fattura rispetto alla data attuale controllando che sia precedente od uguale;
+
+Trigger delete_fornitore
+
+DROP TRIGGER IF EXISTS delete_fornitore;
+DELIMITER $$
+CREATE TRIGGER delete_fornitore
+BEFORE DELETE ON Fornitore
+FOR EACH ROW
+BEGIN
+DELETE FROM Registrato WHERE Fattura = ANY (SELECT F.Id FROM Fattura F WHERE F.Fornitore = old.Nome);
+END $$
+DELIMITER ;
+
+Questo trigger si attiva alla cancellazione di un fornitore e procede all'eliminazione delle rispettive righe su registrato per rispettare I vincoli di integrita' referenziale.
+
+Trigger iscritto_psw_insert
+
+DROP TRIGGER IF EXISTS Iscritto_psw_insert;
+DELIMITER ||
+CREATE TRIGGER Iscritto_psw_insert
+BEFORE INSERT ON Iscritto
+FOR EACH ROW
+BEGIN
+SET New.Password=SHA1(New.Password);
+END ||
+DELIMITER ;
+
+Questo trigger si attiva all'inserimento di un nuovo iscritto e procede al calcolo di SHA (password)
+
+Trigger Iscritto_psw_update
+
+DROP TRIGGER IF EXISTS Iscritto_psw_update;
+DELIMITER ||
+CREATE TRIGGER Iscritto_psw_update
+BEFORE UPDATE ON Iscritto
+FOR EACH ROW
+BEGIN
+
+SET New.Password=SHA1(New.Password);
+END ||
+DELIMITER ;
+
+Questo trigger compie il calcolo di SHA (password) come il trigger precedente in caso di update di un iscritto.
+
+Trigger  Scontrino_check_data
+
+DROP TRIGGER IF EXISTS Scontrino_check_data;
+DELIMITER ||
+CREATE TRIGGER Scontrino_check_data
+BEFORE INSERT ON Scontrino
+FOR EACH ROW
+BEGIN
+IF(New.Data > Date(Now()))
+THEN 
+	INSERT INTO Scontrino SELECT * FROM Scontrino LIMIT 1;
+END IF;
+END ||
+DELIMITER ;
+
+Questo trigger controlla l'integrità del campo data rispetto alla data attuale, in caso negativo genera un errore
+
+
