@@ -1,5 +1,10 @@
 <?php
 
+include_once("../../../include/lib/mysql/query.php");
+include_once("../../../include/page.php");
+
+getCss();
+
 if(isset($_POST['CProdotto'])){
     hide($_POST['CProdotto']);
 }else{
@@ -10,14 +15,14 @@ function hide($id){
 
     $qry = new Query();
 
-    $result = $qry->exec("SET Quantita = -1 FROM Prodotto WHERE CodProdotto = $id;");
+    $result = $qry->exec("UPDATE Prodotto SET Quantita = -1 WHERE CodProdotto = $id;");
 
-    ?><p>Prodotto Nascosto. <a href="addSupplier.php">Nascondi un altro Prodotto.</a></p><?php
+    ?><p>Prodotto Nascosto. <a href="hideProduct.php">Nascondi un altro Prodotto.</a></p><?php
 
 }
 
 function form(){
-?><form action="addTicket.php" method="POST">
+?><form action="hideProduct.php" method="POST">
                 <table style align="center">
                     <tr>
                         <td>Prodotto</td>
@@ -37,3 +42,5 @@ function form(){
                     </tr>
                 </table>
 </form>
+<?php
+}
