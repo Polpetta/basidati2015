@@ -5,13 +5,6 @@ include_once("../../../include/page.php");
 
 getCss();
 
-/*
-`Categoria` ,
-`Livello` ,
-`PercentualeSconto` ,
-`TettoMax`
-*/
-
 if(isset($_POST['NCategoria']) && isset($_POST['NLivello']) && isset($_POST['NPercSconto'])){
     if (isset($_POST['NTettoMax'])){
         execadd($_POST['NCategoria'],$_POST['NLivello'],$_POST['NPercSconto'],$_POST['NTettoMax']);
@@ -25,7 +18,6 @@ if(isset($_POST['NCategoria']) && isset($_POST['NLivello']) && isset($_POST['NPe
 function execadd($NCategoria,$NLivello,$NPercSconto,$NTettoMax = ""){
     $add = new Query();
 
-    //NuovoLivello(NLivello SMALLINT,NPercSconto INT(2), NTettoMax SMALLINT, NCategoria CHAR(50))
     if($NTettoMax != ""){
         $newlvl = $add->exec("CALL NuovoLivello ($NLivello,$NPercSconto,$NTettoMax,'$NCategoria');");
     }else{
