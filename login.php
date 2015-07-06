@@ -210,16 +210,23 @@ function removeUser(){
     ?><iframe src="include/lib/admin/removeUser.php" scrolling="auto"></iframe><?php
 }
 
+function addLevel(){
+    echo "<h3>Aggiungi Livello di Sconto</h3>";
+    ?><iframe src="include/lib/admin/addLevel.php" scrolling="auto"></iframe><?php
+}
+
 function adminOp(){
     /*qui ci andranno le funzioni per inserire i dati come le fatture,
     le nuove categorie con i nuovi dipendenti e per emettere nuovi scontrini*/
-    addCategory();
+
     addTicket();
+    addCategory();
     addInvoice();
     addSupplier();
     removeSupplier();
     addUser();
     removeUser();
+    addLevel();
 }
 
 //USER*************************************************************************
