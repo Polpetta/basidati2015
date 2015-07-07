@@ -5,7 +5,7 @@ Per i clienti \textbf{iscritti} identificati da un codice, vogliamo tenere conto
 
 
 
-Ogni \textbf{prodotto} \`e identificato da un codice, vogliamo tenere conto delle informazioni base e della quantit\`a disponibile e catalogarlo in una delle sei \textbf{categorie}, identificate come: porcellane, pentolame, liste nozze, tovaglie, tavola, paralumi. Ad ogni prodotto \`e associata una specifica che lo descrive accompagnando la descrizione da una foto.
+Ogni \textbf{prodotto} \`e identificato da un codice, vogliamo tenere conto delle informazioni base e della quantit\`a disponibile e catalogarlo in una delle sei \textbf{categorie}. Esse sono identificate come: porcellane, pentolame, liste nozze, tovaglie, tavola, paralumi. Ad ogni prodotto \`e associata una specifica che lo descrive accompagnando la descrizione da una foto.
 
 
 Ad ogni categoria sono associati possibili \textbf{sconti} in base ad una distribuzione per livelli e con una relativa percentuale.
@@ -15,7 +15,19 @@ I \textbf{dipendenti}, responsabili ognuno di una singola categoria, sono identi
 
 Vogliamo tener conto delle \textbf{fatture} ai rispettivi \textbf{fornitori} dei quali si necessita solamente del nome e delle informazioni base per la descrizione in fattura.
 
-\paragraph*{Sito Web} Nell'implementazione web abbiamo deciso di dare la possibilit\`a ai dipendenti di compiere azioni amministrative, come aggiungere fatture (e di conseguenza nuovi prodotti o rendere di nuovo disponibili prodotti non pi\`u in vendita), iscritti, scontrini, categorie (e quindi aggiungere altri dipendenti), livelli di sconto e di togliere fornitori, iscritti, nascondere prodotti non pi\`u in vendita, ma non di apportare modifiche a fatture e scontrini, ne ai fornitori gi\`a inseriti o ai prodotti, ugualmente per gli iscritti.
+\paragraph*{Sito Web} Nell'implementazione web abbiamo deciso di dare la possibilit\`a ai dipendenti di compiere azioni amministrative come:
+\begin{itemize}
+\item aggiungere fatture (e di conseguenza nuovi prodotti o rendere di nuovo disponibili prodotti non pi\`u in vendita)
+\item aggiungere iscritti
+\item aggiungere scontrini
+\item aggiungere categorie (e quindi aggiungere altri dipendenti)
+\item aggiungere livelli di sconto
+\item togliere fornitori
+\item togliere iscritti
+\item nascondere prodotti non pi\`u in vendita
+\end{itemize}
+
+Abbiamo deciso di non autorizzare modifiche a fatture e scontrini, ne ai fornitori gi\`a inseriti o ai prodotti, ugualmente per gli iscritti.
 
 Gli utenti iscritti al programma del negozio avranno la possibilit\`a di visualizzare i propri scontrini effettuati, mentre chiunque avr\`a la possibilit\`a di vedere i prodotti in vendita nel negozio, e di effettuare ricerche dei prodotti su di esso.
 
@@ -26,23 +38,25 @@ Gli utenti iscritti al programma del negozio avranno la possibilit\`a di visuali
 
 \textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Collegamenti} \\ \hline
 
-Iscritto & Compratore abituale iscritto a questa lista per avere diritto a sconti speciali. Pu\`o essere un dipendente. & Cliente abituale & Scontrino \\ \hline
+Iscritto & Compratore abituale iscritto a questa lista per avere diritto a sconti speciali. & Cliente abituale & Scontrino \\ \hline
 
 Scontrino & Scontrino attestante lo storico degli acquisti. & Storico, acquisto & Iscritto, Prodotto \\ \hline
 
-Categoria & Sei insiemi di prodotti. Un prodotto pu\`o appartenere ad un'unica categoria. Ogni categoria ha il suo univoco responsabile. & & Sconto, Dipende, Prodotto. \\ \hline
+Categoria & Sei insiemi di prodotti. Un prodotto pu\`o appartenere ad un'unica categoria. Ogni categoria ha il suo univoco responsabile. & & Sconto, Dipendente, Prodotto. \\ \hline
 
-Sconto & Spetta solamente al cliente iscritto. Per ogni categoria esistono diversi livelli in base agli acquisti, a cui corrisponde una percentuale di sconto. & & Categoria. \\ \hline
+Sconto & Spetta solamente al cliente iscritto. Per ogni categoria esistono diversi livelli in base agli acquisti, a cui corrisponde una percentuale di sconto. & & Scaglione. \\ \hline
 
-Dipendente & Responsabile di una singola categoria. Pu\`o essere un cliente ma non un fornitore. & Responsabile & Categoria \\ \hline
+Dipendente & Responsabile di una singola categoria. & Responsabile & Categoria \\ \hline
 
-Prodotto & Ogni prodotto pu\`o appartenere ad una sola categoria. & Oggetti, Prodotto ordinati o acquistati & Categoria, Fattura, Scontrino \\ \hline
+Prodotto & Ogni prodotto pu\`o appartenere ad una sola categoria. & Oggetti, Prodotto ordinati o acquistati & Categoria, Registrato, Certifica \\ \hline
 
 Specifica & Ogni prodotto ha una specifica diversa. & Descrizione & Prodotto \\ \hline
 
-Fattura & Pi\`u unit\`a di prodotto possono essere ordinate a fornitori diversi. Modifica il campo quantit\`a disponibile di prodotto. & Ordine & Fornitore, Prodotto \\ \hline
+Fattura & Pi\`u unit\`a di prodotto possono essere ordinate a fornitori diversi. Modifica il campo quantit\`a disponibile di prodotto. & Ordine & Fornitore, Registrato \\ \hline
 
-Fornitore & Forniscono i prodotti attraverso gli ordini. Un fornitore non pu\`o essere un cliente e pu\`o fornire prodotti di diverse categorie & & Fattura \\
+Fornitore & Forniscono i prodotti attraverso gli ordini, pu\`o fornire prodotti di diverse categorie & & Fattura \\ \hline
+
+Scaglione & Ogni categoria pu\`o avere diversi livelli di sconto & & Categoria, Sconto \\
 
 
 %\hline

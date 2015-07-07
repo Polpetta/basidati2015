@@ -3,13 +3,13 @@
 \subsubsection{Scelte di ristrutturazione}
 \begin{itemize}
 
-\item Nell'attributo composto Informazione in DIPENDENTE abbiamo notato la ridondanza tra Nome, Cognome, Data di nascita con Codice Fiscale, ma abbiamo deciso di mantenere questi campi in quanto ricavarci questi dati da Codice Fiscale risulterebbe essere un'operazione onerosa ed inoltre non sempre potrebbe essere corretta (vedasi i casi di omocodia). Sempre su DIPENDENTE abbiamo deciso di accorpare l'attributo composto Indirizzo in un unico attributo in quanto ci \`e sufficente l'accesso all'informazione complessiva
+\item Nell'attributo composto Informazione in DIPENDENTE abbiamo notato la ridondanza tra Nome, Cognome, Data di nascita con Codice Fiscale, ma abbiamo deciso di mantenere questi campi in quanto ricavarci questi dati da Codice Fiscale risulterebbe essere un'operazione onerosa ed inoltre non sempre potrebbe essere corretta (vedasi i casi di omocodia). Sempre su DIPENDENTE abbiamo deciso di accorpare l'attributo composto Indirizzo in un unico attributo in quanto ci \`e sufficente l'accesso all'informazione complessiva.
 
 \item Abbiamo deciso di non accorpare DIPENDENTE in CATEGORIA in quanto, accedendo a CATEGORIA, non sempre vogliamo accedere agli attributi di DIPENDENTE; rendendo il tutto pi\`u modulare e velocizzando le query che usano solamente gli attributi di CATEGORIA.
 
-\item L'entit\`a SPECIFICA e la relazione DEFINITO sono stati rimossi accorpando gli attributi nome, descrizione nella tabella prodotto, in quanto le relazioni pi\`u frequenti su PRODOTTO richiedono appunto questi dati. Cos\`i facendo vengono risparmiati molti accessi altrimenti necessari.
+\item L'entit\`a SPECIFICA e la relazione DEFINITO sono stati rimossi accorpando gli attributi nome, descrizione nella tabella prodotto, in quanto le relazioni pi\`u frequenti su PRODOTTO richiedono appunto questi dati. Cos\`i facendo vengono risparmiati molti accessi, altrimenti necessari.
 
-\item Su PRODOTTO abbiamo lasciato l'attributo Quantit\`a in quanto, al crescere del numero di scontrini e fatture, calcolare il numero di un determinato prodotto sarebe diventato troppo oneroso dal punto di vista computazionale, quindi abbiamo deciso di lasciare questa rindondanza.
+\item Su PRODOTTO abbiamo lasciato l'attributo Quantit\`a, in quanto al crescere del numero di scontrini e fatture, calcolare il numero di un determinato prodotto sarebbe diventato troppo oneroso dal punto di vista computazionale.
 
 \item Su FORNITORE \`e stata tolta la generalizzazione totale, in quanto la differenza tra le produzioni di un artigiano e di un grossista non sono richieste nell'analisi dei requisiti.
 
@@ -29,7 +29,7 @@
 \item \underline{Iscritto}: CodIscritto come su Dipendente.
 \item \underline{Scontrino}: Id per consentire vincoli d'integrit\`a pi\`u gestibili
 \item \underline{Certifica}: (Prodotto,Scontrino) essendo una relazione tra la tabella Prodotto e Scontrino
-\item \underline{Fornitore}: Nome in quanto non sono presenti in questo negozio fornitori che hanno nomi uguali.
+\item \underline{Fornitore}: Nome in quanto non sono presenti fornitori che hanno nomi uguali.
 \item \underline{Registrato}: (Prodotto,Fattura) \`e una relazione tra la tabella Prodotto e Fattura
 \item \underline{Fattura}: Id per consentire vincoli d'integrit\`a pi\`u gestibili
 
