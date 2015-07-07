@@ -6,10 +6,10 @@ In modo da non incorrere in errori in caso di ricreazione delle tabelle. \newlin
 I create table veri e propri sono i seguenti:
 
 \lstinputlisting[language=SQL,firstline=13,lastline=15]{res/code/createtable.sql}
-crea la tabella Categoria con chiave primaria NomeCategoria;
+Crea la tabella Categoria con chiave primaria NomeCategoria;
 
 \lstinputlisting[language=SQL,firstline=16,lastline=27]{res/code/createtable.sql}
-crea la tabella Sconto che ha come chiave primaria l'attributo Id;
+Crea la tabella Sconto che ha come chiave primaria l'attributo Id;
 
 \lstinputlisting[language=SQL,firstline=28,lastline=36]{res/code/createtable.sql}
 Crea la tabella Scaglione (relazione tra Sconto e Categoria), ha come chiave entrambi i suoi campi (Categoria e Sconto) che sono chiave esterna per Categoria e Sconto rispettivamente. Sia Categoria che Sconto hanno il vincolo DELETE ON CASCADE in quanto vogliamo che alla cancellazione di una Categoria anche gli sconti a questa associata vengano cancellati (con l'intervento aggiuntivo del trigger delete\_categoria spiegato successivamente), mentre per l'eliminazione di Sconto deve essere eliminata la tupla corrispondente di Scaglione ma mantenuta la Categoria associata (in quanto potrebbe essere non vuota);
@@ -18,25 +18,25 @@ Crea la tabella Scaglione (relazione tra Sconto e Categoria), ha come chiave ent
 Crea tabella Dipendente con chiave primaria CodDipendente e Categoria come chiave esterna con vincolo ON DELETE CASCADE in modo tale che all'eliminazione (evento raro ma possibile) di una categoria anche il dipendente venga eliminato;
 
 \lstinputlisting[language=SQL,firstline=56,lastline=67]{res/code/createtable.sql}
-crea la tabella Prodotto con chiave primaria CodProdotto e chiave esterna Categoria. In caso di cancellazione di categoria agisce il trigger delete\_categoria che impedisce l'eliminazione in caso di esistenza di prodotti in quella categoria;
+Crea la tabella Prodotto con chiave primaria CodProdotto e chiave esterna Categoria. In caso di cancellazione di categoria agisce il trigger delete\_categoria che impedisce l'eliminazione in caso di esistenza di prodotti in quella categoria;
 
 \lstinputlisting[language=SQL,firstline=68,lastline=80]{res/code/createtable.sql}
 crea la tabella Iscritto con chiave primaria CodIscritto;
 
 \lstinputlisting[language=SQL,firstline=82,lastline=93]{res/code/createtable.sql}
-crea la tabella Scontrino con chiave primaria Id e chiave esterna Iscritto a cui viene associato il vincolo ON DELETE CASCADE che alla cancellazione di un iscritto procede alla cancellazione di tutti i suoi scontrini (qui interviene il trigger delete certifica che verr\`a spiegato successivamente). Scontrino si riferisce alle singole righe di uno scontrino, lo scontrino totale viene identificato dal CodScontrino. Abbiamo fatto questa scelta in quanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sullo scontrino totale (questo fatto si ritrova anche nella tabella Fattura);
+Crea la tabella Scontrino con chiave primaria Id e chiave esterna Iscritto a cui viene associato il vincolo ON DELETE CASCADE che alla cancellazione di un iscritto procede alla cancellazione di tutti i suoi scontrini (qui interviene il trigger delete certifica che verr\`a spiegato successivamente). Scontrino si riferisce alle singole righe di uno scontrino, lo scontrino totale viene identificato dal CodScontrino. Abbiamo fatto questa scelta in quanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sullo scontrino totale (questo fatto si ritrova anche nella tabella Fattura);
 
 \lstinputlisting[language=SQL,firstline=95,lastline=102]{res/code/createtable.sql}
-crea la tabella Certifica (relazione tra prodotto e scontrino) con chiave primaria Prodotto e Scontrino entrambe anche chiavi esterne per le tabelle Prodotto e Scontrino rispettivamente;
+Crea la tabella Certifica (relazione tra prodotto e scontrino) con chiave primaria Prodotto e Scontrino entrambe anche chiavi esterne per le tabelle Prodotto e Scontrino rispettivamente;
 
 \lstinputlisting[language=SQL,firstline=104,lastline=112]{res/code/createtable.sql}
-crea la tabella Fornitore con chiave primaria Nome in quanto univoco;
+Crea la tabella Fornitore con chiave primaria Nome in quanto univoco;
 
 \lstinputlisting[language=SQL,firstline=114,lastline=123]{res/code/createtable.sql}
-crea la tabella Fattura, che si riferisce alle singole righe di fattura, la fattura totale viene identificata dal CodFattura. Abbiamo fatto questa scelta in quanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sulla fattura totale. La chiave primaria \`e Id;
+Crea la tabella Fattura, che si riferisce alle singole righe di fattura, la fattura totale viene identificata dal CodFattura. Abbiamo fatto questa scelta in quanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sulla fattura totale; la chiave primaria \`e Id;
 
 \lstinputlisting[language=SQL,firstline=125,lastline=133]{res/code/createtable.sql}
-crea la tabella Registrato (relazione tra Prodotto e Fattura) con chiave primaria Prodotto e Fattura entrambe chiavi esterne per le relazioni Prodotto e Fattura rispettivamente;
+Crea la tabella Registrato (relazione tra Prodotto e Fattura) con chiave primaria Prodotto e Fattura entrambe chiavi esterne per le relazioni Prodotto e Fattura rispettivamente.
 
 
 \subsubsection{Procedure}
@@ -51,7 +51,7 @@ Questa Procedure esegue diversi controlli:
 
 \item Se non esiste gi\`a lo stesso livello che deve essere aggiunto
 
-\item Controlli sulla scalarit\`a per stessa categoria di riferimento. In particolare controlla se non esistono altri livelli con numero livello pi\`u alto, percentuale sconto pi\`u alto o tetto massimo pi\`u alto; in quanto non avrebbe senso l'inserimento altrimento.
+\item Controlli sulla scalarit\`a per stessa categoria di riferimento. In particolare controlla se non esistono altri livelli con numero livello pi\`u alto, percentuale sconto pi\`u alto o tetto massimo pi\`u alto; in quanto non avrebbe senso l'inserimento altrimenti.
 \end{enumerate}
 
 Se queste condizioni sono negate viene generato un errore, altrimenti procede all'inserimento di un nuovo livello di sconto relativo ad una categoria ricevuta come input (la categoria deve esistere a priori). \newpage
@@ -60,7 +60,7 @@ Se queste condizioni sono negate viene generato un errore, altrimenti procede al
 
 \paragraph*{Nuova Fattura}
 Questa procedura controlla se la quantit\`a che appare in fattura \`e positiva altrimenti non procede all'inserimento della fattura inquanto non avrebbe senso. Inoltre viene controllato se il prodotto che si vuole inserire esiste gi\`a nella tabella Prodotto, in questo caso viene solamente generata la fattura e maggiorata la quantit\`a di prodotto con la quantit\`a che compare in fattura; altrimenti viene aggiunto un nuovo prodotto nella relativa tabella e generata la fattura. 
-I controlli su $quantita = -1$ vengono inseriti in quanto \`e stato scelto di porre a -1 la quantit\`a di prodotto in caso di tolta dal mercato dello stesso (deve essere mantenuto per consentire il calcolo degli sconti degli iscritti che hanno acquistato il prodotto in questione);
+I controlli su $quantita = -1$ vengono inseriti, in quanto \`e stato scelto di porre a -1 la quantit\`a di un prodotto in caso venga tolto dal mercato (deve essere mantenuto per consentire il calcolo degli sconti degli iscritti che hanno acquistato il prodotto in questione);
 
 \lstinputlisting[language=SQL,caption=Nuova Fattura]{res/code/Procedura_nuova_fattura.sql}
 
@@ -96,7 +96,7 @@ Questo trigger alla cancellazione di una categoria procede alla cancellazione de
 
 \paragraph*{Delete Certifica}
 
-Questo trigger viene attivato dalla cancellazione di un iscritto e procede all'eliminazione delle relative righe di tabelle su Certifica in modo da rispettare i vincoli di integrit\`a referenziale.
+Questo trigger viene attivato dalla cancellazione di un iscritto e procede all'eliminazione delle relative righe di tabella su Certifica in modo da rispettare i vincoli di integrit\`a referenziale.
 
 \lstinputlisting[language=SQL,caption=Delete Certifica]{res/code/Trigger_delete_certifica.sql}
 
@@ -146,6 +146,6 @@ Questo trigger controlla l'integrit\`a del campo data rispetto alla data attuale
 
 \paragraph*{Prodotti Validi}
 
-Questa view \`e stata implementata in modo tale da nascondere alla vista dell'utente finale di tutti quei prodotti che non sono pi\`u in vendita (identificati dalla quantità pari a -1) ma che continuano a popolare la tabella Prodotto per consentire il calcolo degli sconti per gli iscritti.
+Questa view \`e stata implementata in modo tale da nascondere alla vista dell'utente finale di tutti quei prodotti che non sono pi\`u in vendita (identificati dalla quantit\`a pari a -1) ma che continuano a popolare la tabella Prodotto per consentire il calcolo degli sconti per gli iscritti.
 
 \lstinputlisting[language=SQL,caption=Prodotti Validi]{res/code/View_Prodotti_Validi.sql}
