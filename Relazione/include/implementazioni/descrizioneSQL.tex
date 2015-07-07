@@ -1,0 +1,151 @@
+\subsubsection{Create Table}
+Prima di creare le tabelle abbiamo inserito le seguenti righe di codice:
+
+\lstinputlisting[language=SQL,firstline=1,lastline=11]{res/code/createtable.sql}
+In modo da non incorrere in errori in caso di ricreazione delle tabelle. \newline
+I create table veri e propri sono i seguenti:
+
+\lstinputlisting[language=SQL,firstline=13,lastline=15]{res/code/createtable.sql}
+crea la tabella Categoria con chiave primaria NomeCategoria;
+
+\lstinputlisting[language=SQL,firstline=16,lastline=27]{res/code/createtable.sql}
+crea la tabella Sconto che ha come chiave primaria l'attributo Id;
+
+\lstinputlisting[language=SQL,firstline=28,lastline=36]{res/code/createtable.sql}
+Crea la tabella Scaglione (relazione tra Sconto e Categoria), ha come chiave entrambi i suoi campi (Categoria e Sconto) che sono chiave esterna per Categoria e Sconto rispettivamente. Sia Categoria che Sconto hanno il vincolo DELETE ON CASCADE in quanto vogliamo che alla cancellazione di una Categoria anche gli sconti a questa associata vengano cancellati (con l'intervento aggiuntivo del trigger delete\_categoria spiegato successivamente), mentre per l'eliminazione di Sconto deve essere eliminata la tupla corrispondente di Scaglione ma mantenuta la Categoria associata (in quanto potrebbe essere non vuota);
+
+\lstinputlisting[language=SQL,firstline=38,lastline=54]{res/code/createtable.sql}
+Crea tabella Dipendente con chiave primaria CodDipendente e Categoria come chiave esterna con vincolo ON DELETE CASCADE in modo tale che all'eliminazione (evento raro ma possibile) di una categoria anche il dipendente venga eliminato;
+
+\lstinputlisting[language=SQL,firstline=56,lastline=67]{res/code/createtable.sql}
+crea la tabella Prodotto con chiave primaria CodProdotto e chiave esterna Categoria. In caso di cancellazione di categoria agisce il trigger delete\_categoria che impedisce l'eliminazione in caso di esistenza di prodotti in quella categoria;
+
+\lstinputlisting[language=SQL,firstline=68,lastline=80]{res/code/createtable.sql}
+crea la tabella Iscritto con chiave primaria CodIscritto;
+
+\lstinputlisting[language=SQL,firstline=82,lastline=93]{res/code/createtable.sql}
+crea la tabella Scontrino con chiave primaria Id e chiave esterna Iscritto a cui viene associato il vincolo ON DELETE CASCADE che alla cancellazione di un iscritto procede alla cancellazione di tutti i suoi scontrini (qui interviene il trigger delete certifica che verr\`a spiegato successivamente). Scontrino si riferisce alle singole righe di uno scontrino, lo scontrino totale viene identificato dal CodScontrino. Abbiamo fatto questa scelta in quanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sullo scontrino totale (questo fatto si ritrova anche nella tabella Fattura);
+
+\lstinputlisting[language=SQL,firstline=95,lastline=102]{res/code/createtable.sql}
+crea la tabella Certifica (relazione tra prodotto e scontrino) con chiave primaria Prodotto e Scontrino entrambe anche chiavi esterne per le tabelle Prodotto e Scontrino rispettivamente;
+
+\lstinputlisting[language=SQL,firstline=104,lastline=112]{res/code/createtable.sql}
+crea la tabella Fornitore con chiave primaria Nome in quanto univoco;
+
+\lstinputlisting[language=SQL,firstline=114,lastline=123]{res/code/createtable.sql}
+crea la tabella Fattura, che si riferisce alle singole righe di fattura, la fattura totale viene identificata dal CodFattura. Abbiamo fatto questa scelta in quanto la maggior parte delle azioni sul database vengono eseguite sulle singole righe e non sulla fattura totale. La chiave primaria \`e Id;
+
+\lstinputlisting[language=SQL,firstline=125,lastline=133]{res/code/createtable.sql}
+crea la tabella Registrato (relazione tra Prodotto e Fattura) con chiave primaria Prodotto e Fattura entrambe chiavi esterne per le relazioni Prodotto e Fattura rispettivamente;
+
+
+\subsubsection{Procedure}
+
+\paragraph*{Nuovo Livello}
+Questa Procedure esegue diversi controlli:
+\begin{enumerate}
+
+\item Controlla la percentuale di sconto inserita sia maggiore di zero
+
+\item Se la categoria collegata al livello di sconto esiste
+
+\item Se non esiste gi\`a lo stesso livello che deve essere aggiunto
+
+\item Controlli sulla scalarit\`a per stessa categoria di riferimento. In particolare controlla se non esistono altri livelli con numero livello pi\`u alto, percentuale sconto pi\`u alto o tetto massimo pi\`u alto; in quanto non avrebbe senso l'inserimento altrimento.
+\end{enumerate}
+
+Se queste condizioni sono negate viene generato un errore, altrimenti procede all'inserimento di un nuovo livello di sconto relativo ad una categoria ricevuta come input (la categoria deve esistere a priori). \newpage
+
+\lstinputlisting[language=SQL,caption=Nuovo Livello]{res/code/Procedura_NuovoLivello.sql}
+
+\paragraph*{Nuova Fattura}
+Questa procedura controlla se la quantit\`a che appare in fattura \`e positiva altrimenti non procede all'inserimento della fattura inquanto non avrebbe senso. Inoltre viene controllato se il prodotto che si vuole inserire esiste gi\`a nella tabella Prodotto, in questo caso viene solamente generata la fattura e maggiorata la quantit\`a di prodotto con la quantit\`a che compare in fattura; altrimenti viene aggiunto un nuovo prodotto nella relativa tabella e generata la fattura. 
+I controlli su $quantita = -1$ vengono inseriti in quanto \`e stato scelto di porre a -1 la quantit\`a di prodotto in caso di tolta dal mercato dello stesso (deve essere mantenuto per consentire il calcolo degli sconti degli iscritti che hanno acquistato il prodotto in questione);
+
+\lstinputlisting[language=SQL,caption=Nuova Fattura]{res/code/Procedura_nuova_fattura.sql}
+
+\paragraph*{Nuova Categoria}
+Questa procedura inserisce una nuova riga nella tabella Categoria procedendo all'inserimento delle righe richieste su Sconto e Scaglione per rispettare i vincoli di integrit\`a referenziale.
+
+\lstinputlisting[language=SQL,caption=Nuova Categoria]{res/code/Procedure_NuovaCategoria.sql}
+
+\paragraph*{Nuovo Scontrino}
+Questa procedura controlla se la quantit\`a richiesta dall'acquisto \`e maggiore di zero, quindi anche diversa da -1 (che significherebbe prodotto non pi\`u in vendita) e ovviamente che venga richiesto l'acquisto di una quantit\`a di prodotto effettivamente esistente in magazzino. Se queste richieste vengono soddisfatte procede con:
+\begin{enumerate}
+
+\item Il calcolo della quantit\`a di prodotto rimanente dopo l'acquisto
+
+\item Il calcolo della percentuale di iva sul prodotto
+
+\item Il calcolo dello sconto relativo al livello di acquisti dell'iscritto acquistante
+
+\item La scrittura dello scontrino, altrimenti genera un errore
+
+\end{enumerate}
+
+\lstinputlisting[language=SQL,caption=Nuovo Scontrino]{res/code/Procedure_NuovoScontrino.sql}
+
+
+\subsubsection{Triggers}
+
+\paragraph*{Delete Categoria}
+
+Questo trigger alla cancellazione di una categoria procede alla cancellazione della riga associata in sconto, le righe di dipendente e scaglione vengono invece cancellate dal vincolo di DELETE ON CASCADE.
+
+\lstinputlisting[language=SQL,caption=Delete Categoria]{res/code/Trigger_delete_categoria.sql}
+
+\paragraph*{Delete Certifica}
+
+Questo trigger viene attivato dalla cancellazione di un iscritto e procede all'eliminazione delle relative righe di tabelle su Certifica in modo da rispettare i vincoli di integrit\`a referenziale.
+
+\lstinputlisting[language=SQL,caption=Delete Certifica]{res/code/Trigger_delete_certifica.sql}
+
+\paragraph*{Dipendente password insert}
+
+Questo trigger viene attivato dall'inserimento di un nuovo dipendente e procede al confronto della data di nascita con la data di assunzione e se maggiorenne consente il suo inserimento facendo lo SHA della password.
+
+\lstinputlisting[language=SQL,caption=Dipendente password insert]{res/code/TriggerDipendente_insert.sql}
+
+\paragraph*{Dipendente password update}
+
+Questo trigger compie le stesse azioni del trigger precedente, ma viene attivato dall'update di un dipendente.
+
+\lstinputlisting[language=SQL,caption=Dipendente password update]{res/code/TriggerDipendente_update.sql}
+
+\paragraph*{Fattura check data}
+
+Questo trigger verifica l'integrit\`a della data di fattura rispetto alla data attuale controllando che sia precedente od uguale;
+
+\lstinputlisting[language=SQL,caption=Fattura check data]{res/code/TriggerFatturaCheck_data.sql}
+
+\paragraph*{Delete Fornitore}
+
+Questo trigger si attiva alla cancellazione di un fornitore e procede all'eliminazione delle rispettive righe su registrato per rispettare i vincoli di integrit\`a referenziale. \newpage
+
+\lstinputlisting[language=SQL,caption=Delete Fornitore]{res/code/Trigger_delete_Fornitore.sql}
+
+\paragraph*{Iscritto password insert}
+
+Questo trigger si attiva all'inserimento di un nuovo iscritto e procede al calcolo di SHA (password)
+
+\lstinputlisting[language=SQL,caption=Iscritto password insert]{res/code/TriggerIscritto_insert.sql}
+
+\paragraph*{Iscritto password update}
+
+Questo trigger compie il calcolo di SHA (password) come il trigger precedente in caso di update di un iscritto.
+
+\lstinputlisting[language=SQL,caption=Iscritto password update]{res/code/TriggerIscritto_update.sql}
+
+\paragraph*{Scontrino controllo data}
+
+Questo trigger controlla l'integrit\`a del campo data rispetto alla data attuale, in caso negativo genera un errore.
+
+\lstinputlisting[language=SQL,caption=Scontrino check data]{res/code/TriggerCheckData.sql}
+
+\subsubsection{Viste}
+
+\paragraph*{Prodotti Validi}
+
+Questa view \`e stata implementata in modo tale da nascondere alla vista dell'utente finale di tutti quei prodotti che non sono pi\`u in vendita (identificati dalla quantità pari a -1) ma che continuano a popolare la tabella Prodotto per consentire il calcolo degli sconti per gli iscritti.
+
+\lstinputlisting[language=SQL,caption=Prodotti Validi]{res/code/View_Prodotti_Validi.sql}

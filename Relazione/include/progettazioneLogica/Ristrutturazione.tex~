@@ -1,4 +1,6 @@
-\paragraph*{Note post ristrutturazione}
+\subsection{Ristrutturazione}
+
+\paragraph*{Scelte di ristrutturazione}
 \begin{itemize}
 
 \item Nell'attributo composto Informazione in DIPENDENTE abbiamo notato la ridondanza tra Nome, Cognome, Data di nascita con Codice Fiscale, ma abbiamo deciso di mantenere questi campi in quanto ricavarci questi dati da Codice Fiscale risulterebbe essere un'operazione onerosa ed inoltre non sempre potrebbe essere corretta (vedasi i casi di omocodia). Sempre su DIPENDENTE abbiamo deciso di accorpare l'attributo composto Indirizzo in un unico attributo in quanto ci \`e sufficente l'accesso all'informazione complessiva
@@ -14,3 +16,5 @@
 \item Per quanto riguarda ISCRITTO abbiamo deciso di voler conoscere solo un contatto e un indirizzo principale. Anche qui la generalizzazione \`e stata tolta, in quanto nell'analisi dei requisiti abbiamo imposto che gli sconti fossero riferiti solamente ai clienti iscritti.
   
 \end{itemize}
+
+\paragraph*{Scelta chiavi primarie}
