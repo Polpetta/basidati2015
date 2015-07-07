@@ -1,6 +1,6 @@
 \BOOKMARK [1][-]{section.1}{Progettazione Concettuale}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Studio di fattibilit\340}{section.1}% 2
-\BOOKMARK [2][-]{subsection.1.2}{Abstract}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.1}{Abstract}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Studio di fattibilit\340}{section.1}% 3
 \BOOKMARK [2][-]{subsection.1.3}{Raccolta e analisi dei requisiti}{section.1}% 4
 \BOOKMARK [3][-]{subsubsection.1.3.1}{Analisi dei requisiti}{subsection.1.3}% 5
 \BOOKMARK [3][-]{subsubsection.1.3.2}{Glossario dei termini}{subsection.1.3}% 6
@@ -21,3 +21,4 @@
 \BOOKMARK [3][-]{subsubsection.3.0.3}{Triggers}{subsubsection.3.0.1}% 21
 \BOOKMARK [3][-]{subsubsection.3.0.4}{Viste}{subsubsection.3.0.1}% 22
 \BOOKMARK [3][-]{subsubsection.3.0.5}{Query}{subsubsection.3.0.1}% 23
+\BOOKMARK [3][-]{subsubsection.3.0.6}{Codice PHP}{subsubsection.3.0.1}% 24

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.16)  7 JUL 2015 14:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.16)  7 JUL 2015 15:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -428,6 +428,7 @@ e.toc)
 
 
 (./include/progettazioneConcettuale.tex
+(./include/progettazioneConcettuale/abstract.tex)
 (./include/progettazioneConcettuale/studioFattibilita.tex
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 6.
 
@@ -437,7 +438,6 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
 )
-(./include/progettazioneConcettuale/abstract.tex)
 (./include/progettazioneConcettuale/raccoltaAnalisiReq.tex
 Underfull \hbox (badness 10000) in paragraph at lines 14--15
 
@@ -510,7 +510,7 @@ Underfull \hbox (badness 1158) in paragraph at lines 43--43
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-<include/progettazioneConcettuale/schemaER/PreNorm.png, id=160, 1057.9525pt x 7
+<include/progettazioneConcettuale/schemaER/PreNorm.png, id=165, 1057.9525pt x 7
 74.895pt>
 File: include/progettazioneConcettuale/schemaER/PreNorm.png Graphic file (type 
 png)
@@ -576,7 +576,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--15
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-<include/progettazioneConcettuale/schemaER/PostRistrutturaz.png, id=183, 1020.8
+<include/progettazioneConcettuale/schemaER/PostRistrutturaz.png, id=188, 1020.8
 1375pt x 725.71124pt>
 File: include/progettazioneConcettuale/schemaER/PostRistrutturaz.png Graphic fi
 le (type png)
@@ -790,26 +790,34 @@ Overfull \hbox (85.74193pt too wide) in paragraph at lines 118--118
  []
 
 (./res/code/query.sql) (./res/code/query.sql) [31] (./res/code/query.sql)
-(./res/code/query.sql [32]) (./res/code/query.sql) [33])) [34]
+(./res/code/query.sql [32]) (./res/code/query.sql) [33])
+(./include/implementazioni/codicephp.tex
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2014/03/04 1.5c listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2014/03/04 1.5c listings language file
+)
+(./res/code/addInvoice.php [34] [35] [36]))) [37]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 44.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 44.
- (./relazione.aux (./include/progettazioneConcettuale.aux) (./include/progettaz
-ioneLogica.aux)
+ (./relazione.aux
+(./include/progettazioneConcettuale.aux) (./include/progettazioneLogica.aux)
 (./include/implementazioni.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 44.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 44.
 Package rerunfilecheck Info: File `relazione.out' has not changed.
-(rerunfilecheck)             Checksum: FF6FC700E9B5204857C67120D9D3C553;1702.
+(rerunfilecheck)             Checksum: 2C59B6642A9951C3698100FC2F3514DE;1777.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 44.
  ) 
 Here is how much of TeX's memory you used:
- 9436 strings out of 495025
- 135051 string characters out of 6181515
- 258565 words of memory out of 5000000
- 11660 multiletter control sequences out of 15000+600000
+ 11591 strings out of 495025
+ 172172 string characters out of 6181515
+ 503607 words of memory out of 5000000
+ 13625 multiletter control sequences out of 15000+600000
  11671 words of font info for 46 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,9n,45p,729b,1823s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,9n,45p,729b,3652s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
@@ -819,10 +827,10 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist
 type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb>
-Output written on relazione.pdf (34 pages, 306902 bytes).
+Output written on relazione.pdf (37 pages, 324292 bytes).
 PDF statistics:
- 1165 PDF objects out of 1200 (max. 8388607)
- 1104 compressed objects within 12 object streams
- 753 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1397 PDF objects out of 1440 (max. 8388607)
+ 1331 compressed objects within 14 object streams
+ 931 named destinations out of 1000 (max. 500000)
+ 203 words of extra memory for PDF output out of 10000 (max. 10000000)
 
