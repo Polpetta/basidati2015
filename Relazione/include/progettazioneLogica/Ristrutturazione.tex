@@ -1,0 +1,155 @@
+\subsection{Ristrutturazione}
+
+\subsubsection{Scelte di ristrutturazione}
+\begin{itemize}
+
+\item Nell'attributo composto Informazione in DIPENDENTE abbiamo notato la ridondanza tra Nome, Cognome, Data di nascita con Codice Fiscale, ma abbiamo deciso di mantenere questi campi in quanto ricavarci questi dati da Codice Fiscale risulterebbe essere un'operazione onerosa ed inoltre non sempre potrebbe essere corretta (vedasi i casi di omocodia). Sempre su DIPENDENTE abbiamo deciso di accorpare l'attributo composto Indirizzo in un unico attributo in quanto ci \`e sufficente l'accesso all'informazione complessiva
+
+\item Abbiamo deciso di non accorpare DIPENDENTE in CATEGORIA in quanto, accedendo a CATEGORIA, non sempre vogliamo accedere agli attributi di DIPENDENTE; rendendo il tutto pi\`u modulare e velocizzando le query che usano solamente gli attributi di CATEGORIA.
+
+\item L'entit\`a SPECIFICA e la relazione DEFINITO sono stati rimossi accorpando gli attributi nome, descrizione nella tabella prodotto, in quanto le relazioni pi\`u frequenti su PRODOTTO richiedono appunto questi dati. Cos\`i facendo vengono risparmiati molti accessi altrimenti necessari.
+
+\item Su PRODOTTO abbiamo lasciato l'attributo Quantit\`a in quanto, al crescere del numero di scontrini e fatture, calcolare il numero di un determinato prodotto sarebe diventato troppo oneroso dal punto di vista computazionale, quindi abbiamo deciso di lasciare questa rindondanza.
+
+\item Su FORNITORE \`e stata tolta la generalizzazione totale, in quanto la differenza tra le produzioni di un artigiano e di un grossista non sono richieste nell'analisi dei requisiti.
+
+\item Per quanto riguarda ISCRITTO abbiamo deciso di voler conoscere solo un contatto e un indirizzo principale. Anche qui la generalizzazione \`e stata tolta, in quanto nell'analisi dei requisiti abbiamo imposto che gli sconti fossero riferiti solamente ai clienti iscritti.
+  
+\end{itemize}
+
+\newpage
+\subsubsection{Scelta chiavi primarie}
+\begin{itemize}
+  
+\item \underline{Categoria}: Nome Categoria \`e l'unico attributo
+\item \underline{Sconto}: Id per consentire vincoli d'integrit\`a pi\`u gestibili
+\item \underline{Scaglione}: (Categoria,Sconto) \`e una relazione tra Categoria e Sconto
+\item \underline{Dipendente}: CodDipendente per aver una migliore indicizzazione
+\item \underline{Prodotto}: CodProdotto ogni prodotto \`e indentificabile attraverso un suo codice
+\item \underline{Iscritto}: CodIscritto come su Dipendente.
+\item \underline{Scontrino}: Id per consentire vincoli d'integrit\`a pi\`u gestibili
+\item \underline{Certifica}: (Prodotto,Scontrino) essendo una relazione tra la tabella Prodotto e Scontrino
+\item \underline{Fornitore}: Nome in quanto non sono presenti in questo negozio fornitori che hanno nomi uguali.
+\item \underline{Registrato}: (Prodotto,Fattura) \`e una relazione tra la tabella Prodotto e Fattura
+\item \underline{Fattura}: Id per consentire vincoli d'integrit\`a pi\`u gestibili
+
+\end{itemize}
+
+\subsubsection{Lista delle Entit\`a}
+
+\begin{itemize}
+
+\item \underline{Dipendente}: lista dei dipendenti del negozio.
+  
+  \begin{itemize}
+
+  \item Codice dipendente SMALLINT PK
+  \item Nome CHAR(15) NOT NULL
+  \item Cognome CHAR(15) NOT NULL
+  \item Data di nascita DATE NOT NULL
+  \item Codice Fiscale CHAR(16) NOT NULL
+  \item Telefono CHAR(10) NOT NULL
+  \item E-mail CHAR(50)
+  \item DataInizio DATE NOT NULL
+  \item Indirizzo NOT NULL
+  \item Categoria CHAR(20) FK con Categoria(NomeCategoria)
+  \item CHAR(64) NOT NULL
+
+  \end{itemize}
+
+\item \underline{Categoria}: insieme di prodotti
+  \begin{itemize}
+  \item Nome Categoria CHAR(50) PK
+  \end{itemize}
+
+\item \underline{Sconto}: entit\`a destinata a contenere tutti i gradi di sconto di tutte le categorie
+  \begin{itemize}
+    \item Id INT AUTO\_INCREMENT PK
+  \item Livello SMALLINT DEFAULT 0 NOT NULL
+  \item PercentualeSconto INT(2) DEFAULT 0 NOT NULL
+  \item Tetto Max SMALLINT
+  \end{itemize}
+
+\item \underline{Prodotto}: lista di tutti i prodotti in vendita
+  \begin{itemize}
+  \item Codice Prodotto INT AUTO\_INCREMENT PK
+  \item Nome CHAR(50) NOT NULL
+  \item Descrizione TEXT
+  \item Quantit\`a SMALLINT DEFAULT 0 NOT NULL
+  \item Costo DECIMAL(8,2) DEFAULT 0 NOT NULL
+  \item PercentrualeIVA INT(2) DEFAULT 0 NOT NULL
+  \item Categoria CHAR(20) FK con Categoria(NomeCategoria)
+  \end{itemize}
+
+\item \underline{Fattura}: contenente tutti gli attestati di avvenuto ordine per un certo numero di prodotti
+  \begin{itemize}
+  \item Id INT AUTO\_INCREMENT PK
+  \item CodFattura INT NOT NULL
+  \item Quantit\`a SMALLINT NOT NULL
+  \item Data DATE NOT NULL
+  \item Fornitore CHAR(50) FK con Fornitore(Nome)
+  \end{itemize}
+
+\item \underline{Fornitore}: lista di tutti i venditori da cui il negozio acquista i prodotti
+  \begin{itemize}
+  \item Nome CHAR(50) PK
+  \item Contatto
+  \item Fax CHAR(10)
+  \item Telefono CHAR(10) NOT NULL
+  \item Mail CHAR (10) NOT NULL
+  \item Indirizzo CHAR(50) NOT NULL
+  \end{itemize}
+
+\item \underline{Scontrino}: registro di tutti le vendite effettuate dai clienti iscritti
+  \begin{itemize}
+  \item Id INT AUTO\_INCREMENT PK
+  \item CodScontrino INT NOT NULL
+  \item Data DATE NOT NULL
+  \item Quantit\`a SMALLINT NOT NULL
+  \item SubTotale DECIMAL(8,2) NOT NULL
+  \item Iscritto INT NOT NULL FK con Iscritto(CodIscritto)
+  \end{itemize}
+
+\item \underline{Iscritto}: clienti iscritti
+  \begin{itemize}
+  \item CodIscritto INT AUTO\_INCREMENT PK
+  \item Nome CHAR(50) NOT NULL
+  \item Descrizione TEXT
+  \item Quantit\`a SMALLINT DEFAULT 0 NOT NULL
+  \item Costo DECIMAL(8,2) DEFAULT 0 NOT NULL
+  \item PercentualeIVA INT(2) DEFAULT 0 NOT NULL
+  \item Categoria CHAR(20) FK con Categoria(NomeCategoria)
+  \end{itemize}
+
+\item \underline{Scaglione}: relazione tra Sconto e Categoria
+  \begin{itemize}
+
+  \item Categoria CHAR(50) FK con Categoria(NomeCategoria)
+  \item Sconto INT FK con Sconto(Id)
+
+    PK (\underline{Categoria, Sconto})
+    
+  \end{itemize}
+
+\item \underline{Certifica}: relazione tra Prodotto e Scontrino
+  \begin{itemize}
+
+  \item Prodotto INT FK con Prodotto (CodProdotto)
+  \item Scontrino INT FK con Scontrino(Id)
+
+    PK (\underline{Prodotto, Scontrino})
+
+  \end{itemize}
+
+\item \underline{Registrato}: relazione tra Prodotto e Fattura
+  \begin{itemize}
+
+  \item Prodotto INT FK con Prodotto (CodProdotto)
+  \item Fattura INT FK con Fattura (Id)
+
+    PK (\underline{Prodotto, Fattura})
+    
+  \end{itemize}
+  
+\end{itemize}
+

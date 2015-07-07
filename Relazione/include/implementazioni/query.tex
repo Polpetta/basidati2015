@@ -1,0 +1,184 @@
+\newpage
+\subsubsection{Query}
+
+\paragraph*{Query 1}
+Prodotto pi\`u venduto (nota per visualizzare il risultato di questa query abbiamo omesso il campo descrizione)
+
+\begin{verbatim}
+
++-------------+------------+--------+----------------+------------+-------------+
+| CodProdotto | Nome       | Costo  | PercentualeIVA | Categoria  | Num_venduti |
++-------------+------------+--------+----------------+------------+-------------+
+|           5 | padella    |  40.00 |             22 | Pentolame  |           5 |
+|           6 | padella    |  34.50 |             22 | Pentolame  |           1 |
+|          11 | Set. Tazze | 250.00 |             22 | Porcellane |           1 |
+|          12 | tovaglia   |  10.00 |             22 | Tovaglie   |           2 |
+|          14 | confetti   |   0.10 |             10 | ListeNozze |           1 |
+|          15 | teglia     |  39.00 |             22 | Pentolame  |           1 |
+|          16 | pentola    |  30.00 |             22 | Pentolame  |           2 |
++-------------+------------+--------+----------------+------------+-------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=3,lastline=20,caption=Query 1]{res/code/query.sql}
+
+
+\paragraph*{Query 2}
+Prodotti invenduti
+
+\begin{verbatim}
+
++-------------+
+| CodProdotto |
++-------------+
+|           1 |
+|           2 |
+|           3 |
+|           4 |
+|           7 |
+|           8 |
+|           9 |
+|          10 |
+|          13 |
++-------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=25,lastline=28,caption=Query 2]{res/code/query.sql}
+
+\paragraph*{Query 3}
+Prodotti acquistati da un certo utente iscritto (per una migliore visualizzazione del risultato abbiamo omesso il campo Descrizione)
+
+\begin{verbatim}
+
++-------------+------------+--------+----------------+------------+
+| CodProdotto | Nome       | Costo  | PercentualeIVA | Categoria  |
++-------------+------------+--------+----------------+------------+
+|           5 | padella    |  40.00 |             22 | Pentolame  |
+|           5 | padella    |  40.00 |             22 | Pentolame  |
+|           5 | padella    |  40.00 |             22 | Pentolame  |
+|           5 | padella    |  40.00 |             22 | Pentolame  |
+|           5 | padella    |  40.00 |             22 | Pentolame  |
+|           6 | padella    |  34.50 |             22 | Pentolame  |
+|          11 | Set. Tazze | 250.00 |             22 | Porcellane |
+|          12 | tovaglia   |  10.00 |             22 | Tovaglie   |
+|          14 | confetti   |   0.10 |             10 | ListeNozze |
+|          16 | pentola    |  30.00 |             22 | Pentolame  |
+|          15 | teglia     |  39.00 |             22 | Pentolame  |
+|          16 | pentola    |  30.00 |             22 | Pentolame  |
++-------------+------------+--------+----------------+------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=38,lastline=41,caption=Query 3]{res/code/query.sql}
+
+\paragraph*{Query 4}
+Fornitore da cui ho comprato di pi\`u (per una migliore visualizzazione del risultato abbiamo omesso il campo Fax e Telefono)
+
+\begin{verbatim}
+
++----------+--------------------------+--------------------------+------------------------+
+| Nome     |Mail                      | Indirizzo                | Numero_acquisto        |
++----------+--------------------------+--------------------------+------------------------+
+| Arzenton |arzenton.scatole@gmail.com| via roma, 51 verona Vr   | 3                      |
++----------+--------------------------+--------------------------+------------------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=45,lastline=55,caption=Query 4]{res/code/query.sql}
+
+\paragraph*{Query 5}
+Categoria che ha venduto pi\`u prodotti
+
+\begin{verbatim}
+
++-----------+--------------+
+| Categoria | Guadagno_Max |
++-----------+--------------+
+| Pentolame |       511.00 |
++-----------+--------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=59,lastline=70,caption=Query 5]{res/code/query.sql}
+
+\paragraph*{Query 6}
+Iscritti che non hanno mai comprato prodotti da una certa categoria (per una migliore visualizzazione del risultato abbiamo omesso il campo Fax e Telefono)
+
+\begin{verbatim}
+
++-------------+------------+-----------+---------------------------+---------------------------+
+| CodIscritto | Nome       | Cognome   |Mail                       | Indirizzo                 |
++-------------+------------+-----------+---------------------------+---------------------------+
+|           1 | Alessandro | Bari      |alessandro.bari@gmail.com  | Via roma, 10 Verona Vr    |
+|           2 | Carlo      | Sindaco   |carlo.sin@gmail.com        | Via S.paolo, 12 Verona Vr |
+|           3 | Giovanni   | Mucciacia |giovanni.mu@gmail.com      | Via augusto, 12 Verona Vr |
++-------------+------------+-----------+------------+--------------+---------------------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=75,lastline=82,caption=Query 6]{res/code/query.sql}
+
+\paragraph*{Query 7}
+Giorno della settimana dove vi \`e stato il maggior guadagno
+
+\begin{verbatim}
+
++------------+-------------+
+| Data       | Tot_vendite |
++------------+-------------+
+| 2015-01-06 |      381.00 |
++------------+-------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=86,lastline=90,caption=Query 7]{res/code/query.sql}
+
+\paragraph*{Query 8}
+Nome dipendente responsabile della categoria che ha stampato il maggior numero di scontrini
+
+\begin{verbatim}
+
++----------+---------------+---------------+
+| Nome     | Num_Scontrini | NomeCategoria |
++----------+---------------+---------------+
+| Giovanni |             9 | Pentolame     |
++----------+---------------+---------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=94,lastline=108,caption=Query 8]{res/code/query.sql}
+
+\paragraph*{Query 9}
+Per ogni iscritto il livello di sconto piu alto nella categoria che ha venduto di pi\`u questo mese
+
+\begin{verbatim}
+
++-------------+------------+---------+-----------------+
+| CodIscritto | Nome       | Cognome | Livello_massimo |
++-------------+------------+---------+-----------------+
+|           1 | Alessandro | Bari    |               1 |
++-------------+------------+---------+-----------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=112,lastline=140,caption=Query 9]{res/code/query.sql}
+
+\paragraph*{Query 10}
+Per iscritto i suoi scontrini (numero di acquisti) e i livelli (attualmente raggiunti) per ogni categoria.
+Nell'esempio visualizziamo gli scontrino dell'utente $1$.
+
+\begin{verbatim}
+
++-----------------+---------------+-----------------+
+| Numero_Acquisti | NomeCategoria | Livello_attuale |
++-----------------+---------------+-----------------+
+|               2 | ListeNozze    |               1 |
+|              18 | Pentolame     |               1 |
+|               2 | Porcellane    |               1 |
+|               2 | Tovaglie      |               1 |
++-----------------+---------------+-----------------+
+
+\end{verbatim}
+
+\lstinputlisting[language=SQL,firstline=144,lastline=161,caption=Query 10]{res/code/query.sql}
