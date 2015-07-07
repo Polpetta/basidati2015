@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}Progettazione Concettuale}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}Studio di fattibilit\`a}{3}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Abstract}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.1}Abstract}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Studio di fattibilit\`a}{3}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Raccolta e analisi dei requisiti}{3}{subsection.1.3}
 \contentsline {subsubsection}{\numberline {1.3.1}Analisi dei requisiti}{3}{subsubsection.1.3.1}
 \contentsline {subsubsection}{\numberline {1.3.2}Glossario dei termini}{4}{subsubsection.1.3.2}
@@ -21,3 +21,4 @@
 \contentsline {subsubsection}{\numberline {3.0.3}Triggers}{23}{subsubsection.3.0.3}
 \contentsline {subsubsection}{\numberline {3.0.4}Viste}{27}{subsubsection.3.0.4}
 \contentsline {subsubsection}{\numberline {3.0.5}Query}{28}{subsubsection.3.0.5}
+\contentsline {subsubsection}{\numberline {3.0.6}Codice PHP}{34}{subsubsection.3.0.6}
