@@ -162,8 +162,66 @@ function query4(){
     }
 }
 
+function query1(){
+    $stats = new Query();
+
+    $q1 = $stats->exec ("SELECT P.CodProdotto ,P.Nome, P.Descrizione, P.Costo, P.PercentualeIVA, P.Categoria,COUNT(C.Prodotto) AS Num_venduti FROM Prodotto P, Certifica C, Scontrino S  WHERE P.CodProdotto=C.Prodotto AND S.Id=C.Scontrino GROUP BY C.Prodotto, P.CodProdotto ,P.Nome, P.Descrizione, P.Quantita, P.Costo, P.PercentualeIVA, P.Categoria HAVING MAX(Num_venduti);");
+
+    if(mysql_num_rows($q1) > 0){
+        echo "<h3>Prodotto pi&ugrave; venduto</h3>";
+        ?> <table style align="center" border="1">
+            <tr>
+                <th>Codice Prodotto</th>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Costo</th>
+                <th>PercentualeIVA</th>
+                <th>Categoria</th>
+                <th>Numero Venduti</th>
+            </tr>
+        <?php
+
+        while($row = mysql_fetch_row($q1)){ ?>
+            <tr>
+				<td><?php echo $row[0];?></td>
+				<td><?php echo $row[1];?></td>
+                <td><?php echo $row[2];?></td>
+                <td><?php echo $row[3];?></td>
+                <td><?php echo $row[4];?></td>
+                <td><?php echo $row[5];?></td>
+                <td><?php echo $row[6];?></td>
+				</tr> <?php
+        }
+?> </table> <?php
+    }
+}
+
+function query2(){
+        $stats = new Query();
+
+        $q2 = $stats->exec ("SELECT P1.CodProdotto FROM Prodotto P1 WHERE P1.CodProdotto <> ALL(SELECT C.Prodotto FROM Certifica C);");
+
+    if(mysql_num_rows($q2) > 0){
+        echo "<h3>Prodotti invenduti</h3>";
+        ?> <table style align="center" border="1">
+            <tr>
+                <th>Codice Prodotto</th>
+            </tr>
+        <?php
+
+        while($row = mysql_fetch_row($q2)){ ?>
+            <tr>
+				<td><?php echo $row[0];?></td>
+				</tr> <?php
+        }
+?> </table> <?php
+    }
+}
+
 function adminStats(){
     echo "<h2>Statistiche</h2>";
+    query1();
+    query2();
     query4();
     query5();
     query6();
@@ -263,7 +321,40 @@ function query10($user){
     }
 }
 
+function query3($user){
+     $q3 = new Query();
+
+    $result = $q3->exec("SELECT P.CodProdotto ,P.Nome, P.Descrizione, P.Costo, P.PercentualeIVA, P.Categoria FROM Prodotto P,Certifica C, Scontrino S WHERE C.Prodotto=P.CodProdotto AND C.Scontrino=S.Id AND S.Iscritto=$user;");
+
+    if(mysql_num_rows($result) > 0){
+        echo "<h3>I tuoi scontrini</h3>";
+        ?> <table style align="center" border="1">
+            <tr>
+                <th>Codice Prodotto</th>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Costo</th>
+                <th>Percentuale IVA</th>
+                <th>Categoria</th>
+            </tr>
+        <?php
+
+        while($row = mysql_fetch_row($result)){ ?>
+            <tr>
+				<td><?php echo $row[0];?></td>
+				<td><?php echo $row[1];?></td>
+                <td><?php echo $row[2];?></td>
+                <td><?php echo $row[3];?></td>
+                <td><?php echo $row[4];?></td>
+                <td><?php echo $row[5];?></td>
+				</tr> <?php
+        }
+?> </table> <?php
+    }
+}
+
 function userStats($user){
+    query3($user);
     query10($user);
 }
 
